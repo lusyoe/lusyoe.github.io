@@ -109,6 +109,60 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="post-Linux软件篇之ssh" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/03/06/Linux软件篇之ssh/">Linux软件篇之ssh</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+</div>
+        <time datetime="2016-03-06T08:16:57.000Z" itemprop="datePublished" class="post-tiem">
+  2016-03-06
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。<br>一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
+<h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><ul>
+<li>本机<br><code>$ ssh-keygen</code></li>
+<li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
+</ul>
+<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
+<h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
+<p>之后连接直接使用：<code>$ ssh test</code>即可</p>
+<h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
+<ul>
+<li><p>从远程主机拷贝到本地<br><code>$ scp 远程user@addr:文件路径(默认用户home目录)  本地路径(同上)</code></p>
+</li>
+<li><p>将本地文件拷贝到远程主机<br><code>$ scp 本地文件路径  远程user@addr:文件路径(默认用户home目录)</code></p>
+</li>
+<li><p>拷贝目录(递归)<br><code>$ scp -r</code></p>
+</li>
+</ul>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/03/06/Linux软件篇之ssh/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-Linux软件篇" class="article article-type-post" itemscope itemprop="blogPost">
     
       
@@ -151,6 +205,7 @@
 <li>激活小键盘 <code>numlockx on</code></li>
 <li>禁用小键盘 <code>numlockx off</code></li>
 </ul>
+<h4 id="基于终端的文件浏览器"><a href="#基于终端的文件浏览器" class="headerlink" title="基于终端的文件浏览器"></a>基于终端的文件浏览器</h4><p><code>ranger</code></p>
 
         
       </div>

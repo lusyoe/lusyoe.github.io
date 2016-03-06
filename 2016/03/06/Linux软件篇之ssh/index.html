@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux软件篇之ssh | 风格 | 风起于青萍之末</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Linux">
+  <meta name="description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
+生成公私密钥
+本机$ ssh-keygen
+指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
+
+无需密码登陆服务器将公钥(一般位于~/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux软件篇之ssh">
+<meta property="og:url" content="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
+生成公私密钥
+本机$ ssh-keygen
+指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
+
+无需密码登陆服务器将公钥(一般位于~/">
+<meta property="og:updated_time" content="2016-03-06T08:40:00.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux软件篇之ssh">
+<meta name="twitter:description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
+生成公私密钥
+本机$ ssh-keygen
+指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
+
+无需密码登陆服务器将公钥(一般位于~/">
+  
+    <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner">
+  <a href="javascript:;" class="header-icon waves-circle-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="./" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">风格</h5>
+        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav">
+    
+        <li class="waves-block">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>Home
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>Archives
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>Tags
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="https://github.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>Github
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="http://www.weibo.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>Weibo
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>风格 &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux软件篇之ssh</div>
+        <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Linux软件篇之ssh</h1>
+    <h5 class="subtitle">2016-03-06</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-Linux软件篇之ssh" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成公私密钥"><span class="post-toc-text">生成公私密钥</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无需密码登陆服务器"><span class="post-toc-text">无需密码登陆服务器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速连接"><span class="post-toc-text">快速连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#远程与本地传输文件"><span class="post-toc-text">远程与本地传输文件</span></a></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" itemprop="postContent"><p>ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。<br>一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
+<h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><ul>
+<li>本机<br><code>$ ssh-keygen</code></li>
+<li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
+</ul>
+<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
+<h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
+<p>之后连接直接使用：<code>$ ssh test</code>即可</p>
+<h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
+<ul>
+<li><p>从远程主机拷贝到本地<br><code>$ scp 远程user@addr:文件路径(默认用户home目录)  本地路径(同上)</code></p>
+</li>
+<li><p>将本地文件拷贝到远程主机<br><code>$ scp 本地文件路径  远程user@addr:文件路径(默认用户home目录)</code></p>
+</li>
+<li><p>拷贝目录(递归)<br><code>$ scp -r</code></p>
+</li>
+</ul>
+</div>
+
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block prev">
+    
+  </div>
+  <div class="flex-col waves-block next">
+    
+      <a href="/2016/03/06/Linux软件篇/" title="Linux软件篇" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Linux软件篇之ssh" data-title="Linux软件篇之ssh" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lusyoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<div class="global-share" id="global-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
