@@ -35,7 +35,7 @@
     <div class="brand">
       <a href="./" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
-        <h5 class="nickname">lusyoe</h5>
+        <h5 class="nickname">风格</h5>
         <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
       </hgroup>
     </div>
@@ -109,33 +109,45 @@
   <ul class="post-list">
   
     <li class="post-list-item">
-  <article id="post-My-first-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Ubuntu基础操作" class="article article-type-post" itemscope itemprop="blogPost">
     
       
 
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/03/06/My-first-hexo/">My first hexo</a>
+      <a class="post-title-link" href="/2016/03/06/Ubuntu基础操作/">Ubuntu基础操作</a>
     </h3>
   
 
 
 
       <div class="post-meat flex-row">
-        <div class="flex-col"></div>
-        <time datetime="2016-03-06T02:04:12.000Z" itemprop="datePublished" class="post-tiem">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+</div>
+        <time datetime="2016-03-06T06:57:42.000Z" itemprop="datePublished" class="post-tiem">
   2016-03-06
 </time>
       </div>
       <div class="post-content" itemprop="postContent" >
         
-          <p>hello, hexo</p>
+          <p>将早期学习Linux的一些笔记整理下</p>
+<h3 id="安装中文man手册"><a href="#安装中文man手册" class="headerlink" title="安装中文man手册"></a>安装中文man手册</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install manpages-zh</span><br></pre></td></tr></table></figure>
+<h3 id="查看系统发行版本"><a href="#查看系统发行版本" class="headerlink" title="查看系统发行版本"></a>查看系统发行版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看内核版本"><a href="#查看内核版本" class="headerlink" title="查看内核版本"></a>查看内核版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uname <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
+<li>查看已记录的所有历史命令<code>$ history</code></li>
+<li>执行指定编号的历史命令<code>$ !N</code> N为命令前面的编号</li>
+<li>修改历史命令，然后退出时执行 <code>$ fc N</code></li>
+</ul>
+<h3 id="开机自动执行命令"><a href="#开机自动执行命令" class="headerlink" title="开机自动执行命令"></a>开机自动执行命令</h3><p>编辑<code>/etc/rc.local</code>文件，在<code>exit 0</code>前面添加命令即可</p>
+<h3 id="新装系统，切换root失败"><a href="#新装系统，切换root失败" class="headerlink" title="新装系统，切换root失败"></a>新装系统，切换root失败</h3><p>首次安装好系统后，root用户没有设置默认密码，因此执行<code>su</code>命令会报错<br>设置root密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd root</span><br></pre></td></tr></table></figure></p>
 
         
       </div>
       <div class="post-footer clearfix">
-        <a href="/2016/03/06/My-first-hexo/" class="post-more waves-button-light">MORE</a>
+        <a href="/2016/03/06/Ubuntu基础操作/" class="post-more waves-button-light">MORE</a>
       </div>
     
 
