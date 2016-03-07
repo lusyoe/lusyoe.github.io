@@ -161,13 +161,13 @@
 <li><code>Enter</code> 回车，复制完成</li>
 <li><code>Ctrl+b ]</code> 粘贴文本</li>
 </ol>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>编辑<strong>~/.tmux.conf</strong>文件</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>编辑<strong>~/.tmux.conf</strong>文件</p>
 <ul>
 <li>修改前缀键为<strong>Ctrl+a(C-a)</strong><br><code>set -g prefix C-a</code></li>
 <li>解除原来的<strong>Ctrl+b</strong><br><code>unbind C-b</code></li>
 </ul>
 <p>其他的配置和快捷键可通过<code>$ man tmux</code>查看tmux的手册</p>
-<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>我使用tmux最主要的还是看中它的现场恢复了。<br>比如说：今天在服务器上进行编码修改，快到下班时间，不想等着加班搞完了再回去，可以直接关掉电脑走人，第二天来登陆服务器，直接<code>$ tmux a</code>即可完美回到前一天正在修改的地方，继续接着改就可以了。不然每次下班第二天来又要找半天前一天要改的地方了。。<br>还有一个好处是<strong>tmux</strong>只通过一个ssh连接就可以实现多个终端操作了，大家都知道在工作中，一个终端的使用是远远不够的，如果不用类似<strong>tmux</strong>这样的软件，就必须要进行多次ssh连接了。<br>最后需要注意一下的是: 使用tmux恢复时，必须要保证在上一次断开连接到这次恢复之间，服务器(主机)<strong>不能重启</strong>，一旦重启了就什么都没了。。</p>
+<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>我使用tmux最主要的还是看中它的现场恢复了。<br>比如说：今天在服务器上进行编码修改，快到下班时间，不想等着加班搞完了再回去，可以直接关掉电脑走人，第二天来登陆服务器，直接<code>$ tmux a</code>即可完美回到前一天正在修改的地方，继续接着改就可以了。不然每次下班第二天来又要找半天前一天要改的地方了。。<br>还有一个好处是<strong>tmux</strong>只通过一个ssh连接就可以实现多个终端操作了，大家都知道在工作中，一个终端的使用是远远不够的，如果不用类似<strong>tmux</strong>这样的软件，就必须要进行多次ssh连接了。<br>最后需要注意一下的是: 使用tmux恢复时，必须要保证在上一次断开连接到这次恢复之间，服务器(主机)<strong>不能重启</strong>，一旦重启了就什么都没了。。</p>
 
         
       </div>
