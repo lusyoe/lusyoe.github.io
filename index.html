@@ -292,13 +292,99 @@
 
 </li>
   
-  </ul>
+    <li class="post-list-item">
+  <article id="post-Ubuntu基础操作" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
   
-    <nav id="page-nav">
-      <div class="inner">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/03/06/Ubuntu基础操作/">Ubuntu基础操作</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+</div>
+        <time datetime="2016-03-06T06:57:42.000Z" itemprop="datePublished" class="post-tiem">
+  2016-03-06
+</time>
       </div>
-    </nav>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>将早期学习Linux的一些笔记整理下</p>
+<h3 id="安装中文man手册"><a href="#安装中文man手册" class="headerlink" title="安装中文man手册"></a>安装中文man手册</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install manpages-zh</span><br></pre></td></tr></table></figure>
+<h3 id="查看系统发行版本"><a href="#查看系统发行版本" class="headerlink" title="查看系统发行版本"></a>查看系统发行版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看内核版本"><a href="#查看内核版本" class="headerlink" title="查看内核版本"></a>查看内核版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uname <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
+<li>查看已记录的所有历史命令<code>$ history</code></li>
+<li>执行指定编号的历史命令<code>$ !N</code> N为命令前面的编号</li>
+<li>修改历史命令，然后退出时执行 <code>$ fc N</code></li>
+</ul>
+<h3 id="开机自动执行命令"><a href="#开机自动执行命令" class="headerlink" title="开机自动执行命令"></a>开机自动执行命令</h3><p>编辑<code>/etc/rc.local</code>文件，在<code>exit 0</code>前面添加命令即可</p>
+<h3 id="新装系统，切换root失败"><a href="#新装系统，切换root失败" class="headerlink" title="新装系统，切换root失败"></a>新装系统，切换root失败</h3><p>首次安装好系统后，root用户没有设置默认密码，因此执行<code>su</code>命令会报错<br>设置root密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd root</span><br></pre></td></tr></table></figure></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/03/06/Ubuntu基础操作/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/03/06/hello-world/">Hello World</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col"></div>
+        <time datetime="2016-03-06T01:59:31.512Z" itemprop="datePublished" class="post-tiem">
+  2016-03-06
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/03/06/hello-world/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+  </ul>
   
 
 
