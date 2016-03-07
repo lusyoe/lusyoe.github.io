@@ -109,6 +109,42 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/03/07/hello-world/">Hello World</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col"></div>
+        <time datetime="2016-03-07T15:25:39.938Z" itemprop="datePublished" class="post-tiem">
+  2016-03-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/03/07/hello-world/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-Linux软件篇之tmux" class="article article-type-post" itemscope itemprop="blogPost">
     
       
@@ -142,33 +178,6 @@
 <li>恢复最上面的一个Session<br><code>$ tmux a</code></li>
 <li>恢复指定Session<br><code>$ tmux attach-session -t &lt;session-name&gt;</code></li>
 </ul>
-<h3 id="窗口-Window"><a href="#窗口-Window" class="headerlink" title="窗口(Window)"></a>窗口(Window)</h3><ul>
-<li>创建一个新的Window<br><code>Ctrl+b c</code></li>
-<li>重命名当前Window<br><code>Ctrl+b ,</code></li>
-<li>创建一个指定名字的Window<br><code>Ctrl+b :new-window -n &lt;window-name&gt;</code></li>
-<li>切换不同的Window<br><code>Ctrl+b number(位于window名字:前面的数字编号)</code></li>
-<li>删除当前的Window<br><code>Ctrl+b &amp;</code></li>
-</ul>
-<h3 id="窗格-Pane"><a href="#窗格-Pane" class="headerlink" title="窗格(Pane)"></a>窗格(Pane)</h3><ul>
-<li>垂直分割窗口(一左一右2个窗格)<br><code>Ctrl+b %</code></li>
-<li>水平分割窗口(一上一下2个窗格)<br><code>Ctrl+b &quot;</code></li>
-<li>切换不同的窗格(Pane)<br><code>Ctrl+b up(down、left、right上下左右方向键)</code></li>
-<li>删除当前的窗格(Pane)<br><code>Ctrl+b x</code></li>
-</ul>
-<h3 id="复制、粘贴文本"><a href="#复制、粘贴文本" class="headerlink" title="复制、粘贴文本"></a>复制、粘贴文本</h3><ol>
-<li><code>Ctrl+b [</code> 进入复制模式</li>
-<li><code>Space</code> 空格键开始复制指定的文本(类似vi的可视模式)</li>
-<li><code>Enter</code> 回车，复制完成</li>
-<li><code>Ctrl+b ]</code> 粘贴文本</li>
-</ol>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>编辑<strong>~/.tmux.conf</strong>文件</p>
-<ul>
-<li>修改前缀键为<strong>Ctrl+a(C-a)</strong><br><code>set -g prefix C-a</code></li>
-<li>解除原来的<strong>Ctrl+b</strong><br><code>unbind C-b</code></li>
-</ul>
-<p>其他的配置和快捷键可通过<code>$ man tmux</code>查看tmux的手册</p>
-<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>我使用tmux最主要的还是看中它的现场恢复了。<br>比如说：今天在服务器上进行编码修改，快到下班时间，不想等着加班搞完了再回去，可以直接关掉电脑走人，第二天来登陆服务器，直接<code>$ tmux a</code>即可完美回到前一天正在修改的地方，继续接着改就可以了。不然每次下班第二天来又要找半天前一天要改的地方了。。<br>还有一个好处是<strong>tmux</strong>只通过一个ssh连接就可以实现多个终端操作了，大家都知道在工作中，一个终端的使用是远远不够的，如果不用类似<strong>tmux</strong>这样的软件，就必须要进行多次ssh连接了。<br>最后需要注意一下的是: 使用tmux恢复时，必须要保证在上一次断开连接到这次恢复之间，服务器(主机)<strong>不能重启</strong>，一旦重启了就什么都没了。。</p>
-
         
       </div>
       <div class="post-footer clearfix">
@@ -210,19 +219,7 @@
 <li>本机<br><code>$ ssh-keygen</code></li>
 <li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
 </ul>
-<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
-<h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
-<p>之后连接直接使用：<code>$ ssh test</code>即可</p>
-<h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
-<ul>
-<li><p>从远程主机拷贝到本地<br><code>$ scp 远程user@addr:文件路径(默认用户home目录)  本地路径(同上)</code></p>
-</li>
-<li><p>将本地文件拷贝到远程主机<br><code>$ scp 本地文件路径  远程user@addr:文件路径(默认用户home目录)</code></p>
-</li>
-<li><p>拷贝目录(递归)<br><code>$ scp -r</code></p>
-</li>
-</ul>
-
+<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2>
         
       </div>
       <div class="post-footer clearfix">
@@ -261,25 +258,7 @@
         
           <p>总结一下，在Linux下使用过的一些软件，不包括开发使用的</p>
 <h4 id="axel-终端下载器"><a href="#axel-终端下载器" class="headerlink" title="axel 终端下载器"></a>axel 终端下载器</h4><p>可通过 <code>-n x(数字)</code> 设置下载时使用的线程数 ,如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ axel -n 5 &lt;URL&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="新立得包依赖管理器"><a href="#新立得包依赖管理器" class="headerlink" title="新立得包依赖管理器"></a>新立得包依赖管理器</h4><p><code>synaptic</code><br>虽然一般直接使用<code>apt-get</code>的比较多，不过在处理依赖方面，这个软件还是挺强大的</p>
-<h4 id="查找库文件以及对应包的神器"><a href="#查找库文件以及对应包的神器" class="headerlink" title="查找库文件以及对应包的神器"></a>查找库文件以及对应包的神器</h4><p><code>apt-file</code><br>第一次安装成功后，需要更新数据库<br><code>$ apt-file update</code><br>查找包信息或库文件所在包<br><code>$ apt-file search xxx</code></p>
-<h4 id="文件编码转换"><a href="#文件编码转换" class="headerlink" title="文件编码转换"></a>文件编码转换</h4><p><code>iconv</code>，一般情况下使用方法：<br><code>$ iconv -f 原来编码 -t 新编码 文件名</code></p>
-<h4 id="词典"><a href="#词典" class="headerlink" title="词典"></a>词典</h4><p><code>goldendict</code></p>
-<h4 id="文本比较工具"><a href="#文本比较工具" class="headerlink" title="文本比较工具"></a>文本比较工具</h4><p><code>Meld Diff</code></p>
-<h4 id="Mac-托盘效果"><a href="#Mac-托盘效果" class="headerlink" title="Mac 托盘效果"></a>Mac 托盘效果</h4><p><code>Cairo-dock</code></p>
-<h4 id="可视化系统管理面板-web端"><a href="#可视化系统管理面板-web端" class="headerlink" title="可视化系统管理面板(web端)"></a>可视化系统管理面板(web端)</h4><p><code>ajenti</code></p>
-<h4 id="网络端口流量监控"><a href="#网络端口流量监控" class="headerlink" title="网络端口流量监控"></a>网络端口流量监控</h4><p><code>iftop</code></p>
-<h4 id="截图工具"><a href="#截图工具" class="headerlink" title="截图工具"></a>截图工具</h4><p><code>shutter</code></p>
-<h4 id="markdown可视化工具"><a href="#markdown可视化工具" class="headerlink" title="markdown可视化工具"></a>markdown可视化工具</h4><p><code>remarkable</code></p>
-<h4 id="tty显示中文"><a href="#tty显示中文" class="headerlink" title="tty显示中文"></a>tty显示中文</h4><p><code>fbterm</code></p>
-<h4 id="摄像头软件"><a href="#摄像头软件" class="headerlink" title="摄像头软件"></a>摄像头软件</h4><p><code>Camorama</code></p>
-<h4 id="笔记本数字小键盘工具"><a href="#笔记本数字小键盘工具" class="headerlink" title="笔记本数字小键盘工具"></a>笔记本数字小键盘工具</h4><p><code>numlockx</code></p>
-<ul>
-<li>激活小键盘 <code>numlockx on</code></li>
-<li>禁用小键盘 <code>numlockx off</code></li>
-</ul>
-<h4 id="基于终端的文件浏览器"><a href="#基于终端的文件浏览器" class="headerlink" title="基于终端的文件浏览器"></a>基于终端的文件浏览器</h4><p><code>ranger</code></p>
-
+<h4 id="新立得包依赖管理器"><a href="#新立得包依赖管理器" class="headerlink" title="新立得包依赖管理器"></a>新立得包依赖管理器</h4>
         
       </div>
       <div class="post-footer clearfix">
@@ -319,63 +298,10 @@
           <p>将早期学习Linux的一些笔记整理下</p>
 <h3 id="安装中文man手册"><a href="#安装中文man手册" class="headerlink" title="安装中文man手册"></a>安装中文man手册</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install manpages-zh</span><br></pre></td></tr></table></figure>
 <h3 id="查看系统发行版本"><a href="#查看系统发行版本" class="headerlink" title="查看系统发行版本"></a>查看系统发行版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="_">-a</span></span><br></pre></td></tr></table></figure>
-<h3 id="查看内核版本"><a href="#查看内核版本" class="headerlink" title="查看内核版本"></a>查看内核版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uname <span class="_">-a</span></span><br></pre></td></tr></table></figure>
-<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
-<li>查看已记录的所有历史命令<code>$ history</code></li>
-<li>执行指定编号的历史命令<code>$ !N</code> N为命令前面的编号</li>
-<li>修改历史命令，然后退出时执行 <code>$ fc N</code></li>
-</ul>
-<h3 id="开机自动执行命令"><a href="#开机自动执行命令" class="headerlink" title="开机自动执行命令"></a>开机自动执行命令</h3><p>编辑<code>/etc/rc.local</code>文件，在<code>exit 0</code>前面添加命令即可</p>
-<h3 id="新装系统，切换root失败"><a href="#新装系统，切换root失败" class="headerlink" title="新装系统，切换root失败"></a>新装系统，切换root失败</h3><p>首次安装好系统后，root用户没有设置默认密码，因此执行<code>su</code>命令会报错<br>设置root密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd root</span><br></pre></td></tr></table></figure></p>
-
         
       </div>
       <div class="post-footer clearfix">
         <a href="/2016/03/06/Ubuntu基础操作/" class="post-more waves-button-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
-  <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/03/06/hello-world/">Hello World</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col"></div>
-        <time datetime="2016-03-06T01:59:31.512Z" itemprop="datePublished" class="post-tiem">
-  2016-03-06
-</time>
-      </div>
-      <div class="post-content" itemprop="postContent" >
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2016/03/06/hello-world/" class="post-more waves-button-light">MORE</a>
       </div>
     
 

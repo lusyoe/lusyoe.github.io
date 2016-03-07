@@ -12,7 +12,7 @@
 本机$ ssh-keygen
 指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
 
-无需密码登陆服务器将公钥(一般位于~/">
+无需密码登陆服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux软件篇之ssh">
 <meta property="og:url" content="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
@@ -22,8 +22,8 @@
 本机$ ssh-keygen
 指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
 
-无需密码登陆服务器将公钥(一般位于~/">
-<meta property="og:updated_time" content="2016-03-06T08:40:00.402Z">
+无需密码登陆服务器">
+<meta property="og:updated_time" content="2016-03-07T15:24:08.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux软件篇之ssh">
 <meta name="twitter:description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
@@ -31,7 +31,7 @@
 本机$ ssh-keygen
 指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
 
-无需密码登陆服务器将公钥(一般位于~/">
+无需密码登陆服务器">
   
     <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
   
@@ -134,7 +134,12 @@
         <aside class="post-widget" id="post-widget">
 
           
-          <div class="post-share" id="post-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+          <div class="post-share" id="post-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="&lt;p&gt;ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。&lt;br&gt;一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install openssh-server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;生成公私密钥&quot;&gt;&lt;a href=&quot;#生成公私密钥&quot; class=&quot;headerlink&quot; title=&quot;生成公私密钥&quot;&gt;&lt;/a&gt;生成公私密钥&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本机&lt;br&gt;&lt;code&gt;$ ssh-keygen&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定&lt;br&gt;&lt;code&gt;$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;无需密码登陆服务器&quot;&gt;&lt;a href=&quot;#无需密码登陆服务器&quot; class=&quot;headerlink&quot; title=&quot;无需密码登陆服务器&quot;&gt;&lt;/a&gt;无需密码登陆服务器&lt;/h2&gt;" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -186,7 +191,8 @@
 <li>本机<br><code>$ ssh-keygen</code></li>
 <li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
 </ul>
-<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
+<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><a id="more"></a>
+<p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
 <h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
 <p>之后连接直接使用：<code>$ ssh test</code>即可</p>
 <h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
@@ -262,7 +268,12 @@
   </main>
 <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-<div class="global-share" id="global-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+<div class="global-share" id="global-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="&lt;p&gt;ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。&lt;br&gt;一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install openssh-server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;生成公私密钥&quot;&gt;&lt;a href=&quot;#生成公私密钥&quot; class=&quot;headerlink&quot; title=&quot;生成公私密钥&quot;&gt;&lt;/a&gt;生成公私密钥&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本机&lt;br&gt;&lt;code&gt;$ ssh-keygen&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定&lt;br&gt;&lt;code&gt;$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;无需密码登陆服务器&quot;&gt;&lt;a href=&quot;#无需密码登陆服务器&quot; class=&quot;headerlink&quot; title=&quot;无需密码登陆服务器&quot;&gt;&lt;/a&gt;无需密码登陆服务器&lt;/h2&gt;" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
