@@ -3,35 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Linux软件篇之ssh | 风格 | 风起于青萍之末</title>
+  <title>Linux软件篇之tmux | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="Linux">
-  <meta name="description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
-生成公私密钥
-本机$ ssh-keygen
-指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
-
-无需密码登陆服务器将公钥(一般位于~/">
+  <meta name="description" content="tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。tmux前缀键默认为Ctrl+b，可通过配置文件进行更改，后面会写到。tmux 分为会话(Session)、窗口(Window)和窗格(pane)。
+快捷键会话(Session)
+创建一个新的Session$ tmux new -s &amp;quot;名称&amp;quot;
+在tmux中再创建一个SessionCtrl+b :new -s &amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux软件篇之ssh">
-<meta property="og:url" content="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+<meta property="og:title" content="Linux软件篇之tmux">
+<meta property="og:url" content="http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
-生成公私密钥
-本机$ ssh-keygen
-指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
-
-无需密码登陆服务器将公钥(一般位于~/">
-<meta property="og:updated_time" content="2016-03-06T08:40:00.402Z">
+<meta property="og:description" content="tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。tmux前缀键默认为Ctrl+b，可通过配置文件进行更改，后面会写到。tmux 分为会话(Session)、窗口(Window)和窗格(pane)。
+快捷键会话(Session)
+创建一个新的Session$ tmux new -s &amp;quot;名称&amp;quot;
+在tmux中再创建一个SessionCtrl+b :new -s &amp;q">
+<meta property="og:updated_time" content="2016-03-07T14:20:25.764Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux软件篇之ssh">
-<meta name="twitter:description" content="ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行1$ sudo apt-get install openssh-server
-生成公私密钥
-本机$ ssh-keygen
-指定$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;
-
-无需密码登陆服务器将公钥(一般位于~/">
+<meta name="twitter:title" content="Linux软件篇之tmux">
+<meta name="twitter:description" content="tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。tmux前缀键默认为Ctrl+b，可通过配置文件进行更改，后面会写到。tmux 分为会话(Session)、窗口(Window)和窗格(pane)。
+快捷键会话(Session)
+创建一个新的Session$ tmux new -s &amp;quot;名称&amp;quot;
+在tmux中再创建一个SessionCtrl+b :new -s &amp;q">
   
     <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
   
@@ -107,7 +101,7 @@
         <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Linux软件篇之ssh</div>
+        <div class="flex-col header-title ellipsis">Linux软件篇之tmux</div>
         <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
@@ -115,14 +109,14 @@
 </header>
 <header class="content-header">
   <div class="container">
-    <h1 class="author">Linux软件篇之ssh</h1>
-    <h5 class="subtitle">2016-03-06</h5>
+    <h1 class="author">Linux软件篇之tmux</h1>
+    <h5 class="subtitle">2016-03-07</h5>
   </div>
 </header>
 
     <div class="container body-wrap">
       
-  <article id="post-Linux软件篇之ssh" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Linux软件篇之tmux" class="article article-type-post" itemscope itemprop="blogPost">
     
       <div class="post-meat flex-row">
         <div class="flex-col">
@@ -134,7 +128,7 @@
         <aside class="post-widget" id="post-widget">
 
           
-          <div class="post-share" id="post-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+          <div class="post-share" id="post-share" data-title="Linux软件篇之tmux" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -174,45 +168,59 @@
 
           
           <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成公私密钥"><span class="post-toc-text">生成公私密钥</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无需密码登陆服务器"><span class="post-toc-text">无需密码登陆服务器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速连接"><span class="post-toc-text">快速连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#远程与本地传输文件"><span class="post-toc-text">远程与本地传输文件</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快捷键"><span class="post-toc-text">快捷键</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#会话-Session"><span class="post-toc-text">会话(Session)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#窗口-Window"><span class="post-toc-text">窗口(Window)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#窗格-Pane"><span class="post-toc-text">窗格(Pane)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制、粘贴文本"><span class="post-toc-text">复制、粘贴文本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置"><span class="post-toc-text">配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结一下"><span class="post-toc-text">总结一下</span></a></li></ol></li></ol>
           </nav>
           
         </aside>
 
         <div class="post-main">
 
-            <div class="post-content" itemprop="postContent"><p>ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。<br>一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
-<h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><ul>
-<li>本机<br><code>$ ssh-keygen</code></li>
-<li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
+            <div class="post-content" itemprop="postContent"><p>tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。<br>tmux前缀键默认为<strong>Ctrl+b</strong>，可通过配置文件进行更改，后面会写到。<br>tmux 分为会话(Session)、窗口(Window)和窗格(pane)。</p>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h3><ul>
+<li>创建一个新的Session<br><code>$ tmux new -s &quot;名称&quot;</code></li>
+<li>在tmux中再创建一个Session<br><code>Ctrl+b :new -s &quot;名称&quot;</code></li>
+<li>切换不同的Session<br><code>Ctrl+b s up(down)方向键</code></li>
+<li>重命名当前Session<br><code>Ctrl+b $</code></li>
+<li>退出当前Session<br><code>$ exit</code></li>
+<li>恢复最上面的一个Session<br><code>$ tmux a</code></li>
+<li>恢复指定Session<br><code>$ tmux attach-session -t &lt;session-name&gt;</code></li>
 </ul>
-<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
-<h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
-<p>之后连接直接使用：<code>$ ssh test</code>即可</p>
-<h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
+<h3 id="窗口-Window"><a href="#窗口-Window" class="headerlink" title="窗口(Window)"></a>窗口(Window)</h3><ul>
+<li>创建一个新的Window<br><code>Ctrl+b c</code></li>
+<li>重命名当前Window<br><code>Ctrl+b ,</code></li>
+<li>创建一个指定名字的Window<br><code>Ctrl+b :new-window -n &lt;window-name&gt;</code></li>
+<li>切换不同的Window<br><code>Ctrl+b number(位于window名字:前面的数字编号)</code></li>
+<li>删除当前的Window<br><code>Ctrl+b &amp;</code></li>
+</ul>
+<h3 id="窗格-Pane"><a href="#窗格-Pane" class="headerlink" title="窗格(Pane)"></a>窗格(Pane)</h3><ul>
+<li>垂直分割窗口(一左一右2个窗格)<br><code>Ctrl+b %</code></li>
+<li>水平分割窗口(一上一下2个窗格)<br><code>Ctrl+b &quot;</code></li>
+<li>切换不同的窗格(Pane)<br><code>Ctrl+b up(down、left、right上下左右方向键)</code></li>
+<li>删除当前的窗格(Pane)<br><code>Ctrl+b x</code></li>
+</ul>
+<h3 id="复制、粘贴文本"><a href="#复制、粘贴文本" class="headerlink" title="复制、粘贴文本"></a>复制、粘贴文本</h3><ol>
+<li><code>Ctrl+b [</code> 进入复制模式</li>
+<li><code>Space</code> 空格键开始复制指定的文本(类似vi的可视模式)</li>
+<li><code>Enter</code> 回车，复制完成</li>
+<li><code>Ctrl+b ]</code> 粘贴文本</li>
+</ol>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>编辑<strong>~/.tmux.conf</strong>文件</p>
 <ul>
-<li><p>从远程主机拷贝到本地<br><code>$ scp 远程user@addr:文件路径(默认用户home目录)  本地路径(同上)</code></p>
-</li>
-<li><p>将本地文件拷贝到远程主机<br><code>$ scp 本地文件路径  远程user@addr:文件路径(默认用户home目录)</code></p>
-</li>
-<li><p>拷贝目录(递归)<br><code>$ scp -r</code></p>
-</li>
+<li>修改前缀键为<strong>Ctrl+a(C-a)</strong><br><code>set -g prefix C-a</code></li>
+<li>解除原来的<strong>Ctrl+b</strong><br><code>unbind C-b</code></li>
 </ul>
+<p>其他的配置和快捷键可通过<code>$ man tmux</code>查看tmux的手册</p>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>我使用tmux最主要的还是看中它的现场恢复了。<br>比如说：今天在服务器上进行编码修改，快到下班时间，不想等着加班搞完了再回去，可以直接关掉电脑走人，第二天来登陆服务器，直接<code>$ tmux a</code>即可完美回到前一天正在修改的地方，继续接着改就可以了。不然每次下班第二天来又要找半天前一天要改的地方了。。<br>还有一个好处是<strong>tmux</strong>只通过一个ssh连接就可以实现多个终端操作了，大家都知道在工作中，一个终端的使用是远远不够的，如果不用类似<strong>tmux</strong>这样的软件，就必须要进行多次ssh连接了。<br>最后需要注意一下的是: 使用tmux恢复时，必须要保证在上一次断开连接到这次恢复之间，服务器(主机)<strong>不能重启</strong>，一旦重启了就什么都没了。。</p>
 </div>
 
             
 <nav class="post-nav flex-row">
   <div class="flex-col waves-block prev">
     
-      <a href="/2016/03/07/Linux软件篇之tmux/" title="Linux软件篇之tmux" id="post-prev" class="post-nav-link">
-        <i class="icon icon-chevron-left"></i>
-        <span class="article-nav-title">上一篇</span>
-      </a>
-    
   </div>
   <div class="flex-col waves-block next">
     
-      <a href="/2016/03/06/Linux软件篇/" title="Linux软件篇" id="post-next" class="post-nav-link">
+      <a href="/2016/03/06/Linux软件篇之ssh/" title="Linux软件篇之ssh" id="post-next" class="post-nav-link">
         <span class="article-nav-title">下一篇</span>
         <i class="icon icon-chevron-right"></i>
       </a>
@@ -226,7 +234,7 @@
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Linux软件篇之ssh" data-title="Linux软件篇之ssh" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html"></div>
+	<div class="ds-thread" data-thread-key="Linux软件篇之tmux" data-title="Linux软件篇之tmux" data-url="http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -262,7 +270,7 @@
   </main>
 <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-<div class="global-share" id="global-share" data-title="Linux软件篇之ssh" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/06/Linux软件篇之ssh/index.html">
+<div class="global-share" id="global-share" data-title="Linux软件篇之tmux" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
