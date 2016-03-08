@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux软件篇之systemd | 风格 | 风起于青萍之末</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Linux">
+  <meta name="description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。
+系统服务管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux软件篇之systemd">
+<meta property="og:url" content="http://yoursite.com/2016/03/08/Linux软件篇之systemd/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。
+系统服务管理">
+<meta property="og:updated_time" content="2016-03-08T15:58:44.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux软件篇之systemd">
+<meta name="twitter:description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。
+系统服务管理">
+  
+    <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner">
+  <a href="javascript:;" class="header-icon waves-circle-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="./" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">卢浩元</h5>
+        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav">
+    
+        <li class="waves-block">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>Home
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>Archives
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>Tags
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="https://github.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>Github
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="http://www.weibo.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>Weibo
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>风格 &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux软件篇之systemd</div>
+        <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Linux软件篇之systemd</h1>
+    <h5 class="subtitle">2016-03-08</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-Linux软件篇之systemd" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share" data-title="Linux软件篇之systemd" data-pic="/img/logo.jpg" data-summary="&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;systemd&lt;/strong&gt;是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。&lt;/p&gt;
+&lt;h3 id=&quot;系统服务管理&quot;&gt;&lt;a href=&quot;#系统服务管理&quot; class=&quot;headerlink&quot; title=&quot;系统服务管理&quot;&gt;&lt;/a&gt;系统服务管理&lt;/h3&gt;" data-url="http://yoursite.com/2016/03/08/Linux软件篇之systemd/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统服务管理"><span class="post-toc-text">系统服务管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志管理"><span class="post-toc-text">日志管理</span></a></li></ol></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" itemprop="postContent"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>systemd</strong>是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。</p>
+<h3 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h3><a id="more"></a>
+<ul>
+<li>激活开机启动服务<br>  <code>$ sudo systemctl enable [service-name]</code></li>
+<li>取消开机启动服务<br>  <code>$ sudo systemctl disable [service-name]</code></li>
+<li>查看是否开机启动服务<br>  <code>$ systemctl is-enable [service-name]</code></li>
+<li>查看开机每个服务消耗的时间<br>  <code>$ systemd-analyze blame</code></li>
+<li>查看开机消耗总时间<br>  <code>$ systemd-analyze</code></li>
+<li>查看所有被激活的服务<br>  <code>$ systemctl list-units -t service</code></li>
+<li>查看一个服务的状态<br>  <code>$ systemctl status [service-name]</code></li>
+<li>启动、停止、重启一个服务<br>  <code>$ sudo systemctl start(stop、restart) [service-name]</code></li>
+<li>重新加载一个服务(可以只加载服务的配置文件而不重启服务)<br>  <code>$ sudo systemctl reload [service-name]</code></li>
+</ul>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><ul>
+<li>查看启动日志(默认只保存本次启动的日志)<br>  <code>$ sudo journalctl</code></li>
+<li>查看某个服务的日志<br>  <code>$ sudo journalctl [service-path](如：/usr/sbin/sshd)</code></li>
+<li>查看实时日志<br>  <code>$ sudo journalctl -f</code></li>
+<li>重新载入systemd所有更改的配置，扫描新的或变动的单元<br>  <code>$ sudo systemctl daemon-reload</code></li>
+<li>查看内核日志(不显示应用日志)<br>  <code>$ sudo journalctl -k</code></li>
+<li>查看某个路径的脚本的日志<br>  <code>$ sudo journalctl /bin/bash</code></li>
+<li>显示日志占据的硬盘空间<br>  <code>$ sudo journalctl --disk-usage</code></li>
+</ul>
+<p>以上都为常用的功能，当然还有需要添加自定义的服务，这个以后再说。</p>
+</div>
+
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block prev">
+    
+  </div>
+  <div class="flex-col waves-block next">
+    
+      <a href="/2016/03/07/Linux软件篇之tmux/" title="Linux软件篇之tmux" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Linux软件篇之systemd" data-title="Linux软件篇之systemd" data-url="http://yoursite.com/2016/03/08/Linux软件篇之systemd/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lusyoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<div class="global-share" id="global-share" data-title="Linux软件篇之systemd" data-pic="/img/logo.jpg" data-summary="&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;systemd&lt;/strong&gt;是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。&lt;/p&gt;
+&lt;h3 id=&quot;系统服务管理&quot;&gt;&lt;a href=&quot;#系统服务管理&quot; class=&quot;headerlink&quot; title=&quot;系统服务管理&quot;&gt;&lt;/a&gt;系统服务管理&lt;/h3&gt;" data-url="http://yoursite.com/2016/03/08/Linux软件篇之systemd/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
