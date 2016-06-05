@@ -29,6 +29,16 @@
   
     <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
   
+  <meta name="summary" content="&lt;p&gt;tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。&lt;br&gt;tmux前缀键默认为&lt;strong&gt;Ctrl+b&lt;/strong&gt;，可通过配置文件进行更改，后面会写到。&lt;br&gt;tmux 分为会话(Session)、窗口(Window)和窗格(pane)。&lt;/p&gt;
+&lt;h2 id=&quot;快捷键&quot;&gt;&lt;a href=&quot;#快捷键&quot; class=&quot;headerlink&quot; title=&quot;快捷键&quot;&gt;&lt;/a&gt;快捷键&lt;/h2&gt;&lt;h3 id=&quot;会话-Session&quot;&gt;&lt;a href=&quot;#会话-Session&quot; class=&quot;headerlink&quot; title=&quot;会话(Session)&quot;&gt;&lt;/a&gt;会话(Session)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;创建一个新的Session&lt;br&gt;&lt;code&gt;$ tmux new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在tmux中再创建一个Session&lt;br&gt;&lt;code&gt;Ctrl+b :new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切换不同的Session&lt;br&gt;&lt;code&gt;Ctrl+b s up(down)方向键&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重命名当前Session&lt;br&gt;&lt;code&gt;Ctrl+b $&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;退出当前Session&lt;br&gt;&lt;code&gt;$ exit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;恢复最上面的一个Session&lt;br&gt;&lt;code&gt;$ tmux a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;恢复指定Session&lt;br&gt;&lt;code&gt;$ tmux attach-session -t &amp;lt;session-name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -37,48 +47,60 @@
   <div id="loading" class="active"></div>
 
   <nav id="menu" class="hide" >
-   <div class="inner">
-  <a href="javascript:;" class="header-icon waves-circle-light" id="menu-off">
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
       <i class="icon icon-lg icon-close"></i>
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="./" class="avatar"><img src="/img/logo.jpg"></a>
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">卢浩元</h5>
         <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
       </hgroup>
     </div>
   </div>
-  <ul class="nav">
+  <ul class="nav flex-col">
     
-        <li class="waves-block">
+        <li class="waves-block waves-effect">
           <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>Home
+            <i class="icon icon-lg icon-home"></i>
+            主页
           </a>
         </li>
     
-        <li class="waves-block">
+        <li class="waves-block waves-effect">
           <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>Archives
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
           </a>
         </li>
     
-        <li class="waves-block">
+        <li class="waves-block waves-effect">
           <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>Tags
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
           </a>
         </li>
     
-        <li class="waves-block">
+        <li class="waves-block waves-effect">
           <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>Github
+            <i class="icon icon-lg icon-github"></i>
+            Github
           </a>
         </li>
     
-        <li class="waves-block">
+        <li class="waves-block waves-effect">
           <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>Weibo
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/"  >
+            <i class="icon icon-lg icon-link"></i>
+            测试
           </a>
         </li>
     
@@ -98,13 +120,26 @@
   <main id="main">
     <header class="header" id="header">
     <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">Linux软件篇之tmux</div>
-        <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
+        
     </div>
 </header>
 <header class="content-header">
@@ -116,7 +151,7 @@
 
     <div class="container body-wrap">
       
-  <article id="post-Linux软件篇之tmux" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Linux软件篇之tmux" class="article article-type-post" itemprop="blogPost">
     
       <div class="post-meat flex-row">
         <div class="flex-col">
@@ -128,16 +163,7 @@
         <aside class="post-widget" id="post-widget">
 
           
-          <div class="post-share" id="post-share" data-title="Linux软件篇之tmux" data-pic="/img/logo.jpg" data-summary="&lt;p&gt;tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。&lt;br&gt;tmux前缀键默认为&lt;strong&gt;Ctrl+b&lt;/strong&gt;，可通过配置文件进行更改，后面会写到。&lt;br&gt;tmux 分为会话(Session)、窗口(Window)和窗格(pane)。&lt;/p&gt;
-&lt;h2 id=&quot;快捷键&quot;&gt;&lt;a href=&quot;#快捷键&quot; class=&quot;headerlink&quot; title=&quot;快捷键&quot;&gt;&lt;/a&gt;快捷键&lt;/h2&gt;&lt;h3 id=&quot;会话-Session&quot;&gt;&lt;a href=&quot;#会话-Session&quot; class=&quot;headerlink&quot; title=&quot;会话(Session)&quot;&gt;&lt;/a&gt;会话(Session)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;创建一个新的Session&lt;br&gt;&lt;code&gt;$ tmux new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;在tmux中再创建一个Session&lt;br&gt;&lt;code&gt;Ctrl+b :new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;切换不同的Session&lt;br&gt;&lt;code&gt;Ctrl+b s up(down)方向键&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重命名当前Session&lt;br&gt;&lt;code&gt;Ctrl+b $&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;退出当前Session&lt;br&gt;&lt;code&gt;$ exit&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;恢复最上面的一个Session&lt;br&gt;&lt;code&gt;$ tmux a&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;恢复指定Session&lt;br&gt;&lt;code&gt;$ tmux attach-session -t &amp;lt;session-name&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;" data-url="http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html">
+          <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -184,7 +210,8 @@
 
         <div class="post-main">
 
-            <div class="post-content" itemprop="postContent"><p>tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。<br>tmux前缀键默认为<strong>Ctrl+b</strong>，可通过配置文件进行更改，后面会写到。<br>tmux 分为会话(Session)、窗口(Window)和窗格(pane)。</p>
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。<br>tmux前缀键默认为<strong>Ctrl+b</strong>，可通过配置文件进行更改，后面会写到。<br>tmux 分为会话(Session)、窗口(Window)和窗格(pane)。</p>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h3><ul>
 <li>创建一个新的Session<br><code>$ tmux new -s &quot;名称&quot;</code></li>
 <li>在tmux中再创建一个Session<br><code>Ctrl+b :new -s &quot;名称&quot;</code></li>
@@ -221,11 +248,18 @@
 </ul>
 <p>其他的配置和快捷键可通过<code>$ man tmux</code>查看tmux的手册</p>
 <h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>我使用tmux最主要的还是看中它的现场恢复了。<br>比如说：今天在服务器上进行编码修改，快到下班时间，不想等着加班搞完了再回去，可以直接关掉电脑走人，第二天来登陆服务器，直接<code>$ tmux a</code>即可完美回到前一天正在修改的地方，继续接着改就可以了。不然每次下班第二天来又要找半天前一天要改的地方了。。<br>还有一个好处是<strong>tmux</strong>只通过一个ssh连接就可以实现多个终端操作了，大家都知道在工作中，一个终端的使用是远远不够的，如果不用类似<strong>tmux</strong>这样的软件，就必须要进行多次ssh连接了。<br>最后需要注意一下的是: 使用tmux恢复时，必须要保证在上一次断开连接到这次恢复之间，服务器(主机)<strong>不能重启</strong>，一旦重启了就什么都没了。。</p>
-</div>
 
+            <blockquote>
+              <p>
+                本文地址：
+                <a href="http://yoursite.com/2016/03/07/Linux软件篇之tmux/" target="_blank" rel="external">http://yoursite.com/2016/03/07/Linux软件篇之tmux/</a>
+              </p>
+              <footer><cite><a href="http://yoursite.com">@风格</a></cite></footer>
+            </blockquote>
+            </div>
             
 <nav class="post-nav flex-row">
-  <div class="flex-col waves-block prev">
+  <div class="flex-col waves-block waves-effect prev">
     
       <a href="/2016/03/08/Linux软件篇之systemd/" title="Linux软件篇之systemd" id="post-prev" class="post-nav-link">
         <i class="icon icon-chevron-left"></i>
@@ -233,7 +267,7 @@
       </a>
     
   </div>
-  <div class="flex-col waves-block next">
+  <div class="flex-col waves-block waves-effect next">
     
       <a href="/2016/03/06/Linux软件篇之ssh/" title="Linux软件篇之ssh" id="post-next" class="post-nav-link">
         <span class="article-nav-title">下一篇</span>
@@ -284,17 +318,17 @@
     </div>
   </main>
 <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-<div class="global-share" id="global-share" data-title="Linux软件篇之tmux" data-pic="/img/logo.jpg" data-summary="&lt;p&gt;tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。&lt;br&gt;tmux前缀键默认为&lt;strong&gt;Ctrl+b&lt;/strong&gt;，可通过配置文件进行更改，后面会写到。&lt;br&gt;tmux 分为会话(Session)、窗口(Window)和窗格(pane)。&lt;/p&gt;
-&lt;h2 id=&quot;快捷键&quot;&gt;&lt;a href=&quot;#快捷键&quot; class=&quot;headerlink&quot; title=&quot;快捷键&quot;&gt;&lt;/a&gt;快捷键&lt;/h2&gt;&lt;h3 id=&quot;会话-Session&quot;&gt;&lt;a href=&quot;#会话-Session&quot; class=&quot;headerlink&quot; title=&quot;会话(Session)&quot;&gt;&lt;/a&gt;会话(Session)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;创建一个新的Session&lt;br&gt;&lt;code&gt;$ tmux new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;在tmux中再创建一个Session&lt;br&gt;&lt;code&gt;Ctrl+b :new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;切换不同的Session&lt;br&gt;&lt;code&gt;Ctrl+b s up(down)方向键&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重命名当前Session&lt;br&gt;&lt;code&gt;Ctrl+b $&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;退出当前Session&lt;br&gt;&lt;code&gt;$ exit&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;恢复最上面的一个Session&lt;br&gt;&lt;code&gt;$ tmux a&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;恢复指定Session&lt;br&gt;&lt;code&gt;$ tmux attach-session -t &amp;lt;session-name&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;" data-url="http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html">
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "Linux软件篇之tmux",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yoursite.com/2016/03/07/Linux软件篇之tmux/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -331,9 +365,32 @@
  </div>
 
 
+
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 
 <script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
 
 
 
