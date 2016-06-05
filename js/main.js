@@ -7,11 +7,10 @@
         mask = d.getElementById('mask'),
         menuToggle = d.getElementById('menu-toggle'),
         menuOff = d.getElementById('menu-off'),
-        menuShare = d.getElementById('menu-share'),
         loading = d.getElementById('loading'),
         animate = w.requestAnimationFrame,
         ua = navigator.userAgent,
-        isMD = ua.indexOf('Mobile') != -1 || ua.indexOf('Android') != -1 || ua.indexOf('iPhone') != -1 || ua.indexOf('iPad') != -1 || ua.indexOf('KFAPWI') != -1,
+        isMD = ua.indexOf('Mobile') !== -1 || ua.indexOf('Android') !== -1 || ua.indexOf('iPhone') !== -1 || ua.indexOf('iPad') !== -1 || ua.indexOf('KFAPWI') !== -1,
         even = isMD ? 'touchstart' : 'click',
         noop = function() {},
         offset = function(el) {
@@ -28,16 +27,17 @@
                 x: x,
                 y: y
             };
-        };
+        },
+        docEl = ua.indexOf('Firefox') !== -1 ? d.documentElement : body;
 
     var Blog = {
         goTop: function() {
-            var top = body.scrollTop;
+            var top = docEl.scrollTop;
             if (top > 400) {
-                body.scrollTop = top - 400;
+                docEl.scrollTop = top - 400;
                 animate(arguments.callee);
             } else {
-                body.scrollTop = 0;
+                docEl.scrollTop = 0;
             }
         },
         toggleGotop: function(top) {
@@ -51,7 +51,7 @@
             if (flag) {
                 menu.classList.remove('hide');
 
-                if(w.innerWidth < 1241) {
+                if (w.innerWidth < 1241) {
                     mask.classList.add('in');
                     menu.classList.add('show');
                 }
@@ -76,36 +76,65 @@
             }
 
             var tocOfs = offset(toc),
-                tocTop = tocOfs.y;
+                tocTop = tocOfs.y,
+                tocH = toc.offsetHeight,
+                isScroll = tocH > w.innerHeight,
+                titles = d.getElementById('post-content').querySelectorAll('h1, h2, h3, h4, h5, h6'),
+                cssTop = 150,
+                minTop = -1 * (tocH - w.innerHeight) - cssTop;
+
+            function scroll(top) {
+
+                for (var id, i = 0, len = titles.length; i < len; i++) {
+                    if (top > offset(titles[i]).y) {
+                        id = titles[i].id;
+                    }
+                }
+
+                var top = cssTop - toc.querySelectorAll('a[href="#' + id + '"]')[0].offsetTop;
+
+                toc.style.top = (top < minTop ? minTop : top) + 'px';
+            }
 
             return function(top) {
                 if (top > tocTop) {
                     toc.classList.add('fixed');
+
+                    if (isScroll) {
+                        scroll(top);
+                    }
                 } else {
                     toc.classList.remove('fixed');
                 }
+
             };
         })(),
         share: function() {
 
             var share = d.getElementById('global-share'),
-                data = share.dataset,
-                title = data.title,
-                url = data.url,
-                summary = data.summary,
-                pic = data.pic,
+                menuShare = d.getElementById('menu-share'),
                 div = d.createElement('div'),
                 sns = d.getElementsByClassName('share-sns'),
-                interface;
+                summary, api;
 
-            div.innerHTML = summary;
+            div.innerHTML = BLOG_SHARE.summary;
             summary = div.innerText;
             div = undefined;
 
-            interface = 'http://www.jiathis.com/send/?webid={service}&url=' + url + '&title=' + title + '&summary=' + summary + '&pic=' + pic;
+            api = 'http://www.jiathis.com/send/?webid={service}&url=' + BLOG_SHARE.url + '&title=' + BLOG_SHARE.title + '&summary=' + summary + '&pic=' + location.protocol + '//' + location.host + BLOG_SHARE.pic;
 
             function goShare(service) {
-                w.open(encodeURI(interface.replace('{service}', service)));
+                w.open(encodeURI(api.replace('{service}', service)));
+            }
+
+            function show() {
+                mask.classList.add('in');
+                share.classList.add('in');
+            }
+
+            function hide() {
+                share.classList.remove('in');
+                mask.classList.remove('in');
             }
 
             [].forEach.call(sns, function(el) {
@@ -114,19 +143,29 @@
                 }, false);
             });
 
-            return {
-                show: function() {
-                    mask.classList.add('in');
-                    share.classList.add('in');
-                },
-                hide: function() {
-                    share.classList.remove('in');
-                    mask.classList.remove('in');
-                }
-            };
+            menuShare.addEventListener(even, function() {
+                show();
+            }, false);
+
+            mask.addEventListener(even, function() {
+                hide();
+            }, false);
+        },
+        search: function() {
+            var searchWrap = d.getElementById('search-wrap');
+
+            function toggleSearch() {
+                searchWrap.classList.toggle('in');
+            }
+
+            d.getElementById('search').addEventListener(even, toggleSearch);
+            d.getElementById('search').addEventListener(even, toggleSearch);
         }
     };
 
+    menu.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    });
 
     w.addEventListener('load', function() {
         loading.classList.remove('active');
@@ -136,18 +175,13 @@
         Blog.toggleMenu();
     });
 
-    var share = Blog.share();
-
-    menuShare.addEventListener(even, function() {
-        share.show();
-    }, false);
-
     gotop.addEventListener(even, function() {
         animate(Blog.goTop);
     }, false);
 
-    menuToggle.addEventListener(even, function() {
+    menuToggle.addEventListener(even, function(e) {
         Blog.toggleMenu(true);
+        e.preventDefault();
     }, false);
 
     menuOff.addEventListener(even, function() {
@@ -156,20 +190,21 @@
 
     mask.addEventListener(even, function() {
         Blog.toggleMenu();
-        share.hide();
     }, false);
 
     d.addEventListener('scroll', function() {
-        var top = body.scrollTop;
+        var top = docEl.scrollTop;
         Blog.toggleGotop(top);
         Blog.fixedHeader(top);
         Blog.fixedToc(top);
     }, false);
 
+    if (typeof BLOG_SHARE !== 'undefined') {
+        Blog.share();
+    }
+
     Waves.init();
-    Waves.attach('.waves-button-light', ['waves-button', 'waves-light']);
-    Waves.attach('.waves-circle-light', ['waves-circle', 'waves-light']);
-    Waves.attach('.waves-block, .global-share li', ['waves-block']);
+    Waves.attach('.global-share li', ['waves-block']);
     Waves.attach('.article-tag-list-link, #page-nav a, #page-nav span', ['waves-button']);
 
 })(window, document);
