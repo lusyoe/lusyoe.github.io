@@ -128,6 +128,46 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="post-Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法" class="article article-type-post" itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/">Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
+</div>
+        <time datetime="2016-07-27T15:12:30.000Z" itemprop="datePublished" class="post-tiem">
+  2016-07-27
+</time>
+      </div>
+      <div class="post-content" id="post-content" itemprop="postContent" >
+        
+          <p>最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，<br>但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。<br>最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，<br>找到了<a href="http://www.hudawei.net/archives/38" target="_blank" rel="external">胡大伟的官方网站</a>的这篇blog，刚好解决了问题。:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Win+r services.msc打开服务管理窗口在里面找到xlserviceplatform把这个服务禁用了。</span><br><span class="line">找到C:\Program Files(x86)\Common Files\Thunder Network\ServicePlatform\XLSP.dll文件</span><br><span class="line">删除之即可</span><br></pre></td></tr></table></figure></p>
+<p>幕后真凶原来是迅雷，对国内这些东西已经是彻底无语了。</p>
+<p>在这里感谢下胡大伟!</p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/" class="post-more waves-effect waves-button waves-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-OpenWrt之Log篇" class="article article-type-post" itemprop="blogPost">
     
       

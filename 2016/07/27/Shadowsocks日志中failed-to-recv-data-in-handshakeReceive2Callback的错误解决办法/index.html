@@ -3,28 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Linux软件篇之systemd | 风格 | 风起于青萍之末</title>
+  <title>Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法 | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="Linux">
-  <meta name="description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。
-系统服务管理">
+  <meta name="keywords" content="shadowsocks">
+  <meta name="description" content="最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，找到了胡大伟的官方网站的这篇blog，刚好解决了问题。:)123Win+r services.msc打开服务管理窗口在里面找到xlse">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux软件篇之systemd">
-<meta property="og:url" content="https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/index.html">
+<meta property="og:title" content="Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法">
+<meta property="og:url" content="https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。
-系统服务管理">
-<meta property="og:updated_time" content="2016-03-08T15:58:44.000Z">
+<meta property="og:description" content="最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，找到了胡大伟的官方网站的这篇blog，刚好解决了问题。:)123Win+r services.msc打开服务管理窗口在里面找到xlse">
+<meta property="og:updated_time" content="2016-07-27T15:37:06.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux软件篇之systemd">
-<meta name="twitter:description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。
-系统服务管理">
+<meta name="twitter:title" content="Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法">
+<meta name="twitter:description" content="最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，找到了胡大伟的官方网站的这篇blog，刚好解决了问题。:)123Win+r services.msc打开服务管理窗口在里面找到xlse">
   
     <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;systemd&lt;/strong&gt;是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。&lt;/p&gt;
-&lt;h3 id=&quot;系统服务管理&quot;&gt;&lt;a href=&quot;#系统服务管理&quot; class=&quot;headerlink&quot; title=&quot;系统服务管理&quot;&gt;&lt;/a&gt;系统服务管理&lt;/h3&gt;">
+  <meta name="summary" content="null">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -102,7 +98,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Linux软件篇之systemd</div>
+        <div class="flex-col header-title ellipsis">Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -123,18 +119,18 @@
 </header>
 <header class="content-header">
   <div class="container">
-    <h1 class="author">Linux软件篇之systemd</h1>
-    <h5 class="subtitle">2016-03-08</h5>
+    <h1 class="author">Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法</h1>
+    <h5 class="subtitle">2016-07-27</h5>
   </div>
 </header>
 
     <div class="container body-wrap">
       
-  <article id="post-Linux软件篇之systemd" class="article article-type-post" itemprop="blogPost">
+  <article id="post-Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法" class="article article-type-post" itemprop="blogPost">
     
       <div class="post-meat flex-row">
         <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
 </div>
       </div>
       <div class="post-body">
@@ -182,7 +178,7 @@
 
           
           <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统服务管理"><span class="post-toc-text">系统服务管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志管理"><span class="post-toc-text">日志管理</span></a></li></ol></li></ol>
+            
           </nav>
           
         </aside>
@@ -190,34 +186,14 @@
         <div class="post-main">
 
             <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>systemd</strong>是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。</p>
-<h3 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h3><a id="more"></a>
-<ul>
-<li>激活开机启动服务<br>  <code>$ sudo systemctl enable [service-name]</code></li>
-<li>取消开机启动服务<br>  <code>$ sudo systemctl disable [service-name]</code></li>
-<li>查看是否开机启动服务<br>  <code>$ systemctl is-enable [service-name]</code></li>
-<li>查看开机每个服务消耗的时间<br>  <code>$ systemd-analyze blame</code></li>
-<li>查看开机消耗总时间<br>  <code>$ systemd-analyze</code></li>
-<li>查看所有被激活的服务<br>  <code>$ systemctl list-units -t service</code></li>
-<li>查看一个服务的状态<br>  <code>$ systemctl status [service-name]</code></li>
-<li>启动、停止、重启一个服务<br>  <code>$ sudo systemctl start(stop、restart) [service-name]</code></li>
-<li>重新加载一个服务(可以只加载服务的配置文件而不重启服务)<br>  <code>$ sudo systemctl reload [service-name]</code></li>
-</ul>
-<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><ul>
-<li>查看启动日志(默认只保存本次启动的日志)<br>  <code>$ sudo journalctl</code></li>
-<li>查看某个服务的日志<br>  <code>$ sudo journalctl [service-path](如：/usr/sbin/sshd)</code></li>
-<li>查看实时日志<br>  <code>$ sudo journalctl -f</code></li>
-<li>重新载入systemd所有更改的配置，扫描新的或变动的单元<br>  <code>$ sudo systemctl daemon-reload</code></li>
-<li>查看内核日志(不显示应用日志)<br>  <code>$ sudo journalctl -k</code></li>
-<li>查看某个路径的脚本的日志<br>  <code>$ sudo journalctl /bin/bash</code></li>
-<li>显示日志占据的硬盘空间<br>  <code>$ sudo journalctl --disk-usage</code></li>
-</ul>
-<p>以上都为常用的功能，当然还有需要添加自定义的服务，这个以后再说。</p>
+            <p>最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，<br>但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。<br>最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，<br>找到了<a href="http://www.hudawei.net/archives/38" target="_blank" rel="external">胡大伟的官方网站</a>的这篇blog，刚好解决了问题。:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Win+r services.msc打开服务管理窗口在里面找到xlserviceplatform把这个服务禁用了。</span><br><span class="line">找到C:\Program Files(x86)\Common Files\Thunder Network\ServicePlatform\XLSP.dll文件</span><br><span class="line">删除之即可</span><br></pre></td></tr></table></figure></p>
+<p>幕后真凶原来是迅雷，对国内这些东西已经是彻底无语了。</p>
+<p>在这里感谢下胡大伟!</p>
 
             <blockquote>
               <p>
                 本文地址：
-                <a href="https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/" target="_blank" rel="external">https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/</a>
+                <a href="https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/" target="_blank" rel="external">https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/</a>
               </p>
               <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
             </blockquote>
@@ -226,15 +202,10 @@
 <nav class="post-nav flex-row">
   <div class="flex-col waves-block waves-effect prev">
     
-      <a href="/2016/03/09/Linux软件篇之Docker/" title="Linux软件篇之Docker" id="post-prev" class="post-nav-link">
-        <i class="icon icon-chevron-left"></i>
-        <span class="article-nav-title">上一篇</span>
-      </a>
-    
   </div>
   <div class="flex-col waves-block waves-effect next">
     
-      <a href="/2016/03/07/Linux软件篇之tmux/" title="Linux软件篇之tmux" id="post-next" class="post-nav-link">
+      <a href="/2016/06/04/OpenWrt之Log篇/" title="OpenWrt之Log篇" id="post-next" class="post-nav-link">
         <span class="article-nav-title">下一篇</span>
         <i class="icon icon-chevron-right"></i>
       </a>
@@ -248,7 +219,7 @@
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Linux软件篇之systemd" data-title="Linux软件篇之systemd" data-url="https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/index.html"></div>
+	<div class="ds-thread" data-thread-key="Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法" data-title="Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法" data-url="https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -287,10 +258,10 @@
 
 <script>
 var BLOG_SHARE = {
-    title: "Linux软件篇之systemd",
+    title: "Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法",
     pic: "/img/logo.jpg",
     summary: document.getElementsByName('summary')[0].content,
-    url: "https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/index.html"
+    url: "https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/index.html"
 };
 </script>
 <div class="global-share" id="global-share">
