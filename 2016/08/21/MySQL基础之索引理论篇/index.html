@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL基础之索引理论篇 | 风格 | 风起于青萍之末</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="MySQL">
+  <meta name="description" content="简介索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。
+索引的含义和特点索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，对于相关列使用索引是提高查询操作速度的最佳途径。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL基础之索引理论篇">
+<meta property="og:url" content="https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="简介索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。
+索引的含义和特点索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，对于相关列使用索引是提高查询操作速度的最佳途径。">
+<meta property="og:updated_time" content="2016-08-21T13:24:56.317Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL基础之索引理论篇">
+<meta name="twitter:description" content="简介索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。
+索引的含义和特点索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，对于相关列使用索引是提高查询操作速度的最佳途径。">
+  
+    <link rel="alternative" href="/atom.xml" title="风格" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。&lt;/p&gt;
+&lt;h1 id=&quot;索引的含义和特点&quot;&gt;&lt;a href=&quot;#索引的含义和特点&quot; class=&quot;headerlink&quot; title=&quot;索引的含义和特点&quot;&gt;&lt;/a&gt;索引的含义和特点&lt;/h1&gt;&lt;p&gt;索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。&lt;br&gt;使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，&lt;br&gt;对于相关列使用索引是提高查询操作速度的最佳途径。&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">卢浩元</h5>
+        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav flex-col">
+    
+        <li class="waves-block waves-effect">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>风格 &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL基础之索引理论篇</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">MySQL基础之索引理论篇</h1>
+    <h5 class="subtitle">2016-08-21</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-MySQL基础之索引理论篇" class="article article-type-post" itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的含义和特点"><span class="post-toc-text">索引的含义和特点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的优点"><span class="post-toc-text">索引的优点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#索引的缺点"><span class="post-toc-text">索引的缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的分类"><span class="post-toc-text">索引的分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#普通索引和唯一索引"><span class="post-toc-text">普通索引和唯一索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单列索引和组合索引"><span class="post-toc-text">单列索引和组合索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全文索引"><span class="post-toc-text">全文索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#空间索引"><span class="post-toc-text">空间索引</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的设计原则"><span class="post-toc-text">索引的设计原则</span></a></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。</p>
+<h1 id="索引的含义和特点"><a href="#索引的含义和特点" class="headerlink" title="索引的含义和特点"></a>索引的含义和特点</h1><p>索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。<br>使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，<br>对于相关列使用索引是提高查询操作速度的最佳途径。<br><a id="more"></a></p>
+<p>由于索引是在存储引擎中实现的，因此采用不同的存储引擎的表支持的索引类型也不相同。<br>MySQL中索引的存储类型有两种：<code>BTREE</code>和<code>HASH</code>，具体和表的存储引擎相关的是：MyISAM和InnoDB<br>存储引擎只支持BTREE索引；MEMORY/HEAP存储引擎可以支持HASH和BTREE索引。</p>
+<h1 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h1><ul>
+<li>通过创建唯一索引，可以保证数据库表中每一行数据的唯一性。</li>
+<li>可以大大加快数据的查询速度，这也是创建索引的最主要的原因。</li>
+<li>在实现数据的参考完整性方面，可以加速表和表之间的连接。</li>
+<li>在使用分组和排序子句进行数据查询时，也可以显著的减少查询中分组和排序的时间。</li>
+</ul>
+<h2 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h2><ul>
+<li>创建索引和维护索引要耗费时间，并且随着数据量的增加所耗费的时间也会增加。</li>
+<li>索引需要占磁盘空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，<br>如果有大量的索引，索引文件可能比数据文件更快达到最大文件大小。</li>
+<li>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。</li>
+</ul>
+<h1 id="索引的分类"><a href="#索引的分类" class="headerlink" title="索引的分类"></a>索引的分类</h1><p>MySQL的索引可以分为以下几类：</p>
+<h3 id="普通索引和唯一索引"><a href="#普通索引和唯一索引" class="headerlink" title="普通索引和唯一索引"></a>普通索引和唯一索引</h3><p>   普通索引是MySQL中的基本索引类型，允许在定义索引的列中插入重复值和空值。<br>   唯一索引，索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一，<br>   主键索引是一种特殊的唯一索引，不允许有空值。</p>
+<h3 id="单列索引和组合索引"><a href="#单列索引和组合索引" class="headerlink" title="单列索引和组合索引"></a>单列索引和组合索引</h3><p>   单列索引即一个索引只包含单个列，一个表可以有多个单列索引。<br>   组合索引指在表的多个字段组合上创建的索引，只有在查询条件中使用了这些字段的左边字段时，<br>   索引才会被使用。使用组合索引时遵循最左前缀集合。</p>
+<h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>   全文索引类型为<strong>FULLTEXT</strong>，在定义索引的列上支持值的全文查找，允许在这些索引列中<br>   插入重复值和空值。全文索引可以在CHAR、VARCHAR或者TEXT类型的列上创建。<br>   MySQL中只有<strong>MyISAM</strong>存储引擎支持全文索引。</p>
+<h3 id="空间索引"><a href="#空间索引" class="headerlink" title="空间索引"></a>空间索引</h3><p>   空间索引是对空间数据类型的字段建立的索引，MySQL中空间数据类型有4种，<br>   分别是：GEOMETRY、POINT、LINESTRING和POLYGON。MySQL使用<strong>SPATIAL</strong>关键字进行扩展，<br>   使得能够用于创建正规索引类似的语法创建空间索引。创建空间索引的列，必须将其声明为NOT NULL，<br>   最后空间索引只能在存储引擎为<strong>MyISAM</strong>的表中创建。</p>
+<h1 id="索引的设计原则"><a href="#索引的设计原则" class="headerlink" title="索引的设计原则"></a>索引的设计原则</h1><p>  索引设计不合理或者缺少索引都会对数据库和应用程序的性能造成障碍。高效的索引对于获得良好的性能非常重要。<br>  设计索引时，应该考虑以下准则：</p>
+<ul>
+<li><p>索引并非越多越好，一个表如有大量的索引，不仅占用磁盘空间，而且会影响<code>INSERT、DELETE、UPDATE</code>等语句的性能，因为当表中的数据更改的同时，索引也会进行调整和更新。</p>
+</li>
+<li><p>避免对经常更新的表进行过多的索引，并且索引中的列尽可能少，而对经常用于<strong>查询</strong>的字段应该创建索引，<br>但要避免添加不必要的字段。</p>
+</li>
+<li><p><strong>数据量小</strong>的表最好不要使用索引，由于数据较少，查询花费的时间可能比遍历索引的时间还要短，索引可能不会产生优化效果。</p>
+</li>
+<li><p>在条件表达式中经常用到的<strong>不同值较多</strong>的列上建立索引，在不同值少的列上不要建立索引。<br>比如在用户表的”性别”字段上只有”男”与”女”两个不同值，因此就无须建立索引。如果建立索引不但不会提高查询效率，反而会严重降低更新速度。</p>
+</li>
+<li><p>当唯一性是某种数据本身的特征时，指定唯一索引。使用唯一索引需能确保定义的列的数据完整性，以提高查询速度。</p>
+</li>
+<li><p>在频繁进行排序或分组(即进行<code>group by或order by操作</code>)的列上建立索引，如果待排序的列有多个，可以在这些列上建立组合索引。</p>
+</li>
+</ul>
+
+            <blockquote>
+              <p>
+                本文地址：
+                <a href="https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/" target="_blank" rel="external">https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/</a>
+              </p>
+              <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block waves-effect prev">
+    
+      <a href="/2016/08/21/MySQL基础之索引实战篇/" title="MySQL基础之索引实战篇" id="post-prev" class="post-nav-link">
+        <i class="icon icon-chevron-left"></i>
+        <span class="article-nav-title">上一篇</span>
+      </a>
+    
+  </div>
+  <div class="flex-col waves-block waves-effect next">
+    
+      <a href="/2016/08/21/Idea-Maven项目无法下载依赖问题汇总/" title="Idea Maven项目无法下载依赖问题汇总" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="MySQL基础之索引理论篇" data-title="MySQL基础之索引理论篇" data-url="https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lusyoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "MySQL基础之索引理论篇",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
