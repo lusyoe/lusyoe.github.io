@@ -142,14 +142,18 @@
 
 
       <div class="post-meat flex-row">
-        <div class="flex-col"></div>
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+</div>
         <time datetime="2016-08-21T13:29:38.000Z" itemprop="datePublished" class="post-tiem">
   2016-08-21
 </time>
       </div>
       <div class="post-content" id="post-content" itemprop="postContent" >
         
-          
+          <p>在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。</p>
+<p>在这里只列出常用索引类型的操作，关于更多的索引分类参看<a href="/2016/08/21/MySQL基础之索引理论篇/">MySQL基础之索引理论篇</a></p>
+<h1 id="索引的创建"><a href="#索引的创建" class="headerlink" title="索引的创建"></a>索引的创建</h1><h2 id="创建表的时候创建索引"><a href="#创建表的时候创建索引" class="headerlink" title="创建表的时候创建索引"></a>创建表的时候创建索引</h2><h4 id="普通索引"><a href="#普通索引" class="headerlink" title="普通索引"></a>普通索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> book</span><br><span class="line">(</span><br><span class="line">    bookid    <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    year_pub  <span class="keyword">YEAR</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">INDEX</span>(year_pub)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
         
       </div>
       <div class="post-footer clearfix">
