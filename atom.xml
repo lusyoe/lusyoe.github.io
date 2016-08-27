@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>风格</title>
+  <subtitle>风起于青萍之末</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://lusyoe.github.io/"/>
+  <updated>2016-08-26T16:49:56.777Z</updated>
+  <id>https://lusyoe.github.io/</id>
+  
+  <author>
+    <name>卢浩元</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL基础之索引实战篇</title>
+    <link href="https://lusyoe.github.io/2016/08/21/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%B4%A2%E5%BC%95%E5%AE%9E%E6%88%98%E7%AF%87/"/>
+    <id>https://lusyoe.github.io/2016/08/21/MySQL基础之索引实战篇/</id>
+    <published>2016-08-21T13:29:38.000Z</published>
+    <updated>2016-08-26T16:49:56.777Z</updated>
+    
+    <content type="html"><![CDATA[<p>在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。</p>
+<p>在这里只列出常用索引类型的操作，关于更多的索引分类参看<a href="/2016/08/21/MySQL基础之索引理论篇/">MySQL基础之索引理论篇</a></p>
+<h1 id="索引的创建"><a href="#索引的创建" class="headerlink" title="索引的创建"></a>索引的创建</h1> <a id="more"></a>
+<h2 id="创建表的时候创建索引"><a href="#创建表的时候创建索引" class="headerlink" title="创建表的时候创建索引"></a>创建表的时候创建索引</h2><h4 id="普通索引"><a href="#普通索引" class="headerlink" title="普通索引"></a>普通索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> book</span><br><span class="line">(</span><br><span class="line">    bookid    <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    year_pub  <span class="keyword">YEAR</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">INDEX</span>(year_pub)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>上面语句是在year_pub字段上创建索引的</p>
+<h4 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h4><p>唯一索引只是多加了一个<strong>UNIQUE</strong>关键字，以下语句为在id字段上添加唯一索引并命名为UniqIdx<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> perso</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">id</span>    <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">name</span>  <span class="built_in">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> UniqIdx(<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h4 id="组合索引"><a href="#组合索引" class="headerlink" title="组合索引"></a>组合索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> employee</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">id</span>    <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">name</span>  <span class="built_in">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    age   <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    info  <span class="built_in">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">    <span class="keyword">INDEX</span> MultiIdx(<span class="keyword">id</span>, <span class="keyword">name</span>, age)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h4><p>FULLTEXT全文索引可以用于全文搜索，但只有<strong>MyISAM</strong>存储引擎才支持，并且必须为CHAR、VARCHAR、TEXT列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> person</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">id</span>    <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">name</span>  <span class="built_in">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    age   <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    info  <span class="built_in">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">    FULLTEXT <span class="keyword">INDEX</span> FullTextIdx(info)</span><br><span class="line">)<span class="keyword">ENGINE</span>=MyISAM;</span><br></pre></td></tr></table></figure>
+<p>通过<code>SHOW CREATE TABLE person;</code>可查看创建表的过程。</p>
+<h2 id="在已经存在的表上创建索引"><a href="#在已经存在的表上创建索引" class="headerlink" title="在已经存在的表上创建索引"></a>在已经存在的表上创建索引</h2><p>主要是通过<code>ALTER TABLE</code> 和 <code>CREATE INDEX</code> 语句进行的，推荐使用<strong>CREATE INDEX</strong></p>
+<h4 id="普通索引-1"><a href="#普通索引-1" class="headerlink" title="普通索引"></a>普通索引</h4><p>在perso表的name上建立名为PoNameIdx的<strong>普通索引</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> perso <span class="keyword">ADD</span> <span class="keyword">INDEX</span> PoNameIdx(<span class="keyword">name</span>(<span class="number">30</span>));</span><br><span class="line">或者</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> PoNameIdx <span class="keyword">ON</span> perso(<span class="keyword">name</span>(<span class="number">30</span>));</span><br></pre></td></tr></table></figure>
+<p>通过<code>SHOW INDEX FROM perso;</code>命令可以查看perso表当前的所有索引信息。</p>
+<h4 id="唯一索引-1"><a href="#唯一索引-1" class="headerlink" title="唯一索引"></a>唯一索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> person <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> UniqNameIdx(<span class="keyword">name</span>(<span class="number">30</span>));</span><br><span class="line">或者</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> UniqNameIdx <span class="keyword">ON</span> person(<span class="keyword">name</span>(<span class="number">30</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="组合索引-1"><a href="#组合索引-1" class="headerlink" title="组合索引"></a>组合索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> person <span class="keyword">ADD</span> <span class="keyword">INDEX</span> PoAgeAndInfo(age, info);</span><br><span class="line">或者</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> PoAgeAndInfo <span class="keyword">ON</span> person(age, info);</span><br></pre></td></tr></table></figure>
+<h4 id="全文索引-1"><a href="#全文索引-1" class="headerlink" title="全文索引"></a>全文索引</h4><p>在这里需要注意，<strong>全文索引</strong>只能在存储引擎为MyISAM的表上使用。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> person <span class="keyword">ADD</span> FULLTEXT <span class="keyword">INDEX</span> infoFTIdx(info);</span><br><span class="line">或者</span><br><span class="line"><span class="keyword">CREATE</span> FULLTEXT <span class="keyword">INDEX</span> infoFTIdx <span class="keyword">ON</span> person(info);</span><br></pre></td></tr></table></figure></p>
+<p>如果该字段上已经存在了索引，可以先删除掉，然后再创建。</p>
+<h2 id="索引的删除"><a href="#索引的删除" class="headerlink" title="索引的删除"></a>索引的删除</h2><p>相较于索引的创建，删除索引的操作就比较简单很多了。</p>
+<h4 id="ALTER-TABLE删除索引"><a href="#ALTER-TABLE删除索引" class="headerlink" title="ALTER TABLE删除索引"></a>ALTER TABLE删除索引</h4><p>遵循以下基本语法格式即可：<br><code>ALTER TABLE table_name DROP INDEX index_name</code><br>如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> person <span class="keyword">DROP</span> <span class="keyword">INDEX</span> infoFTIdx;</span><br></pre></td></tr></table></figure></p>
+<h4 id="DROP-INDEX删除索引"><a href="#DROP-INDEX删除索引" class="headerlink" title="DROP INDEX删除索引"></a>DROP INDEX删除索引</h4><p>格式如下：<br><code>DROP INDEX index_name ON table_name</code><br>如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> PoNameIdx <span class="keyword">ON</span> perso;</span><br></pre></td></tr></table></figure>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>最后索引的实战大概就写这么多吧，这些都只是基本操作。实际开发中重点应该是如何选择索引。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。&lt;/p&gt;
+&lt;p&gt;在这里只列出常用索引类型的操作，关于更多的索引分类参看&lt;a href=&quot;/2016/08/21/MySQL基础之索引理论篇/&quot;&gt;MySQL基础之索引理论篇&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;索引的创建&quot;&gt;&lt;a href=&quot;#索引的创建&quot; class=&quot;headerlink&quot; title=&quot;索引的创建&quot;&gt;&lt;/a&gt;索引的创建&lt;/h1&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https://lusyoe.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://lusyoe.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL基础之索引理论篇</title>
+    <link href="https://lusyoe.github.io/2016/08/21/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%B4%A2%E5%BC%95%E7%90%86%E8%AE%BA%E7%AF%87/"/>
+    <id>https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/</id>
+    <published>2016-08-21T12:19:23.000Z</published>
+    <updated>2016-08-21T13:24:56.317Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。</p>
+<h1 id="索引的含义和特点"><a href="#索引的含义和特点" class="headerlink" title="索引的含义和特点"></a>索引的含义和特点</h1><p>索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。<br>使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，<br>对于相关列使用索引是提高查询操作速度的最佳途径。<br><a id="more"></a></p>
+<p>由于索引是在存储引擎中实现的，因此采用不同的存储引擎的表支持的索引类型也不相同。<br>MySQL中索引的存储类型有两种：<code>BTREE</code>和<code>HASH</code>，具体和表的存储引擎相关的是：MyISAM和InnoDB<br>存储引擎只支持BTREE索引；MEMORY/HEAP存储引擎可以支持HASH和BTREE索引。</p>
+<h1 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h1><ul>
+<li>通过创建唯一索引，可以保证数据库表中每一行数据的唯一性。</li>
+<li>可以大大加快数据的查询速度，这也是创建索引的最主要的原因。</li>
+<li>在实现数据的参考完整性方面，可以加速表和表之间的连接。</li>
+<li>在使用分组和排序子句进行数据查询时，也可以显著的减少查询中分组和排序的时间。</li>
+</ul>
+<h2 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h2><ul>
+<li>创建索引和维护索引要耗费时间，并且随着数据量的增加所耗费的时间也会增加。</li>
+<li>索引需要占磁盘空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，<br>如果有大量的索引，索引文件可能比数据文件更快达到最大文件大小。</li>
+<li>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。</li>
+</ul>
+<h1 id="索引的分类"><a href="#索引的分类" class="headerlink" title="索引的分类"></a>索引的分类</h1><p>MySQL的索引可以分为以下几类：</p>
+<h3 id="普通索引和唯一索引"><a href="#普通索引和唯一索引" class="headerlink" title="普通索引和唯一索引"></a>普通索引和唯一索引</h3><p>   普通索引是MySQL中的基本索引类型，允许在定义索引的列中插入重复值和空值。<br>   唯一索引，索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一，<br>   主键索引是一种特殊的唯一索引，不允许有空值。</p>
+<h3 id="单列索引和组合索引"><a href="#单列索引和组合索引" class="headerlink" title="单列索引和组合索引"></a>单列索引和组合索引</h3><p>   单列索引即一个索引只包含单个列，一个表可以有多个单列索引。<br>   组合索引指在表的多个字段组合上创建的索引，只有在查询条件中使用了这些字段的左边字段时，<br>   索引才会被使用。使用组合索引时遵循最左前缀集合。</p>
+<h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>   全文索引类型为<strong>FULLTEXT</strong>，在定义索引的列上支持值的全文查找，允许在这些索引列中<br>   插入重复值和空值。全文索引可以在CHAR、VARCHAR或者TEXT类型的列上创建。<br>   MySQL中只有<strong>MyISAM</strong>存储引擎支持全文索引。</p>
+<h3 id="空间索引"><a href="#空间索引" class="headerlink" title="空间索引"></a>空间索引</h3><p>   空间索引是对空间数据类型的字段建立的索引，MySQL中空间数据类型有4种，<br>   分别是：GEOMETRY、POINT、LINESTRING和POLYGON。MySQL使用<strong>SPATIAL</strong>关键字进行扩展，<br>   使得能够用于创建正规索引类似的语法创建空间索引。创建空间索引的列，必须将其声明为NOT NULL，<br>   最后空间索引只能在存储引擎为<strong>MyISAM</strong>的表中创建。</p>
+<h1 id="索引的设计原则"><a href="#索引的设计原则" class="headerlink" title="索引的设计原则"></a>索引的设计原则</h1><p>  索引设计不合理或者缺少索引都会对数据库和应用程序的性能造成障碍。高效的索引对于获得良好的性能非常重要。<br>  设计索引时，应该考虑以下准则：</p>
+<ul>
+<li><p>索引并非越多越好，一个表如有大量的索引，不仅占用磁盘空间，而且会影响<code>INSERT、DELETE、UPDATE</code>等语句的性能，因为当表中的数据更改的同时，索引也会进行调整和更新。</p>
+</li>
+<li><p>避免对经常更新的表进行过多的索引，并且索引中的列尽可能少，而对经常用于<strong>查询</strong>的字段应该创建索引，<br>但要避免添加不必要的字段。</p>
+</li>
+<li><p><strong>数据量小</strong>的表最好不要使用索引，由于数据较少，查询花费的时间可能比遍历索引的时间还要短，索引可能不会产生优化效果。</p>
+</li>
+<li><p>在条件表达式中经常用到的<strong>不同值较多</strong>的列上建立索引，在不同值少的列上不要建立索引。<br>比如在用户表的”性别”字段上只有”男”与”女”两个不同值，因此就无须建立索引。如果建立索引不但不会提高查询效率，反而会严重降低更新速度。</p>
+</li>
+<li><p>当唯一性是某种数据本身的特征时，指定唯一索引。使用唯一索引需能确保定义的列的数据完整性，以提高查询速度。</p>
+</li>
+<li><p>在频繁进行排序或分组(即进行<code>group by或order by操作</code>)的列上建立索引，如果待排序的列有多个，可以在这些列上建立组合索引。</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。&lt;/p&gt;
+&lt;h1 id=&quot;索引的含义和特点&quot;&gt;&lt;a href=&quot;#索引的含义和特点&quot; class=&quot;headerlink&quot; title=&quot;索引的含义和特点&quot;&gt;&lt;/a&gt;索引的含义和特点&lt;/h1&gt;&lt;p&gt;索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。&lt;br&gt;使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，&lt;br&gt;对于相关列使用索引是提高查询操作速度的最佳途径。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https://lusyoe.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://lusyoe.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Idea Maven项目无法下载依赖问题汇总</title>
+    <link href="https://lusyoe.github.io/2016/08/21/Idea-Maven%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
+    <id>https://lusyoe.github.io/2016/08/21/Idea-Maven项目无法下载依赖问题汇总/</id>
+    <published>2016-08-21T11:31:50.000Z</published>
+    <updated>2016-08-21T12:20:33.505Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用IntelliJ IDEA开发Web的时候，刚开始总是遇到Maven的各种问题。<br>现在总结一下关于无法下载依赖jar的问题。</p>
+<h3 id="依赖语法错误"><a href="#依赖语法错误" class="headerlink" title="依赖语法错误"></a>依赖语法错误</h3><a id="more"></a>
+<p>有时候没注意，直接就这样写了：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然而，像这种单个的依赖必须要添加到<code>&lt;dependencies&gt;&lt;/dependencies&gt;</code>中间才行。<br>正确的做法应该是这样:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可恨的是IDE也不提示个什么。。</p>
+<h3 id="配置问题"><a href="#配置问题" class="headerlink" title="配置问题"></a>配置问题</h3><p>如果在pom.xml文件中<code>packageing</code>属性配置不对也不会下载依赖的。<br>比如说：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当配置为war的时候就不允许下载了，必须要为<code>pom</code>才行。<br>这个IDE又是不提示，还是我手动敲命令才发现的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mvn compile</span><br></pre></td></tr></table></figure></p>
+<p>执行上面命令就会提示了：<br><code>&#39;packaging&#39; with value &#39;war&#39; is invalid. Aggregator projects require &#39;pom&#39; as packaging.</code></p>
+<p>所以当在开发初期的时候要改为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用IntelliJ IDEA开发Web的时候，刚开始总是遇到Maven的各种问题。&lt;br&gt;现在总结一下关于无法下载依赖jar的问题。&lt;/p&gt;
+&lt;h3 id=&quot;依赖语法错误&quot;&gt;&lt;a href=&quot;#依赖语法错误&quot; class=&quot;headerlink&quot; title=&quot;依赖语法错误&quot;&gt;&lt;/a&gt;依赖语法错误&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Maven" scheme="https://lusyoe.github.io/categories/Maven/"/>
+    
+    
+      <category term="Maven" scheme="https://lusyoe.github.io/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>回首感悟</title>
+    <link href="https://lusyoe.github.io/2016/08/20/%E5%9B%9E%E9%A6%96%E6%84%9F%E6%82%9F/"/>
+    <id>https://lusyoe.github.io/2016/08/20/回首感悟/</id>
+    <published>2016-08-20T13:42:22.000Z</published>
+    <updated>2016-08-20T15:39:36.297Z</updated>
+    
+    <content type="html"><![CDATA[<p>人生总是充满着选择，每一个选择又会造成截然不同的结果。<br>从13年毕业至今，感觉人生真的是变化很快啊。<br>毕业后，毅然决然的选择了转行，到现在也算是差不多完全融入IT这一行了。<br>很庆幸，当初并没有选择错误。虽然不是科班出身，但凭着一股浓厚的兴趣，能真正入行也是不容易了。</p>
+<p>回首一下这3年</p>
+<h2 id="2013年6月正式毕业了"><a href="#2013年6月正式毕业了" class="headerlink" title="2013年6月正式毕业了"></a>2013年6月正式毕业了</h2><p>和绝大多数人一样，我毕业后一段时间都是很茫然的状态，不知道到底要做什么，毕竟刚踏入社会，什么都不了解。<br>我选择了回家，由于在毕业之前报考了学校的计算机二级考试，开始在家里自学计算机课程了，编程语言当然只有C了。<br>经过了暑期的几个月学习，最终顺利的考过了，也算是给自己增加了不少信心吧。<br>不过就这样想找工作还是早得很啊。。</p>
+<a id="more"></a>
+<h2 id="2013年9月-12月-Java起航"><a href="#2013年9月-12月-Java起航" class="headerlink" title="2013年9月-12月 Java起航"></a>2013年9月-12月 Java起航</h2><p>之后又开始自学Java了，当初学Java完全就是奔着Android去的，那时候Android太火了。<br>学Java的过程中又报了计算机网络自考本科，开始全面系统的学习计算机课程了。</p>
+<h2 id="2014年3月-6月-自考之路"><a href="#2014年3月-6月-自考之路" class="headerlink" title="2014年3月-6月 自考之路"></a>2014年3月-6月 自考之路</h2><p>2014年可以说是最重要的一年了，由于基础底子太差了，仅仅凭着几个月的学习完全赶不上来。<br>当然了，自考可以说是一败涂地了，几次过后就已经完全放弃了。。<br>在这期间最大的收获就是在武大表哥那里的生活了，完全可以说是表哥带着我从毕业后的迷茫期走出来的。<br>让我真正的建立了一个成年人的思想，有了自己的思想和主见。那段时间思考的最多的就是人生了。<br>我的人生到底要怎么走，自考的失败可以说差点让我放弃了走IT的路了，那段时间整个人也是懵的。<br>也是表哥把我拉出来的，真的是要非常的感谢他了。</p>
+<h2 id="2014年7月-8月-初次踏入社会"><a href="#2014年7月-8月-初次踏入社会" class="headerlink" title="2014年7月-8月 初次踏入社会"></a>2014年7月-8月 初次踏入社会</h2><p>2014年的暑期，第一次走入社会寻找工作了，虽然之前在校的时候有过实习经验，但那是建筑行业的了。<br>既然已经打算换行了，当然不想再找那方面的工作了。然而，现实就是这么的残酷，就我这水平什么都找不到。。</p>
+<p>无奈只能找一些工厂先去锻炼下了<br>在武汉，去过富士康，由于大专的毕业，居然不要。。好像那些小学毕业的才更吃香啊<br>接连的找了好几个厂子，最后还是在人才市场，找到了一个愿意收我的小厂了。<br>走入工厂才知道那有多么的辛苦啊，每天都是机械性的劳动，还有白班夜班的倒。。</p>
+<p>结果自然不言而喻，在那里只做了一周，还是放弃不下计算机编程啊</p>
+<h2 id="2014年9月-12月-培训之旅"><a href="#2014年9月-12月-培训之旅" class="headerlink" title="2014年9月-12月 培训之旅"></a>2014年9月-12月 培训之旅</h2><p>在武汉，在网上搜一些计算机实习工作时，发现了培训机构。<br>当然了咱好歹也是成年人了，肯定不会被他们所忽悠，什么包就业，推荐工作啥的，一个字都不会信。<br>但是知识这东西，恰好是我目前最缺乏的，通过网上用人单位的招聘需求，很多东西也不懂。<br>这方面培训机构还是很有经验的，通过到多个培训机构试听，最终还是选择了一个看起来靠谱点的。</p>
+<p>培训内容主要为：Java基础、Web入门和Android就业<br>Java基础由于之前有过自学，所以还是挺轻松的，几次测验基本在班里也是第一的<br>Web入门：当时对Web没有太过关注，也就真的只是入个门啦，当然那个讲师还是挺有水平的<br>最关键是Android了，当时真的是挺用心的了，基本上白天学完了，晚上继续敲代码到凌晨1,2点</p>
+<p>时间就这样在充实的学习过程中过去了.</p>
+<h2 id="2015年2月-3月-工作工作"><a href="#2015年2月-3月-工作工作" class="headerlink" title="2015年2月-3月 工作工作"></a>2015年2月-3月 工作工作</h2><p>培训终于结束了，也算是给我开启了一扇IT的大门吧，经过培训过后，我才感觉已经踏入IT门槛了。<br>2015年2月过完年后，为了发展到深圳来了。<br>刚开始找工作，真的觉得自己还是太嫩了，以至于快1个月才终于找到了一个像样的工作了。<br>当然了，这里还有个小插曲，需要感谢一下当初的培训机构。<br>为了找工作，像我这种出身的，简历当然得要伪造了(惭愧)，不然不用想了。。。<br>新单位居然要打电话给之前的单位调查背景，幸好我当初保存了培训机构的前台号码。</p>
+<h2 id="2015年3月-2016年1月-Android实战"><a href="#2015年3月-2016年1月-Android实战" class="headerlink" title="2015年3月-2016年1月 Android实战"></a>2015年3月-2016年1月 Android实战</h2><p>终于终于我找到一份Android开发的工作了，虽然是面向Android TV端的…<br>突然发现自己不会的还是有好多啊，压力有点大。但是日子总得过啊</p>
+<p>每天下了班后回来继续看项目学习了，可怜原还以为能有个人带带呢，结果就我1个Android开发。</p>
+<p>碰碰磕磕，差不多一年的时间就这样过去了，也差不多熟悉Android app的基本开发了。</p>
+<p>在这期间由于意外情况，接触到了Android系统底层的东西了，比如：自己编译ROM刷到盒子里面，静默安装等等</p>
+<p>也跟一些厂商有打过交道了，比如：深圳的兆驰、TCL、小霸王等<br>第一次听说了，除了MTK，高通之外的芯片了，如：Amlogic、Rockchip<br>第一次听说并使用了Docker<br>第一次自己去制作.9 图<br>第一次把自己学习到的东西都运用上了<br>等等…</p>
+<h2 id="2016年2月-3月-Android系统"><a href="#2016年2月-3月-Android系统" class="headerlink" title="2016年2月-3月 Android系统"></a>2016年2月-3月 Android系统</h2><p>由于种种原因，不得不从这家辞职了。是该考虑下一家的时候了。<br>打算好了去南山发展，毕竟在深圳南山区才是IT科技氛围最浓厚的区域了。<br>刚开始也找了好几家app的开发，不过貌似大部分都对我有系统开发经验有兴趣点，<br>那我是该考虑一下方向了，毕竟相对于app来说，我对系统底层也是更有兴趣一点(讨厌UI)。。</p>
+<p>最终在科技园附近找到了一家偏系统开发的工作了，我也没想到人生第一次薪水过万会来的如此之快。</p>
+<p>刚入职肯定是要好好表现了，发现他们居然连版本控制工具都没用，文件都是copy来copy去的。<br>咱现在也不是那种刚入行的嫩鸟了，而且对于系统源码来说，没有版本控制实在是太容易出错了。</p>
+<p>由于之前在上一家的学习，知道了怎么搭建一整套源码管理。<br>耗费一周的时间，成功的搭建起了gitlab + repo + git的源码管理系统。<br>gitlab作为最上层的操作界面，项目组每个人接触最多的东西<br>repo 来着google官方的Android系统源码管理工具，可以管理许多的git小仓库<br>git 最底层当然是使用git了，最流行最适合最好的系统源码管理工具了</p>
+<p>然而git毕竟学习成本较高啊，在我走之后他们就没法使用了。。。</p>
+<h2 id="2016年3月-至今-正式Android-Framework-Engineer"><a href="#2016年3月-至今-正式Android-Framework-Engineer" class="headerlink" title="2016年3月-至今 正式Android Framework Engineer"></a>2016年3月-至今 正式Android Framework Engineer</h2><p>是的，我只在上一家待一个月就跳槽走了，原因说起来很可笑，有时候星期六要加班，而且还是免费的…<br>我不喜欢这样，虽然都说在IT这行加班是很普遍的，但是那也是要有相应的补贴才行啊。免费的工，抱歉我不会打。</p>
+<p>经过了一周的找工作面试，最终我却选择了外包公司。整个行业都在说外包怎么怎么的坑，当然了不排除确实有那么一些。</p>
+<p>但是这家能给出比我上一家还要多出50%的薪水，我没理由不去啊。<br>入职之后就是直接到某手机厂商那上班了，是说长期驻场来着。跟他们的员工一样的工作上班等<br>在这里加班还是挺少的，待遇也不错，真的很满意了</p>
+<p>发现了外包也有不错啊，很多东西光只听别人说真的很容易造成误导。小时候都听说过小马过河故事呢</p>
+<p>还有就是在大公司就是不一样，流程非常的严谨，整个的开发流程就跟我之前所经历的完全不一样。<br>第一次见识到了code review、自动化Test等各种流程了，感觉学到了很多。</p>
+<p>在这里我也被分配到了framework组，做一些中间层功能接口开发、移植和Bug的修复等工作</p>
+<p>然而，时间过去我发现自己没有了对Android的热爱，少了当初的那一份激情了。<br>在这个暑期，我又对Java大数据，分布式感兴趣了起来。<br>不，应该说我始终对编程有着热爱，但是现在每天却很少coding了，而Android即使是app项目的代码量也不大。<br>并没有充分的展现出现编程的艺术来。是的，编程不仅仅是一种技术，更应该是一种艺术。</p>
+<p>话说，今年看书还是看的挺多的，光这个暑期就看完3本了《Head First 设计模式》、《MySQL 5.5》、《分布式Java应用》<br>可以看到，基本都是为下一步做的技术储备了，相比上半年看的《深入理解Android》系列等Android系统开发方面书籍确实变化蛮大的。</p>
+<p>我想我已经做好了选择，不管以后的结果如何，选择了就不会后悔~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;人生总是充满着选择，每一个选择又会造成截然不同的结果。&lt;br&gt;从13年毕业至今，感觉人生真的是变化很快啊。&lt;br&gt;毕业后，毅然决然的选择了转行，到现在也算是差不多完全融入IT这一行了。&lt;br&gt;很庆幸，当初并没有选择错误。虽然不是科班出身，但凭着一股浓厚的兴趣，能真正入行也是不容易了。&lt;/p&gt;
+&lt;p&gt;回首一下这3年&lt;/p&gt;
+&lt;h2 id=&quot;2013年6月正式毕业了&quot;&gt;&lt;a href=&quot;#2013年6月正式毕业了&quot; class=&quot;headerlink&quot; title=&quot;2013年6月正式毕业了&quot;&gt;&lt;/a&gt;2013年6月正式毕业了&lt;/h2&gt;&lt;p&gt;和绝大多数人一样，我毕业后一段时间都是很茫然的状态，不知道到底要做什么，毕竟刚踏入社会，什么都不了解。&lt;br&gt;我选择了回家，由于在毕业之前报考了学校的计算机二级考试，开始在家里自学计算机课程了，编程语言当然只有C了。&lt;br&gt;经过了暑期的几个月学习，最终顺利的考过了，也算是给自己增加了不少信心吧。&lt;br&gt;不过就这样想找工作还是早得很啊。。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="感悟 总结" scheme="https://lusyoe.github.io/tags/%E6%84%9F%E6%82%9F-%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jenkins新建Maven项目构建出现mvn command execution faild</title>
+    <link href="https://lusyoe.github.io/2016/08/10/Jenkins%E6%96%B0%E5%BB%BAMaven%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E5%87%BA%E7%8E%B0mvn-command-execution-faild/"/>
+    <id>https://lusyoe.github.io/2016/08/10/Jenkins新建Maven项目构建出现mvn-command-execution-faild/</id>
+    <published>2016-08-09T22:49:44.000Z</published>
+    <updated>2016-08-09T23:11:08.187Z</updated>
+    
+    <content type="html"><![CDATA[<p>第一次用Jenkins作持续集成自动化构建，难免经验不足。<br>安装好，一来就直接新建一个Maven任务，然后就立即构建了，结果控制台总是输出<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FATAL: <span class="built_in">command</span> execution failed</span><br><span class="line">java.io.IOException: Cannot run program <span class="string">"mvn"</span> (<span class="keyword">in</span> directory)</span><br><span class="line">....</span><br></pre></td></tr></table></figure></p>
+<p>百度google，无果。最终发现了原来是Jenkins工具里没有配置Maven…</p>
+<ul>
+<li>回到Jenkis主目录，点击左边的<code>系统管理</code></li>
+<li>点击<code>全局工具配置(Global Tool Configuration)</code></li>
+<li>拖到最下面发现有一个Maven项目，点击<code>新增Maven</code>,默认可以选择在线自动下载安装，<br>如果本地已经安装了的话，可以去掉<code>自动安装</code>,输入安装的根路径。</li>
+</ul>
+<p>最后保存应用一下，再尝试build，果然成功了^_^</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第一次用Jenkins作持续集成自动化构建，难免经验不足。&lt;br&gt;安装好，一来就直接新建一个Maven任务，然后就立即构建了，结果控制台总是输出&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;
+    
+    </summary>
+    
+      <category term="Jenkins" scheme="https://lusyoe.github.io/categories/Jenkins/"/>
+    
+    
+      <category term="Jenkins" scheme="https://lusyoe.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法</title>
+    <link href="https://lusyoe.github.io/2016/07/27/Shadowsocks%E6%97%A5%E5%BF%97%E4%B8%ADfailed-to-recv-data-in-handshakeReceive2Callback%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/</id>
+    <published>2016-07-27T15:12:30.000Z</published>
+    <updated>2016-07-27T15:37:06.330Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，<br>但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。<br>最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，<br>找到了<a href="http://www.hudawei.net/archives/38" target="_blank" rel="external">胡大伟的官方网站</a>的这篇blog，刚好解决了问题。:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Win+r services.msc打开服务管理窗口在里面找到xlserviceplatform把这个服务禁用了。</span><br><span class="line">找到C:\Program Files(x86)\Common Files\Thunder Network\ServicePlatform\XLSP.dll文件</span><br><span class="line">删除之即可</span><br></pre></td></tr></table></figure></p>
+<p>幕后真凶原来是迅雷，对国内这些东西已经是彻底无语了。</p>
+<p>在这里感谢下胡大伟!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，&lt;br&gt;但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。&lt;br&gt;最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效
+    
+    </summary>
+    
+    
+      <category term="shadowsocks" scheme="https://lusyoe.github.io/tags/shadowsocks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenWrt之Log篇</title>
+    <link href="https://lusyoe.github.io/2016/06/04/OpenWrt%E4%B9%8BLog%E7%AF%87/"/>
+    <id>https://lusyoe.github.io/2016/06/04/OpenWrt之Log篇/</id>
+    <published>2016-06-04T15:50:16.000Z</published>
+    <updated>2016-06-05T10:21:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+<p><strong>目录</strong></p>
+<ul>
+<li><a href="#简介">简介</a></li>
+<li><a href="#logread">logread</a></li>
+<li><a href="#上传到远程rsyslog服务器">上传到远程rsyslog服务器</a></li>
+<li><a href="#配置rsyslog">配置rsyslog</a></li>
+<li><a href="#处理问题">处理问题</a></li>
+<li><a href="#总结">总结</a><!-- markdown-toc end -->
+</li>
+</ul>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因．</p>
+<h1 id="logread"><a href="#logread" class="headerlink" title="logread"></a>logread</h1><p>在OpenWrt中可通过<code>logread</code>命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．<br>不过每次查看log，都要登陆进去，然后不断的敲logread也是很麻烦的，<br>正好OpenWrt的web设置界面中有设置上传日志的选项，在我这是 系统—&gt;日志里面<br><a id="more"></a></p>
+<h1 id="上传到远程rsyslog服务器"><a href="#上传到远程rsyslog服务器" class="headerlink" title="上传到远程rsyslog服务器"></a>上传到远程rsyslog服务器</h1><p>由于之前每次看日志都不太方便，我们可以将日志文件上传到本地的Linux机器中，<br>我一般使用的是Ubuntu/Debian系的，现在一般的Linux发行系统都已经预装了rsyslog了，<br>因此我们只需要配置一下即可．</p>
+<h1 id="配置rsyslog"><a href="#配置rsyslog" class="headerlink" title="配置rsyslog"></a>配置rsyslog</h1><p>首先配置服务端，也即是我们使用的Linux系统主机.<br><code>$ sudo vim /etc/rsyslog.conf</code><br>找到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># provides UDP syslog reception</span></span><br><span class="line"><span class="comment">#module(load="imudp")</span></span><br><span class="line"><span class="comment">#input(type="imudp" port="514")</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># provides TCP syslog reception</span></span><br><span class="line"><span class="comment">#module(load="imtcp")</span></span><br><span class="line"><span class="comment">#input(type="imtcp" port="514"</span></span><br></pre></td></tr></table></figure></p>
+<p>一般只需要打开TCP就好，不过为了还有其他用途可以将UDP的也全部都打开，除去相应的<strong>#</strong>注释即可．<br>修改后的样子<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># provides UDP syslog reception</span></span><br><span class="line">module(load=<span class="string">"imudp"</span>)</span><br><span class="line">input(<span class="built_in">type</span>=<span class="string">"imudp"</span> port=<span class="string">"514"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># provides TCP syslog reception</span></span><br><span class="line">module(load=<span class="string">"imtcp"</span>)</span><br><span class="line">input(<span class="built_in">type</span>=<span class="string">"imtcp"</span> port=<span class="string">"514"</span></span><br></pre></td></tr></table></figure></p>
+<p>这样还没完，我们还需要配置log存放的位置．<br>进入<code>/etc/rsyslog.d/</code>目录，新建一个<code>router.conf</code>文件<br>编辑添加<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:fromhost-ip, isequal, <span class="string">"192.168.1.1"</span> /var/spool/rsyslog/router.log</span><br><span class="line">&amp;~</span><br></pre></td></tr></table></figure></p>
+<p><code>192.168.1.1</code>表示路由器的地址<br>后面路径就表示了上传到本地主机的log地址了<br>最后的符号<strong>&amp;~</strong>表示了一个重定向规则，被用来告知rsyslog守护进程停止对日志消息的进一步处理，并且不要在本地写入。<br>如果没有使用该重定向规则，那么所有的远程消息都会在写入上述描述的日志文件之外同时被写入到本地日志文件，这就意味着日志消息实际上被写了两次。</p>
+<p>然后如果还有什么特殊需求的话，比如：像系统日志一样，自动打包之类的<br>可以在<code>/etc/logrotate.d/</code>目录下面新建文件，然后进行添加．<br>在这里我偷个懒，直接写在<strong>rsyslog</strong>文件里面．</p>
+<p><code>$ sudo vim /etc/logrotate.d/rsyslog</code><br>随便找一个规则，将我们路由器log存放的地址写在上面即可</p>
+<p>最后还有，需要重启一下rsyslog系统服务<br><code>$ sudo systemctl restart rsyslog.service</code></p>
+<p>查看一下是否在监听<br><code>$ sudo netstat -tulpn |grep rsyslogd</code></p>
+<p>以上服务端配置好了，客户端也就是路由器那里就很好配了．<br>可以通过可视化的web界面进行管理，也可以直接命令行登陆进路由器,然后改配置文件的方式．</p>
+<p>下面是我的路由器管理界面<br><img src="/image/log.png" alt="log"></p>
+<p>改配置文件的话，就直接ssh连进路由器<br><code># vim /etc/config/system</code><br>找到<strong>config system</strong>在下面添加即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">config system</span><br><span class="line">        option hostname <span class="string">'OpenWrt'</span></span><br><span class="line">        option conloglevel <span class="string">'8'</span></span><br><span class="line">        option cronloglevel <span class="string">'8'</span></span><br><span class="line">        option <span class="built_in">log</span>_ip <span class="string">'192.168.1.247'</span></span><br><span class="line">        option <span class="built_in">log</span>_port <span class="string">'514'</span></span><br><span class="line">        option <span class="built_in">log</span>_size <span class="string">'200'</span></span><br></pre></td></tr></table></figure></p>
+<p>然后保存并应用，过一会就可以在本机上看到路由上的log了</p>
+<h1 id="处理问题"><a href="#处理问题" class="headerlink" title="处理问题"></a>处理问题</h1><p>上面说了一大堆log的配置，最终的目的只是方便分析日志．而我们分析日志就是为了解决问题的．．．<br>分析日志：<br>发现有很多的这种信息<br><code>daemon.warn odhcpd[903]: A default route is present but there is no public prefix on br-lan thus we don&#39;t announce a default route!</code><br>这个是因为开启了IPv6的原因，我们用不上，关掉即可</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我感觉问题不太可能是出现在IPv6上面的，虽然我关掉后确实断线的情况好了很多．．<br>通过这次鼓捣，让我又对OpenWrt熟悉了不少，当然最大的收获还是rsyslog了，<br>之前虽然知道有这么个东西，但一直没有机会去用上它，配置过一次后感觉以后就熟悉多了．</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- markdown-toc start - Don&#39;t edit this section. Run M-x markdown-toc-generate-toc again --&gt;
+&lt;p&gt;&lt;strong&gt;目录&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#简介&quot;&gt;简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#logread&quot;&gt;logread&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#上传到远程rsyslog服务器&quot;&gt;上传到远程rsyslog服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#配置rsyslog&quot;&gt;配置rsyslog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#处理问题&quot;&gt;处理问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#总结&quot;&gt;总结&lt;/a&gt;&lt;!-- markdown-toc end --&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因．&lt;/p&gt;
+&lt;h1 id=&quot;logread&quot;&gt;&lt;a href=&quot;#logread&quot; class=&quot;headerlink&quot; title=&quot;logread&quot;&gt;&lt;/a&gt;logread&lt;/h1&gt;&lt;p&gt;在OpenWrt中可通过&lt;code&gt;logread&lt;/code&gt;命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．&lt;br&gt;不过每次查看log，都要登陆进去，然后不断的敲logread也是很麻烦的，&lt;br&gt;正好OpenWrt的web设置界面中有设置上传日志的选项，在我这是 系统—&amp;gt;日志里面&lt;br&gt;
+    
+    </summary>
+    
+      <category term="OpenWrt Log" scheme="https://lusyoe.github.io/categories/OpenWrt-Log/"/>
+    
+    
+      <category term="Log" scheme="https://lusyoe.github.io/tags/Log/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenWrt之初相识篇</title>
+    <link href="https://lusyoe.github.io/2016/06/04/OpenWrt%E4%B9%8B%E5%88%9D%E7%9B%B8%E8%AF%86%E7%AF%87/"/>
+    <id>https://lusyoe.github.io/2016/06/04/OpenWrt之初相识篇/</id>
+    <published>2016-06-04T15:47:34.000Z</published>
+    <updated>2016-06-05T10:54:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>  最早是在几年前就知道了OpenWrt的，当时只是为了”翻墙”更方便点，才搜到这个东西的．．<br>然而无奈能力有限，一直没法去把玩尝试它．去年刚好我哥买了一个很便宜的路由器，用不上就给我了．<br>我想着这个反正弄坏了也没太大关系，就又去网上找各种资料了，什么不死uboot啦，什么高科固件一大堆的．</p>
+<p>总之折腾了好几天终于是弄好了.<br>看这高大上的界面，简直要甩原厂自带那个丑爆的界面好几条街．<br>功能更是没法比．．<br><img src="/image/router.png" alt="router"></p>
+<p>最让人兴奋的就是可以装各种第三方的软件了，其中就包含Shadowsocks翻墙工具，我最初的目的也就是这个了．<br>作为一个技术人员，不能google查找资料，就算是不称职的啦．<br>政治这种东西我们不关心，但是技术文档和问题解决方案这些却是必不可少的了．<br><img src="/image/router_soft.png" alt="router_soft"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  最早是在几年前就知道了OpenWrt的，当时只是为了”翻墙”更方便点，才搜到这个东西的．．&lt;br&gt;然而无奈能力有限，一直没法去把玩尝试它．去年刚好我哥买了一个很便宜的路由器，用不上就给我了．&lt;br&gt;我想着这个反正弄坏了也没太大关系，就又去网上找各种资料了，什么不死ubo
+    
+    </summary>
+    
+      <category term="OpenWrt Router" scheme="https://lusyoe.github.io/categories/OpenWrt-Router/"/>
+    
+    
+      <category term="Router" scheme="https://lusyoe.github.io/tags/Router/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux软件篇之Docker</title>
+    <link href="https://lusyoe.github.io/2016/03/09/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8BDocker/"/>
+    <id>https://lusyoe.github.io/2016/03/09/Linux软件篇之Docker/</id>
+    <published>2016-03-09T14:49:05.000Z</published>
+    <updated>2016-03-09T15:29:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。<br>    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。<br>然后当时公司服务器都使用的是centos，但android编译环境可要求的是Ubuntu呀，没办法就想到了虚拟化。最后就又想到Docker了，在网上找了找，果然已经有国外的大神写好了针对<a href="https://github.com/stucki/docker-cyanogenmod" target="_blank" rel="external">CyanogenMod</a>的dockerfile环境搭建了。拉下来一键就部署好了。</p>
+<a id="more"></a>
+<p>下面记录一下当时使用的笔记吧。</p>
+<h3 id="Ubuntu修改Docker服务启动默认数据文件存放位置"><a href="#Ubuntu修改Docker服务启动默认数据文件存放位置" class="headerlink" title="Ubuntu修改Docker服务启动默认数据文件存放位置"></a>Ubuntu修改Docker服务启动默认数据文件存放位置</h3><p>默认Docker将数据文件都放在<code>/var/lib/docker</code>中，如果该分区不是很大的话，不利于后期的扩展，尤其是作为android源码项目来说的，因此可修改配置文件，使其数据存储路径指定在其他位置。</p>
+<ul>
+<li>Upstart方式：编辑<code>/etc/default/docker</code> ，添加<code>DOCKER_OPTS=&quot;-g /opt/docker&quot;</code> 即可改到/opt/docker路径中。</li>
+<li>Systemd方式：</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。&lt;br&gt;    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。&lt;br&gt;然后当时公司服务器都使用的是centos，但android编译环境可要求的是Ubuntu呀，没办法就想到了虚拟化。最后就又想到Docker了，在网上找了找，果然已经有国外的大神写好了针对&lt;a href=&quot;https://github.com/stucki/docker-cyanogenmod&quot;&gt;CyanogenMod&lt;/a&gt;的dockerfile环境搭建了。拉下来一键就部署好了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
+    
+      <category term="Docker" scheme="https://lusyoe.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux软件篇之systemd</title>
+    <link href="https://lusyoe.github.io/2016/03/08/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Bsystemd/"/>
+    <id>https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/</id>
+    <published>2016-03-08T15:32:00.000Z</published>
+    <updated>2016-03-08T15:58:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>systemd</strong>是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。</p>
+<h3 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h3><a id="more"></a>
+<ul>
+<li>激活开机启动服务<br>  <code>$ sudo systemctl enable [service-name]</code></li>
+<li>取消开机启动服务<br>  <code>$ sudo systemctl disable [service-name]</code></li>
+<li>查看是否开机启动服务<br>  <code>$ systemctl is-enable [service-name]</code></li>
+<li>查看开机每个服务消耗的时间<br>  <code>$ systemd-analyze blame</code></li>
+<li>查看开机消耗总时间<br>  <code>$ systemd-analyze</code></li>
+<li>查看所有被激活的服务<br>  <code>$ systemctl list-units -t service</code></li>
+<li>查看一个服务的状态<br>  <code>$ systemctl status [service-name]</code></li>
+<li>启动、停止、重启一个服务<br>  <code>$ sudo systemctl start(stop、restart) [service-name]</code></li>
+<li>重新加载一个服务(可以只加载服务的配置文件而不重启服务)<br>  <code>$ sudo systemctl reload [service-name]</code></li>
+</ul>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><ul>
+<li>查看启动日志(默认只保存本次启动的日志)<br>  <code>$ sudo journalctl</code></li>
+<li>查看某个服务的日志<br>  <code>$ sudo journalctl [service-path](如：/usr/sbin/sshd)</code></li>
+<li>查看实时日志<br>  <code>$ sudo journalctl -f</code></li>
+<li>重新载入systemd所有更改的配置，扫描新的或变动的单元<br>  <code>$ sudo systemctl daemon-reload</code></li>
+<li>查看内核日志(不显示应用日志)<br>  <code>$ sudo journalctl -k</code></li>
+<li>查看某个路径的脚本的日志<br>  <code>$ sudo journalctl /bin/bash</code></li>
+<li>显示日志占据的硬盘空间<br>  <code>$ sudo journalctl --disk-usage</code></li>
+</ul>
+<p>以上都为常用的功能，当然还有需要添加自定义的服务，这个以后再说。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;systemd&lt;/strong&gt;是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。&lt;/p&gt;
+&lt;h3 id=&quot;系统服务管理&quot;&gt;&lt;a href=&quot;#系统服务管理&quot; class=&quot;headerlink&quot; title=&quot;系统服务管理&quot;&gt;&lt;/a&gt;系统服务管理&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux软件篇之tmux</title>
+    <link href="https://lusyoe.github.io/2016/03/07/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Btmux/"/>
+    <id>https://lusyoe.github.io/2016/03/07/Linux软件篇之tmux/</id>
+    <published>2016-03-07T10:31:24.000Z</published>
+    <updated>2016-03-07T15:17:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。<br>tmux前缀键默认为<strong>Ctrl+b</strong>，可通过配置文件进行更改，后面会写到。<br>tmux 分为会话(Session)、窗口(Window)和窗格(pane)。</p>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h3><ul>
+<li>创建一个新的Session<br><code>$ tmux new -s &quot;名称&quot;</code></li>
+<li>在tmux中再创建一个Session<br><code>Ctrl+b :new -s &quot;名称&quot;</code></li>
+<li>切换不同的Session<br><code>Ctrl+b s up(down)方向键</code></li>
+<li>重命名当前Session<br><code>Ctrl+b $</code></li>
+<li>退出当前Session<br><code>$ exit</code></li>
+<li>恢复最上面的一个Session<br><code>$ tmux a</code></li>
+<li>恢复指定Session<br><code>$ tmux attach-session -t &lt;session-name&gt;</code></li>
+</ul>
+<a id="more"></a>
+<h3 id="窗口-Window"><a href="#窗口-Window" class="headerlink" title="窗口(Window)"></a>窗口(Window)</h3><ul>
+<li>创建一个新的Window<br><code>Ctrl+b c</code></li>
+<li>重命名当前Window<br><code>Ctrl+b ,</code></li>
+<li>创建一个指定名字的Window<br><code>Ctrl+b :new-window -n &lt;window-name&gt;</code></li>
+<li>切换不同的Window<br><code>Ctrl+b number(位于window名字:前面的数字编号)</code></li>
+<li>删除当前的Window<br><code>Ctrl+b &amp;</code></li>
+</ul>
+<h3 id="窗格-Pane"><a href="#窗格-Pane" class="headerlink" title="窗格(Pane)"></a>窗格(Pane)</h3><ul>
+<li>垂直分割窗口(一左一右2个窗格)<br><code>Ctrl+b %</code></li>
+<li>水平分割窗口(一上一下2个窗格)<br><code>Ctrl+b &quot;</code></li>
+<li>切换不同的窗格(Pane)<br><code>Ctrl+b up(down、left、right上下左右方向键)</code></li>
+<li>删除当前的窗格(Pane)<br><code>Ctrl+b x</code></li>
+</ul>
+<h3 id="复制、粘贴文本"><a href="#复制、粘贴文本" class="headerlink" title="复制、粘贴文本"></a>复制、粘贴文本</h3><ol>
+<li><code>Ctrl+b [</code> 进入复制模式</li>
+<li><code>Space</code> 空格键开始复制指定的文本(类似vi的可视模式)</li>
+<li><code>Enter</code> 回车，复制完成</li>
+<li><code>Ctrl+b ]</code> 粘贴文本</li>
+</ol>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>编辑<strong>~/.tmux.conf</strong>文件</p>
+<ul>
+<li>修改前缀键为<strong>Ctrl+a(C-a)</strong><br><code>set -g prefix C-a</code></li>
+<li>解除原来的<strong>Ctrl+b</strong><br><code>unbind C-b</code></li>
+</ul>
+<p>其他的配置和快捷键可通过<code>$ man tmux</code>查看tmux的手册</p>
+<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>我使用tmux最主要的还是看中它的现场恢复了。<br>比如说：今天在服务器上进行编码修改，快到下班时间，不想等着加班搞完了再回去，可以直接关掉电脑走人，第二天来登陆服务器，直接<code>$ tmux a</code>即可完美回到前一天正在修改的地方，继续接着改就可以了。不然每次下班第二天来又要找半天前一天要改的地方了。。<br>还有一个好处是<strong>tmux</strong>只通过一个ssh连接就可以实现多个终端操作了，大家都知道在工作中，一个终端的使用是远远不够的，如果不用类似<strong>tmux</strong>这样的软件，就必须要进行多次ssh连接了。<br>最后需要注意一下的是: 使用tmux恢复时，必须要保证在上一次断开连接到这次恢复之间，服务器(主机)<strong>不能重启</strong>，一旦重启了就什么都没了。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。&lt;br&gt;tmux前缀键默认为&lt;strong&gt;Ctrl+b&lt;/strong&gt;，可通过配置文件进行更改，后面会写到。&lt;br&gt;tmux 分为会话(Session)、窗口(Window)和窗格(pane)。&lt;/p&gt;
+&lt;h2 id=&quot;快捷键&quot;&gt;&lt;a href=&quot;#快捷键&quot; class=&quot;headerlink&quot; title=&quot;快捷键&quot;&gt;&lt;/a&gt;快捷键&lt;/h2&gt;&lt;h3 id=&quot;会话-Session&quot;&gt;&lt;a href=&quot;#会话-Session&quot; class=&quot;headerlink&quot; title=&quot;会话(Session)&quot;&gt;&lt;/a&gt;会话(Session)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;创建一个新的Session&lt;br&gt;&lt;code&gt;$ tmux new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在tmux中再创建一个Session&lt;br&gt;&lt;code&gt;Ctrl+b :new -s &amp;quot;名称&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切换不同的Session&lt;br&gt;&lt;code&gt;Ctrl+b s up(down)方向键&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重命名当前Session&lt;br&gt;&lt;code&gt;Ctrl+b $&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;退出当前Session&lt;br&gt;&lt;code&gt;$ exit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;恢复最上面的一个Session&lt;br&gt;&lt;code&gt;$ tmux a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;恢复指定Session&lt;br&gt;&lt;code&gt;$ tmux attach-session -t &amp;lt;session-name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux软件篇之ssh</title>
+    <link href="https://lusyoe.github.io/2016/03/06/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Bssh/"/>
+    <id>https://lusyoe.github.io/2016/03/06/Linux软件篇之ssh/</id>
+    <published>2016-03-06T08:16:57.000Z</published>
+    <updated>2016-03-07T15:24:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。<br>一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
+<h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><ul>
+<li>本机<br><code>$ ssh-keygen</code></li>
+<li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
+</ul>
+<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><a id="more"></a>
+<p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
+<h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
+<p>之后连接直接使用：<code>$ ssh test</code>即可</p>
+<h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
+<ul>
+<li><p>从远程主机拷贝到本地<br><code>$ scp 远程user@addr:文件路径(默认用户home目录)  本地路径(同上)</code></p>
+</li>
+<li><p>将本地文件拷贝到远程主机<br><code>$ scp 本地文件路径  远程user@addr:文件路径(默认用户home目录)</code></p>
+</li>
+<li><p>拷贝目录(递归)<br><code>$ scp -r</code></p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。&lt;br&gt;一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install openssh-server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;生成公私密钥&quot;&gt;&lt;a href=&quot;#生成公私密钥&quot; class=&quot;headerlink&quot; title=&quot;生成公私密钥&quot;&gt;&lt;/a&gt;生成公私密钥&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本机&lt;br&gt;&lt;code&gt;$ ssh-keygen&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定&lt;br&gt;&lt;code&gt;$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;无需密码登陆服务器&quot;&gt;&lt;a href=&quot;#无需密码登陆服务器&quot; class=&quot;headerlink&quot; title=&quot;无需密码登陆服务器&quot;&gt;&lt;/a&gt;无需密码登陆服务器&lt;/h2&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux软件篇</title>
+    <link href="https://lusyoe.github.io/2016/03/06/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
+    <id>https://lusyoe.github.io/2016/03/06/Linux软件篇/</id>
+    <published>2016-03-06T07:27:58.000Z</published>
+    <updated>2016-03-07T15:24:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>总结一下，在Linux下使用过的一些软件，不包括开发使用的</p>
+<h4 id="axel-终端下载器"><a href="#axel-终端下载器" class="headerlink" title="axel 终端下载器"></a>axel 终端下载器</h4><p>可通过 <code>-n x(数字)</code> 设置下载时使用的线程数 ,如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ axel -n 5 &lt;URL&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="新立得包依赖管理器"><a href="#新立得包依赖管理器" class="headerlink" title="新立得包依赖管理器"></a>新立得包依赖管理器</h4><a id="more"></a>
+<p><code>synaptic</code><br>虽然一般直接使用<code>apt-get</code>的比较多，不过在处理依赖方面，这个软件还是挺强大的</p>
+<h4 id="查找库文件以及对应包的神器"><a href="#查找库文件以及对应包的神器" class="headerlink" title="查找库文件以及对应包的神器"></a>查找库文件以及对应包的神器</h4><p><code>apt-file</code><br>第一次安装成功后，需要更新数据库<br><code>$ apt-file update</code><br>查找包信息或库文件所在包<br><code>$ apt-file search xxx</code></p>
+<h4 id="文件编码转换"><a href="#文件编码转换" class="headerlink" title="文件编码转换"></a>文件编码转换</h4><p><code>iconv</code>，一般情况下使用方法：<br><code>$ iconv -f 原来编码 -t 新编码 文件名</code></p>
+<h4 id="词典"><a href="#词典" class="headerlink" title="词典"></a>词典</h4><p><code>goldendict</code></p>
+<h4 id="文本比较工具"><a href="#文本比较工具" class="headerlink" title="文本比较工具"></a>文本比较工具</h4><p><code>Meld Diff</code></p>
+<h4 id="Mac-托盘效果"><a href="#Mac-托盘效果" class="headerlink" title="Mac 托盘效果"></a>Mac 托盘效果</h4><p><code>Cairo-dock</code></p>
+<h4 id="可视化系统管理面板-web端"><a href="#可视化系统管理面板-web端" class="headerlink" title="可视化系统管理面板(web端)"></a>可视化系统管理面板(web端)</h4><p><code>ajenti</code></p>
+<h4 id="网络端口流量监控"><a href="#网络端口流量监控" class="headerlink" title="网络端口流量监控"></a>网络端口流量监控</h4><p><code>iftop</code></p>
+<h4 id="截图工具"><a href="#截图工具" class="headerlink" title="截图工具"></a>截图工具</h4><p><code>shutter</code></p>
+<h4 id="markdown可视化工具"><a href="#markdown可视化工具" class="headerlink" title="markdown可视化工具"></a>markdown可视化工具</h4><p><code>remarkable</code></p>
+<h4 id="tty显示中文"><a href="#tty显示中文" class="headerlink" title="tty显示中文"></a>tty显示中文</h4><p><code>fbterm</code></p>
+<h4 id="摄像头软件"><a href="#摄像头软件" class="headerlink" title="摄像头软件"></a>摄像头软件</h4><p><code>Camorama</code></p>
+<h4 id="笔记本数字小键盘工具"><a href="#笔记本数字小键盘工具" class="headerlink" title="笔记本数字小键盘工具"></a>笔记本数字小键盘工具</h4><p><code>numlockx</code></p>
+<ul>
+<li>激活小键盘 <code>numlockx on</code></li>
+<li>禁用小键盘 <code>numlockx off</code></li>
+</ul>
+<h4 id="基于终端的文件浏览器"><a href="#基于终端的文件浏览器" class="headerlink" title="基于终端的文件浏览器"></a>基于终端的文件浏览器</h4><p><code>ranger</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;总结一下，在Linux下使用过的一些软件，不包括开发使用的&lt;/p&gt;
+&lt;h4 id=&quot;axel-终端下载器&quot;&gt;&lt;a href=&quot;#axel-终端下载器&quot; class=&quot;headerlink&quot; title=&quot;axel 终端下载器&quot;&gt;&lt;/a&gt;axel 终端下载器&lt;/h4&gt;&lt;p&gt;可通过 &lt;code&gt;-n x(数字)&lt;/code&gt; 设置下载时使用的线程数 ,如：&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ axel -n 5 &amp;lt;URL&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&quot;新立得包依赖管理器&quot;&gt;&lt;a href=&quot;#新立得包依赖管理器&quot; class=&quot;headerlink&quot; title=&quot;新立得包依赖管理器&quot;&gt;&lt;/a&gt;新立得包依赖管理器&lt;/h4&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu基础操作</title>
+    <link href="https://lusyoe.github.io/2016/03/06/Ubuntu%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/"/>
+    <id>https://lusyoe.github.io/2016/03/06/Ubuntu基础操作/</id>
+    <published>2016-03-06T06:57:42.000Z</published>
+    <updated>2016-03-07T15:49:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>将早期学习Linux的一些笔记整理下</p>
+<h3 id="安装中文man手册"><a href="#安装中文man手册" class="headerlink" title="安装中文man手册"></a>安装中文man手册</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install manpages-zh</span><br></pre></td></tr></table></figure>
+<h3 id="查看系统发行版本"><a href="#查看系统发行版本" class="headerlink" title="查看系统发行版本"></a>查看系统发行版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="查看内核版本"><a href="#查看内核版本" class="headerlink" title="查看内核版本"></a>查看内核版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uname <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><ul>
+<li>查看已记录的所有历史命令<code>$ history</code></li>
+<li>执行指定编号的历史命令<code>$ !N</code> N为命令前面的编号</li>
+<li>修改历史命令，然后退出时执行 <code>$ fc N</code></li>
+</ul>
+<h3 id="开机自动执行命令"><a href="#开机自动执行命令" class="headerlink" title="开机自动执行命令"></a>开机自动执行命令</h3><p>编辑<code>/etc/rc.local</code>文件，在<code>exit 0</code>前面添加命令即可</p>
+<h3 id="新装系统，切换root失败"><a href="#新装系统，切换root失败" class="headerlink" title="新装系统，切换root失败"></a>新装系统，切换root失败</h3><p>首次安装好系统后，root用户没有设置默认密码，因此执行<code>su</code>命令会报错<br>设置root密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd root</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;将早期学习Linux的一些笔记整理下&lt;/p&gt;
+&lt;h3 id=&quot;安装中文man手册&quot;&gt;&lt;a href=&quot;#安装中文man手册&quot; class=&quot;headerlink&quot; title=&quot;安装中文man手册&quot;&gt;&lt;/a&gt;安装中文man手册&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install manpages-zh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;查看系统发行版本&quot;&gt;&lt;a href=&quot;#查看系统发行版本&quot; class=&quot;headerlink&quot; title=&quot;查看系统发行版本&quot;&gt;&lt;/a&gt;查看系统发行版本&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ lsb_release &lt;span class=&quot;_&quot;&gt;-a&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://lusyoe.github.io/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://lusyoe.github.io/2016/03/05/hello-world/"/>
+    <id>https://lusyoe.github.io/2016/03/05/hello-world/</id>
+    <published>2016-03-05T05:14:52.000Z</published>
+    <updated>2016-03-07T15:55:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
