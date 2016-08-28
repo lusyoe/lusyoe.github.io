@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Jenkins+Gitlab搭建CI持续集成架构 | 风格 | 风起于青萍之末</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="CI持续集成">
+  <meta name="description" content="首先安装Jenkins和Gitlab很简单就不多说了，贴个地址Installing JenkinsInstall a GitLab CE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins+Gitlab搭建CI持续集成架构">
+<meta property="og:url" content="https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="首先安装Jenkins和Gitlab很简单就不多说了，贴个地址Installing JenkinsInstall a GitLab CE">
+<meta property="og:updated_time" content="2016-08-28T14:24:58.148Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jenkins+Gitlab搭建CI持续集成架构">
+<meta name="twitter:description" content="首先安装Jenkins和Gitlab很简单就不多说了，贴个地址Installing JenkinsInstall a GitLab CE">
+  
+    <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;h1 id=&quot;首先安装Jenkins和Gitlab&quot;&gt;&lt;a href=&quot;#首先安装Jenkins和Gitlab&quot; class=&quot;headerlink&quot; title=&quot;首先安装Jenkins和Gitlab&quot;&gt;&lt;/a&gt;首先安装Jenkins和Gitlab&lt;/h1&gt;&lt;p&gt;很简单就不多说了，贴个地址&lt;br&gt;&lt;a href=&quot;https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins&quot;&gt;Installing Jenkins&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://about.gitlab.com/downloads&quot;&gt;Install a GitLab CE&lt;/a&gt;&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">卢浩元</h5>
+        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav flex-col">
+    
+        <li class="waves-block waves-effect">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>风格 &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Jenkins+Gitlab搭建CI持续集成架构</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Jenkins+Gitlab搭建CI持续集成架构</h1>
+    <h5 class="subtitle">2016-08-28</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-Jenkins-Gitlab搭建CI持续集成架构" class="article article-type-post" itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI持续集成/">CI持续集成</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#首先安装Jenkins和Gitlab"><span class="post-toc-text">首先安装Jenkins和Gitlab</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装Jenkins插件"><span class="post-toc-text">安装Jenkins插件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建代码仓库添加Webhooks"><span class="post-toc-text">创建代码仓库添加Webhooks</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建Jenkins项目"><span class="post-toc-text">创建Jenkins项目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#自动化构建"><span class="post-toc-text">自动化构建</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="首先安装Jenkins和Gitlab"><a href="#首先安装Jenkins和Gitlab" class="headerlink" title="首先安装Jenkins和Gitlab"></a>首先安装Jenkins和Gitlab</h1><p>很简单就不多说了，贴个地址<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins" target="_blank" rel="external">Installing Jenkins</a><br><a href="https://about.gitlab.com/downloads" target="_blank" rel="external">Install a GitLab CE</a><br><a id="more"></a><br>需要注意的是，在中国大陆由于墙的问题，Gitlab下载非常的慢，有可能导致下载失败了。。<br>在这里推荐一下清华大学镜像源，在国内速度杠杠的。<br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="external">Gitlab Community Edition 镜像使用帮助</a><br>有兴趣的可以看看它们的<a href="https://mirrors.tuna.tsinghua.edu.cn" target="_blank" rel="external">镜像首页</a>，目前支持的镜像挺多的，而且还在不断的增加呢。</p>
+<h1 id="安装Jenkins插件"><a href="#安装Jenkins插件" class="headerlink" title="安装Jenkins插件"></a>安装Jenkins插件</h1><p>做持续集成，Jenkins默认安装后还需要再安装一些插件。<br>安装插件很简单，通过浏览器进入安装好Jenkins的服务器首页——&gt;点击系统管理——&gt;管理插件——&gt;可选插件<br>然后过滤查找以下插件，勾选安装即可</p>
+<ul>
+<li>Git client plugin</li>
+<li>Git plugin</li>
+<li>Gitlab Hook Plugin</li>
+</ul>
+<h1 id="创建代码仓库添加Webhooks"><a href="#创建代码仓库添加Webhooks" class="headerlink" title="创建代码仓库添加Webhooks"></a>创建代码仓库添加Webhooks</h1><p>好了，让我们来开始实际操作吧<br>先在Gitlab上创建一个仓库，然后在项目的设置中选择Webhooks，<br>在URL上填<code>http://[jenkins-ip]:8080/gitlab/build_now</code><br>前面是jenkins服务器的IP,端口号默认是8080，如果服务器上有类似tomcat这样的程序占用端口，<br>就需要更改端口号了，这里也就要相应的修改了。<br>还有一种情况，如果是通过<a href="https://jenkins.io/" target="_blank" rel="external">Jenkins官网</a>下载的war包形式，<br>这里的URL就要改为<code>http://[jenkins-ip]:8080/jenkins/gitlab/build_now</code></p>
+<h1 id="创建Jenkins项目"><a href="#创建Jenkins项目" class="headerlink" title="创建Jenkins项目"></a>创建Jenkins项目</h1><p>进入我们服务器的Jenkins首页——&gt;点击新建——&gt;输入一个项目名称——&gt;选择构建一个自由风格的软件项目(free-style)点击ok<br>进入了项目配置页面，然后按以下步骤操作就好了</p>
+<ol>
+<li><p>源码管理设置，选中Git，把刚刚从Gitlab上创建的项目地址复制过来，<br>在这里推荐使用http的形式，避免因为权限的问题导致代码无法pull下来。</p>
+</li>
+<li><p>构建设置，继续往下拖看到<strong>构建</strong>选项，点击增加构建步骤，可以根据具体项目来选择，<br>在这里以Web的Maven项目为例。<br>选择<code>Invoke top-level Maven targets</code>，Maven Version可根据个人选择，如果要添加自己下载的版本，<br>可在首页——&gt;系统管理——&gt;Global Tool Configuration全局工具配置下面找到Maven进行添加。推荐使用自己的<br><code>Golas</code>框中填写maven的执行命令，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">package</span><br><span class="line">tomcat:redeploy -Dmaven.test.skip=true -e -X</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>之后保存应用即可<br><strong>注意</strong>：这里不需要添加<code>mvn</code>命令，jenkins会自动帮我们添加的，还有每一个命令占<strong>单独一行</strong>。</p>
+<h1 id="自动化构建"><a href="#自动化构建" class="headerlink" title="自动化构建"></a>自动化构建</h1><p>好了，基本上都配置完了，现在该我们编写程序代码了。只需要从Gitlab上把源码<code>pull</code>到本地，然后进行coding修改再<code>push</code>上去即可。<br>Jenkins那边会监听到<code>push</code>的操作后就自动<code>pull</code>下载更新代码然后进行相应的构建部署了。<br>进入到Jenkins项目，可以查看到构建历史下面正在构建的项目，点击项目编号，再点击Console Output控制台输出就可以查看构建过程的详细日志了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当然了持续集成肯定没这么简单的，后面应该还要有自动Test测试，导出报告之类的。在这里只是搭建一个最基本最简单的持续集成框架。</p>
+
+            <blockquote>
+              <p>
+                本文地址：
+                <a href="https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/" target="_blank" rel="external">https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/</a>
+              </p>
+              <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block waves-effect prev">
+    
+  </div>
+  <div class="flex-col waves-block waves-effect next">
+    
+      <a href="/2016/08/21/MySQL基础之索引实战篇/" title="MySQL基础之索引实战篇" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Jenkins-Gitlab搭建CI持续集成架构" data-title="Jenkins+Gitlab搭建CI持续集成架构" data-url="https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lusyoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "Jenkins+Gitlab搭建CI持续集成架构",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
