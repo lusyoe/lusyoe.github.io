@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2016-08-28T14:24:58.148Z</updated>
+  <updated>2016-08-29T15:15:23.699Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -16,11 +16,74 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MySQL视图之理论篇</title>
+    <link href="https://lusyoe.github.io/2016/08/29/MySQL%E8%A7%86%E5%9B%BE%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/"/>
+    <id>https://lusyoe.github.io/2016/08/29/MySQL视图之理论篇/</id>
+    <published>2016-08-29T15:15:05.000Z</published>
+    <updated>2016-08-29T15:15:23.699Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https://lusyoe.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://lusyoe.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gitlab CI Multi Runner搭建CI持续集成环境</title>
+    <link href="https://lusyoe.github.io/2016/08/29/Gitlab-CI-Multi-Runner%E6%90%AD%E5%BB%BACI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%8E%AF%E5%A2%83/"/>
+    <id>https://lusyoe.github.io/2016/08/29/Gitlab-CI-Multi-Runner搭建CI持续集成环境/</id>
+    <published>2016-08-29T12:32:56.000Z</published>
+    <updated>2016-08-29T15:09:29.803Z</updated>
+    
+    <content type="html"><![CDATA[<p>GitLab不仅仅只是代码托管的工具，它还集成了CI的功能，通过Gitlab CI Multi Runner工具可以更方便的搭建持续集成环境。<br>在安装好GitLab之后还需要再安装一个叫gitlab-ci-multi-runner的工具。<br>PS: 当然了肯定没有Jenkins那么强大，毕竟可用插件太多了。</p>
+<h1 id="安装gitlab-ci-multi-runner"><a href="#安装gitlab-ci-multi-runner" class="headerlink" title="安装gitlab-ci-multi-runner"></a>安装gitlab-ci-multi-runner</h1><a id="more"></a>
+<p><a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner#installation/" target="_blank" rel="external">官方多种安装方式</a><br>由于众所周知(墙)的原因，还是推荐<a href="https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ci-multi-runner" target="_blank" rel="external">Gitlab CI Multi Runner 清华镜像</a></p>
+<h1 id="gitlab-runner命令介绍"><a href="#gitlab-runner命令介绍" class="headerlink" title="gitlab-runner命令介绍"></a>gitlab-runner命令介绍</h1><h3 id="服务状态"><a href="#服务状态" class="headerlink" title="服务状态"></a>服务状态</h3><p>安装好runner之后就可以使用gitlab-runner命令了，可通过<code># gitlab-runner help</code>查看命令帮助，<br>更多命令详情可以查阅<a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/commands/README.md" target="_blank" rel="external">官方文档</a><br>好了，让我们来先查看一下服务运行的状态。<br><code># gitlab-runner status</code><br>输出以下内容，说明服务运行正常了。<br><code>gitlab-runner: Service is running!</code></p>
+<p>还有也可以通过以下命令查看，不过我更喜欢短一点的命令，后面都只使用<strong>gitlab-runner</strong>了。<br><code># gitlab-ci-multi-runner status</code></p>
+<h3 id="注册一个runner"><a href="#注册一个runner" class="headerlink" title="注册一个runner"></a>注册一个runner</h3><p>注册一个runner可以使用交互式和非交互式两种方式，默认使用交互式的。<br>输入以下命令就可以开始交互式注册了，在这之前请确保<strong>Gitlab</strong>上面已经新建有项目了。<br><code># gitlab-runner register</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Running in system-mode.</span><br><span class="line"></span><br><span class="line">Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/ci):</span><br><span class="line">http://192.168.1.2/ci   // 在这里输入gitlab安装的服务器ip/ci 即可</span><br><span class="line">Please enter the gitlab-ci token for this runner:</span><br><span class="line">eaYyokc57xxZbzAsoshT    // 这里的token可通过Gitlab上的项目Runners选项查看，在下面贴一张截图</span><br><span class="line">Please enter the gitlab-ci description for this runner:</span><br><span class="line">[E5]: spring-demo       // 这里填写一个描述信息，不太重要，看着填吧</span><br><span class="line">Please enter the gitlab-ci tags for this runner (comma separated):</span><br><span class="line">demo                    // 在这里填写tag信息，多个tag可通过逗号,分割。</span><br><span class="line">Registering runner... succeeded                     runner=eaYyokc5</span><br><span class="line">Please enter the executor: docker, docker-ssh, parallels, shell, ssh, virtualbox, docker+machine, docker-ssh+machine:</span><br><span class="line">shell                   // 在这里需要输入runner的执行方式，因为我的Gitlab和runner是安装在同一台服务器上的，直接输入shell</span><br><span class="line">Runner registered successfully. Feel free to start it, but if it&apos;s running already the config should be automatically reloaded!</span><br><span class="line">// 出现这样信息表示服务端的配置就已经成功结束了，如果需要使用到自动构建，还需要再添加一个配置文件，下面说说这个。</span><br></pre></td></tr></table></figure>
+<p><img src="/image/runner.png" alt="runner"></p>
+<h3 id="查看runner配置信息"><a href="#查看runner配置信息" class="headerlink" title="查看runner配置信息"></a>查看runner配置信息</h3><p>可通过以下命令进行查看<br><code># gitlab-runner list</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listing configured runners                          ConfigFile=/etc/gitlab-runner/config.toml</span><br><span class="line">spring-demo                                         Executor=shell Token=387ed6c05fef248d2183f9f45b9cda URL=http://192.168.1.2/ci</span><br></pre></td></tr></table></figure></p>
+<p>也可以直接打开配置文件进行查看<br><code># vim /etc/gitlab-runner/config.toml</code><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">concurrent = 1</span><br><span class="line">check_interval = 0</span><br><span class="line"></span><br><span class="line">[[runners]]</span><br><span class="line">  name = "spring-demo"</span><br><span class="line">  url = "http://192.168.1.2/ci"</span><br><span class="line">  token = "387ed6c05fef248d2183f9f45b9cda"</span><br><span class="line">  executor = "shell"</span><br><span class="line">  [runners.ssh]</span><br><span class="line">  [runners.docker]</span><br><span class="line">    tls_verify = false</span><br><span class="line">    image = ""</span><br><span class="line">    privileged = false</span><br><span class="line">    disable_cache = false</span><br><span class="line">  [runners.parallels]</span><br><span class="line">    base_name = ""</span><br><span class="line">    disable_snapshots = false</span><br><span class="line">  [runners.virtualbox]</span><br><span class="line">    base_name = ""</span><br><span class="line">    disable_snapshots = false</span><br><span class="line">  [runners.cache]</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除注册信息"><a href="#删除注册信息" class="headerlink" title="删除注册信息"></a>删除注册信息</h3><p>如果发现register信息填写错误，或者不再使用了。可通过以下命令进行删除。</p>
+<ul>
+<li><p>首先查看已注册过的信息<br><code># gitlab-runner list</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listing configured runners                          ConfigFile=/etc/gitlab-runner/config.toml</span><br><span class="line">spring-demo                                         Executor=shell Token=387ed6c05fef248d2183f9f45b9cda URL=http://192.168.1.2/ci</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始删除<br><code># gitlab-runner unregister --url http://192.168.1.2/ci --token 387ed6c05fef248d2183f9f45b9cda</code><br>其中<strong>–url</strong>参数可查看上面的URL=后面的值填写，<strong>–token</strong>参数就是上面的Token=后面的值，复制粘贴即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Running in system-mode.</span><br><span class="line"></span><br><span class="line">Deleting runner... succeeded                        runner=387ed6c0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>出现上面信息表示删除成功了。<br><strong>注意：</strong>这个操作是不可逆的，为了防止出错可以先备份一下<code>/etc/gitlab-runner/config.toml</code>配置文件</p>
+<h1 id="项目自动化构建配置"><a href="#项目自动化构建配置" class="headerlink" title="项目自动化构建配置"></a>项目自动化构建配置</h1><p>配置好了runner，想要开始自动构建还需要在项目根目录添加一个<strong>.gitlab-ci.yaml</strong>文件。<br>关于<strong>.gitlab-ci.yaml</strong>文件的配置说明可参考<a href="http://docs.gitlab.com/ce/ci/yaml/README.html" target="_blank" rel="external">官方文档</a>。<br>下面贴一下我做测试Demo时使用的，不要笑，很简单只做演示用的。。<br>.gitlab-ci.yaml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - build</span><br><span class="line">  - deploy</span><br><span class="line">job1:</span><br><span class="line">  stage: build</span><br><span class="line">  script: &quot;mvn package&quot;</span><br><span class="line">job2:</span><br><span class="line">  stage: deploy</span><br><span class="line">  script: &quot;mvn tomcat:redeploy -Dmaven.test.skip=truey -e -X&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>到这里关于CI持续集成的差不多就说那么多了，当然了还有很多都没说到，这就要看实际的项目需求进行相应的配置了。<br>总的来说呢，gitlab-runner虽然跟Gitlab集成的比较好，但是功能方面还是有点不如老牌的Jenkins。<br>不过它对Docker倒是支持的蛮好的，说起来我接触Docker也是挺早的了，它2013年开源，我2014年就开始接触了，并且2015年也在公司服务器上实际部署了，后面有时间再写点关于Docker的吧。不过跳槽后就用的少了，但愿别都忘了好:)。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;GitLab不仅仅只是代码托管的工具，它还集成了CI的功能，通过Gitlab CI Multi Runner工具可以更方便的搭建持续集成环境。&lt;br&gt;在安装好GitLab之后还需要再安装一个叫gitlab-ci-multi-runner的工具。&lt;br&gt;PS: 当然了肯定没有Jenkins那么强大，毕竟可用插件太多了。&lt;/p&gt;
+&lt;h1 id=&quot;安装gitlab-ci-multi-runner&quot;&gt;&lt;a href=&quot;#安装gitlab-ci-multi-runner&quot; class=&quot;headerlink&quot; title=&quot;安装gitlab-ci-multi-runner&quot;&gt;&lt;/a&gt;安装gitlab-ci-multi-runner&lt;/h1&gt;
+    
+    </summary>
+    
+      <category term="CI持续集成" scheme="https://lusyoe.github.io/categories/CI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+    
+      <category term="CI持续集成" scheme="https://lusyoe.github.io/tags/CI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Jenkins+Gitlab搭建CI持续集成架构</title>
     <link href="https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab%E6%90%AD%E5%BB%BACI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E6%9E%B6%E6%9E%84/"/>
     <id>https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/</id>
     <published>2016-08-28T12:54:20.000Z</published>
-    <updated>2016-08-28T14:24:58.148Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<h1 id="首先安装Jenkins和Gitlab"><a href="#首先安装Jenkins和Gitlab" class="headerlink" title="首先安装Jenkins和Gitlab"></a>首先安装Jenkins和Gitlab</h1><p>很简单就不多说了，贴个地址<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins" target="_blank" rel="external">Installing Jenkins</a><br><a href="https://about.gitlab.com/downloads" target="_blank" rel="external">Install a GitLab CE</a><br><a id="more"></a><br>需要注意的是，在中国大陆由于墙的问题，Gitlab下载非常的慢，有可能导致下载失败了。。<br>在这里推荐一下清华大学镜像源，在国内速度杠杠的。<br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="external">Gitlab Community Edition 镜像使用帮助</a><br>有兴趣的可以看看它们的<a href="https://mirrors.tuna.tsinghua.edu.cn" target="_blank" rel="external">镜像首页</a>，目前支持的镜像挺多的，而且还在不断的增加呢。</p>
 <h1 id="安装Jenkins插件"><a href="#安装Jenkins插件" class="headerlink" title="安装Jenkins插件"></a>安装Jenkins插件</h1><p>做持续集成，Jenkins默认安装后还需要再安装一些插件。<br>安装插件很简单，通过浏览器进入安装好Jenkins的服务器首页——&gt;点击系统管理——&gt;管理插件——&gt;可选插件<br>然后过滤查找以下插件，勾选安装即可</p>
@@ -61,7 +124,7 @@
     <link href="https://lusyoe.github.io/2016/08/21/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%B4%A2%E5%BC%95%E5%AE%9E%E6%88%98%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/08/21/MySQL基础之索引实战篇/</id>
     <published>2016-08-21T13:29:38.000Z</published>
-    <updated>2016-08-26T16:49:56.777Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。</p>
 <p>在这里只列出常用索引类型的操作，关于更多的索引分类参看<a href="/2016/08/21/MySQL基础之索引理论篇/">MySQL基础之索引理论篇</a></p>
@@ -108,7 +171,7 @@
     <link href="https://lusyoe.github.io/2016/08/21/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%B4%A2%E5%BC%95%E7%90%86%E8%AE%BA%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/</id>
     <published>2016-08-21T12:19:23.000Z</published>
-    <updated>2016-08-21T13:24:56.317Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。</p>
 <h1 id="索引的含义和特点"><a href="#索引的含义和特点" class="headerlink" title="索引的含义和特点"></a>索引的含义和特点</h1><p>索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。<br>使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，<br>对于相关列使用索引是提高查询操作速度的最佳途径。<br><a id="more"></a></p>
@@ -165,7 +228,7 @@
     <link href="https://lusyoe.github.io/2016/08/21/Idea-Maven%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
     <id>https://lusyoe.github.io/2016/08/21/Idea-Maven项目无法下载依赖问题汇总/</id>
     <published>2016-08-21T11:31:50.000Z</published>
-    <updated>2016-08-21T12:20:33.505Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>在使用IntelliJ IDEA开发Web的时候，刚开始总是遇到Maven的各种问题。<br>现在总结一下关于无法下载依赖jar的问题。</p>
 <h3 id="依赖语法错误"><a href="#依赖语法错误" class="headerlink" title="依赖语法错误"></a>依赖语法错误</h3><a id="more"></a>
@@ -197,7 +260,7 @@
     <link href="https://lusyoe.github.io/2016/08/20/%E5%9B%9E%E9%A6%96%E6%84%9F%E6%82%9F/"/>
     <id>https://lusyoe.github.io/2016/08/20/回首感悟/</id>
     <published>2016-08-20T13:42:22.000Z</published>
-    <updated>2016-08-20T15:39:36.297Z</updated>
+    <updated>2016-08-29T15:43:21.359Z</updated>
     
     <content type="html"><![CDATA[<p>人生总是充满着选择，每一个选择又会造成截然不同的结果。<br>从13年毕业至今，感觉人生真的是变化很快啊。<br>毕业后，毅然决然的选择了转行，到现在也算是差不多完全融入IT这一行了。<br>很庆幸，当初并没有选择错误。虽然不是科班出身，但凭着一股浓厚的兴趣，能真正入行也是不容易了。</p>
 <p>回首一下这3年</p>
@@ -242,7 +305,7 @@
     </summary>
     
     
-      <category term="感悟 总结" scheme="https://lusyoe.github.io/tags/%E6%84%9F%E6%82%9F-%E6%80%BB%E7%BB%93/"/>
+      <category term="感悟总结" scheme="https://lusyoe.github.io/tags/%E6%84%9F%E6%82%9F%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -251,7 +314,7 @@
     <link href="https://lusyoe.github.io/2016/08/10/Jenkins%E6%96%B0%E5%BB%BAMaven%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E5%87%BA%E7%8E%B0mvn-command-execution-faild/"/>
     <id>https://lusyoe.github.io/2016/08/10/Jenkins新建Maven项目构建出现mvn-command-execution-faild/</id>
     <published>2016-08-09T22:49:44.000Z</published>
-    <updated>2016-08-09T23:11:08.187Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>第一次用Jenkins作持续集成自动化构建，难免经验不足。<br>安装好，一来就直接新建一个Maven任务，然后就立即构建了，结果控制台总是输出<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FATAL: <span class="built_in">command</span> execution failed</span><br><span class="line">java.io.IOException: Cannot run program <span class="string">"mvn"</span> (<span class="keyword">in</span> directory)</span><br><span class="line">....</span><br></pre></td></tr></table></figure></p>
 <p>百度google，无果。最终发现了原来是Jenkins工具里没有配置Maven…</p>
@@ -281,7 +344,7 @@
     <link href="https://lusyoe.github.io/2016/07/27/Shadowsocks%E6%97%A5%E5%BF%97%E4%B8%ADfailed-to-recv-data-in-handshakeReceive2Callback%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/</id>
     <published>2016-07-27T15:12:30.000Z</published>
-    <updated>2016-07-27T15:37:06.330Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，<br>但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。<br>最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，<br>找到了<a href="http://www.hudawei.net/archives/38" target="_blank" rel="external">胡大伟的官方网站</a>的这篇blog，刚好解决了问题。:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Win+r services.msc打开服务管理窗口在里面找到xlserviceplatform把这个服务禁用了。</span><br><span class="line">找到C:\Program Files(x86)\Common Files\Thunder Network\ServicePlatform\XLSP.dll文件</span><br><span class="line">删除之即可</span><br></pre></td></tr></table></figure></p>
 <p>幕后真凶原来是迅雷，对国内这些东西已经是彻底无语了。</p>
@@ -304,7 +367,7 @@
     <link href="https://lusyoe.github.io/2016/06/04/OpenWrt%E4%B9%8BLog%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/06/04/OpenWrt之Log篇/</id>
     <published>2016-06-04T15:50:16.000Z</published>
-    <updated>2016-06-05T10:21:18.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 <p><strong>目录</strong></p>
@@ -366,7 +429,7 @@
     <link href="https://lusyoe.github.io/2016/06/04/OpenWrt%E4%B9%8B%E5%88%9D%E7%9B%B8%E8%AF%86%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/06/04/OpenWrt之初相识篇/</id>
     <published>2016-06-04T15:47:34.000Z</published>
-    <updated>2016-06-05T10:54:46.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>  最早是在几年前就知道了OpenWrt的，当时只是为了”翻墙”更方便点，才搜到这个东西的．．<br>然而无奈能力有限，一直没法去把玩尝试它．去年刚好我哥买了一个很便宜的路由器，用不上就给我了．<br>我想着这个反正弄坏了也没太大关系，就又去网上找各种资料了，什么不死uboot啦，什么高科固件一大堆的．</p>
 <p>总之折腾了好几天终于是弄好了.<br>看这高大上的界面，简直要甩原厂自带那个丑爆的界面好几条街．<br>功能更是没法比．．<br><img src="/image/router.png" alt="router"></p>
@@ -391,7 +454,7 @@
     <link href="https://lusyoe.github.io/2016/03/09/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8BDocker/"/>
     <id>https://lusyoe.github.io/2016/03/09/Linux软件篇之Docker/</id>
     <published>2016-03-09T14:49:05.000Z</published>
-    <updated>2016-03-09T15:29:42.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。<br>    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。<br>然后当时公司服务器都使用的是centos，但android编译环境可要求的是Ubuntu呀，没办法就想到了虚拟化。最后就又想到Docker了，在网上找了找，果然已经有国外的大神写好了针对<a href="https://github.com/stucki/docker-cyanogenmod" target="_blank" rel="external">CyanogenMod</a>的dockerfile环境搭建了。拉下来一键就部署好了。</p>
 <a id="more"></a>
@@ -423,7 +486,7 @@
     <link href="https://lusyoe.github.io/2016/03/08/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Bsystemd/"/>
     <id>https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/</id>
     <published>2016-03-08T15:32:00.000Z</published>
-    <updated>2016-03-08T15:58:44.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>systemd</strong>是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。</p>
 <h3 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h3><a id="more"></a>
@@ -467,7 +530,7 @@
     <link href="https://lusyoe.github.io/2016/03/07/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Btmux/"/>
     <id>https://lusyoe.github.io/2016/03/07/Linux软件篇之tmux/</id>
     <published>2016-03-07T10:31:24.000Z</published>
-    <updated>2016-03-07T15:17:27.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>tmux 是一款优秀的终端复用软件，它通过前缀键+操作键进行使用。<br>tmux前缀键默认为<strong>Ctrl+b</strong>，可通过配置文件进行更改，后面会写到。<br>tmux 分为会话(Session)、窗口(Window)和窗格(pane)。</p>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h3><ul>
@@ -533,7 +596,7 @@
     <link href="https://lusyoe.github.io/2016/03/06/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Bssh/"/>
     <id>https://lusyoe.github.io/2016/03/06/Linux软件篇之ssh/</id>
     <published>2016-03-06T08:16:57.000Z</published>
-    <updated>2016-03-07T15:24:08.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。<br>一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
 <h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><ul>
@@ -576,7 +639,7 @@
     <link href="https://lusyoe.github.io/2016/03/06/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/03/06/Linux软件篇/</id>
     <published>2016-03-06T07:27:58.000Z</published>
-    <updated>2016-03-07T15:24:43.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>总结一下，在Linux下使用过的一些软件，不包括开发使用的</p>
 <h4 id="axel-终端下载器"><a href="#axel-终端下载器" class="headerlink" title="axel 终端下载器"></a>axel 终端下载器</h4><p>可通过 <code>-n x(数字)</code> 设置下载时使用的线程数 ,如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ axel -n 5 &lt;URL&gt;</span><br></pre></td></tr></table></figure></p>
@@ -619,7 +682,7 @@
     <link href="https://lusyoe.github.io/2016/03/06/Ubuntu%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/"/>
     <id>https://lusyoe.github.io/2016/03/06/Ubuntu基础操作/</id>
     <published>2016-03-06T06:57:42.000Z</published>
-    <updated>2016-03-07T15:49:06.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>将早期学习Linux的一些笔记整理下</p>
 <h3 id="安装中文man手册"><a href="#安装中文man手册" class="headerlink" title="安装中文man手册"></a>安装中文man手册</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install manpages-zh</span><br></pre></td></tr></table></figure>
@@ -655,7 +718,7 @@
     <link href="https://lusyoe.github.io/2016/03/05/hello-world/"/>
     <id>https://lusyoe.github.io/2016/03/05/hello-world/</id>
     <published>2016-03-05T05:14:52.000Z</published>
-    <updated>2016-03-07T15:55:11.000Z</updated>
+    <updated>2016-08-29T15:09:29.803Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>

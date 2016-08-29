@@ -6,6 +6,9 @@
   <title>Linux软件篇之Docker | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#3F51B5">
+  
+  
   <meta name="keywords" content="Linux,Docker">
   <meta name="description" content="我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。然后当">
 <meta property="og:type" content="article">
@@ -13,7 +16,7 @@
 <meta property="og:url" content="https://lusyoe.github.io/2016/03/09/Linux软件篇之Docker/index.html">
 <meta property="og:site_name" content="风格">
 <meta property="og:description" content="我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。然后当">
-<meta property="og:updated_time" content="2016-03-09T15:29:42.000Z">
+<meta property="og:updated_time" content="2016-08-29T15:09:29.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux软件篇之Docker">
 <meta name="twitter:description" content="我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。然后当">
@@ -38,7 +41,7 @@
       <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">卢浩元</h5>
-        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
       </hgroup>
     </div>
   </div>
@@ -93,7 +96,7 @@
 
   </nav>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -120,25 +123,33 @@
 <header class="content-header">
   <div class="container">
     <h1 class="author">Linux软件篇之Docker</h1>
-    <h5 class="subtitle">2016-03-09</h5>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-03-09T14:49:05.000Z" itemprop="datePublished" class="page-time">
+  2016-03-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-Linux软件篇之Docker" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-Linux软件篇之Docker" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -174,13 +185,13 @@
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ubuntu修改Docker服务启动默认数据文件存放位置"><span class="post-toc-text">Ubuntu修改Docker服务启动默认数据文件存放位置</span></a></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -196,36 +207,36 @@
 </ul>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://lusyoe.github.io/2016/03/09/Linux软件篇之Docker/" target="_blank" rel="external">https://lusyoe.github.io/2016/03/09/Linux软件篇之Docker/</a>
-              </p>
-              <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
             </blockquote>
             </div>
             
-<nav class="post-nav flex-row">
-  <div class="flex-col waves-block waves-effect prev">
-    
-      <a href="/2016/06/04/OpenWrt之初相识篇/" title="OpenWrt之初相识篇" id="post-prev" class="post-nav-link">
-        <i class="icon icon-chevron-left"></i>
-        <span class="article-nav-title">上一篇</span>
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/06/04/OpenWrt之初相识篇/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">OpenWrt之初相识篇</h4>
       </a>
-    
-  </div>
-  <div class="flex-col waves-block waves-effect next">
-    
-      <a href="/2016/03/08/Linux软件篇之systemd/" title="Linux软件篇之systemd" id="post-next" class="post-nav-link">
-        <span class="article-nav-title">下一篇</span>
-        <i class="icon icon-chevron-right"></i>
-      </a>
-    
-  </div>
+    </div>
+  
 
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/03/08/Linux软件篇之systemd/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux软件篇之systemd</h4>
+      </a>
+    </div>
+  
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -250,17 +261,9 @@
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>

@@ -6,6 +6,9 @@
   <title>MySQL基础之索引实战篇 | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#3F51B5">
+  
+  
   <meta name="keywords" content="MySQL">
   <meta name="description" content="在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。
 在这里只列出常用索引类型的操作，关于更多的索引分类参看MySQL基础之索引理论篇
@@ -17,7 +20,7 @@
 <meta property="og:description" content="在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。
 在这里只列出常用索引类型的操作，关于更多的索引分类参看MySQL基础之索引理论篇
 索引的创建">
-<meta property="og:updated_time" content="2016-08-26T16:49:56.777Z">
+<meta property="og:updated_time" content="2016-08-29T15:09:29.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL基础之索引实战篇">
 <meta name="twitter:description" content="在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。
@@ -46,7 +49,7 @@
       <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">卢浩元</h5>
-        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
       </hgroup>
     </div>
   </div>
@@ -101,7 +104,7 @@
 
   </nav>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -128,25 +131,33 @@
 <header class="content-header">
   <div class="container">
     <h1 class="author">MySQL基础之索引实战篇</h1>
-    <h5 class="subtitle">2016-08-21</h5>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-08-21T13:29:38.000Z" itemprop="datePublished" class="page-time">
+  2016-08-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-MySQL基础之索引实战篇" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-MySQL基础之索引实战篇" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -182,13 +193,13 @@
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的创建"><span class="post-toc-text">索引的创建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建表的时候创建索引"><span class="post-toc-text">创建表的时候创建索引</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#普通索引"><span class="post-toc-text">普通索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#唯一索引"><span class="post-toc-text">唯一索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#组合索引"><span class="post-toc-text">组合索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全文索引"><span class="post-toc-text">全文索引</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在已经存在的表上创建索引"><span class="post-toc-text">在已经存在的表上创建索引</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#普通索引-1"><span class="post-toc-text">普通索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#唯一索引-1"><span class="post-toc-text">唯一索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#组合索引-1"><span class="post-toc-text">组合索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全文索引-1"><span class="post-toc-text">全文索引</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#索引的删除"><span class="post-toc-text">索引的删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ALTER-TABLE删除索引"><span class="post-toc-text">ALTER TABLE删除索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#DROP-INDEX删除索引"><span class="post-toc-text">DROP INDEX删除索引</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -219,36 +230,36 @@
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>最后索引的实战大概就写这么多吧，这些都只是基本操作。实际开发中重点应该是如何选择索引。</p>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://lusyoe.github.io/2016/08/21/MySQL基础之索引实战篇/" target="_blank" rel="external">https://lusyoe.github.io/2016/08/21/MySQL基础之索引实战篇/</a>
-              </p>
-              <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
             </blockquote>
             </div>
             
-<nav class="post-nav flex-row">
-  <div class="flex-col waves-block waves-effect prev">
-    
-      <a href="/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/" title="Jenkins+Gitlab搭建CI持续集成架构" id="post-prev" class="post-nav-link">
-        <i class="icon icon-chevron-left"></i>
-        <span class="article-nav-title">上一篇</span>
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Jenkins+Gitlab搭建CI持续集成架构</h4>
       </a>
-    
-  </div>
-  <div class="flex-col waves-block waves-effect next">
-    
-      <a href="/2016/08/21/MySQL基础之索引理论篇/" title="MySQL基础之索引理论篇" id="post-next" class="post-nav-link">
-        <span class="article-nav-title">下一篇</span>
-        <i class="icon icon-chevron-right"></i>
-      </a>
-    
-  </div>
+    </div>
+  
 
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/08/21/MySQL基础之索引理论篇/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MySQL基础之索引理论篇</h4>
+      </a>
+    </div>
+  
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -273,17 +284,9 @@
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>

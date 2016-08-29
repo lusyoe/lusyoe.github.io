@@ -6,6 +6,9 @@
   <title>OpenWrt之Log篇 | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#3F51B5">
+  
+  
   <meta name="keywords" content="Log">
   <meta name="description" content="目录
 
@@ -36,7 +39,7 @@ logread
 简介我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因．
 logread在OpenWrt中可通过logread命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．不过每次查看log，都要登陆进去，然后不断的敲logread也">
 <meta property="og:image" content="https://lusyoe.github.io/image/log.png">
-<meta property="og:updated_time" content="2016-06-05T10:21:18.000Z">
+<meta property="og:updated_time" content="2016-08-29T15:09:29.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenWrt之Log篇">
 <meta name="twitter:description" content="目录
@@ -85,7 +88,7 @@ logread在OpenWrt中可通过logread命令查看运行时的log日志，我一�
       <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">卢浩元</h5>
-        <a href="mailto:undefined" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
       </hgroup>
     </div>
   </div>
@@ -140,7 +143,7 @@ logread在OpenWrt中可通过logread命令查看运行时的log日志，我一�
 
   </nav>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -167,25 +170,33 @@ logread在OpenWrt中可通过logread命令查看运行时的log日志，我一�
 <header class="content-header">
   <div class="container">
     <h1 class="author">OpenWrt之Log篇</h1>
-    <h5 class="subtitle">2016-06-04</h5>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-06-04T15:50:16.000Z" itemprop="datePublished" class="page-time">
+  2016-06-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenWrt-Log/">OpenWrt Log</a></li></ul>
+
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-OpenWrt之Log篇" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-OpenWrt之Log篇" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log/">Log</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -221,13 +232,13 @@ logread在OpenWrt中可通过logread命令查看运行时的log日志，我一�
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#logread"><span class="post-toc-text">logread</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#上传到远程rsyslog服务器"><span class="post-toc-text">上传到远程rsyslog服务器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置rsyslog"><span class="post-toc-text">配置rsyslog</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#处理问题"><span class="post-toc-text">处理问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -263,36 +274,36 @@ logread在OpenWrt中可通过logread命令查看运行时的log日志，我一�
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我感觉问题不太可能是出现在IPv6上面的，虽然我关掉后确实断线的情况好了很多．．<br>通过这次鼓捣，让我又对OpenWrt熟悉了不少，当然最大的收获还是rsyslog了，<br>之前虽然知道有这么个东西，但一直没有机会去用上它，配置过一次后感觉以后就熟悉多了．</p>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://lusyoe.github.io/2016/06/04/OpenWrt之Log篇/" target="_blank" rel="external">https://lusyoe.github.io/2016/06/04/OpenWrt之Log篇/</a>
-              </p>
-              <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
             </blockquote>
             </div>
             
-<nav class="post-nav flex-row">
-  <div class="flex-col waves-block waves-effect prev">
-    
-      <a href="/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/" title="Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法" id="post-prev" class="post-nav-link">
-        <i class="icon icon-chevron-left"></i>
-        <span class="article-nav-title">上一篇</span>
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法</h4>
       </a>
-    
-  </div>
-  <div class="flex-col waves-block waves-effect next">
-    
-      <a href="/2016/06/04/OpenWrt之初相识篇/" title="OpenWrt之初相识篇" id="post-next" class="post-nav-link">
-        <span class="article-nav-title">下一篇</span>
-        <i class="icon icon-chevron-right"></i>
-      </a>
-    
-  </div>
+    </div>
+  
 
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/06/04/OpenWrt之初相识篇/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">OpenWrt之初相识篇</h4>
+      </a>
+    </div>
+  
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -317,17 +328,9 @@ logread在OpenWrt中可通过logread命令查看运行时的log日志，我一�
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>
