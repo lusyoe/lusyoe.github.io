@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2016-08-29T15:15:23.699Z</updated>
+  <updated>2016-09-02T15:29:43.571Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Debian桌面编译安装Tenda U1 USB无线网卡驱动</title>
+    <link href="https://lusyoe.github.io/2016/09/02/Debian%E6%A1%8C%E9%9D%A2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Tenda-U1-USB%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
+    <id>https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/</id>
+    <published>2016-09-02T15:14:01.000Z</published>
+    <updated>2016-09-02T15:29:43.571Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p>
+<h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul>
+<li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>编译</p>
+<ul>
+<li>解压zip包<br><code># unzip U1_linux.zip</code></li>
+<li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li>
+<li>执行自动编译脚本<br><code># sh install.sh</code></li>
+</ul>
+</li>
+<li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo apt-get install linux-headers-`uname -r`</span><br></pre></td></tr></table></figure>
+<p>然后继续编译即可<br><code># sh install.sh</code></p>
+<p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前序&quot;&gt;&lt;a href=&quot;#前序&quot; class=&quot;headerlink&quot; title=&quot;前序&quot;&gt;&lt;/a&gt;前序&lt;/h1&gt;&lt;p&gt;朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。&lt;br&gt;由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。&lt;br&gt;结果Linux系统由于驱动问题，不识别那个网卡。&lt;br&gt;没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。&lt;/p&gt;
+&lt;h1 id=&quot;驱动安装&quot;&gt;&lt;a href=&quot;#驱动安装&quot; class=&quot;headerlink&quot; title=&quot;驱动安装&quot;&gt;&lt;/a&gt;驱动安装&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;从官方网站下载适用于Linux的驱动&lt;br&gt;&lt;code&gt;# wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="USB" scheme="https://lusyoe.github.io/categories/USB/"/>
+    
+    
+      <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
+    
+      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL视图之理论篇</title>
