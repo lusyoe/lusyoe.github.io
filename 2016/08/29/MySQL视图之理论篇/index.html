@@ -10,16 +10,19 @@
   
   
   <meta name="keywords" content="MySQL">
-  <meta name="description">
+  <meta name="description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。
+视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL视图之理论篇">
 <meta property="og:url" content="https://lusyoe.github.io/2016/08/29/MySQL视图之理论篇/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-08-29T15:15:23.699Z">
+<meta property="og:description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。
+视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
+<meta property="og:updated_time" content="2016-09-03T01:57:03.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL视图之理论篇">
-<meta name="twitter:description">
+<meta name="twitter:description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。
+视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
   
     <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
   
@@ -189,7 +192,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图概述"><span class="post-toc-text">视图概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图的含义"><span class="post-toc-text">视图的含义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图的作用"><span class="post-toc-text">视图的作用</span></a></li></ol></li></ol></li></ol>
             </nav>
             
         </aside>
@@ -197,7 +200,26 @@
         <div class="post-main">
 
             <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <h1 id="视图概述"><a href="#视图概述" class="headerlink" title="视图概述"></a>视图概述</h1><p>视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个<strong>虚拟表</strong>。<br>在视图中用户可以使用<code>SELECT</code>语句查询数据，以及使用<code>INSERT、UPDATE、DELETE</code>修改记录。<br>从<strong>MySQL 5.0</strong>开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。</p>
+<h3 id="视图的含义"><a href="#视图的含义" class="headerlink" title="视图的含义"></a>视图的含义</h3><p>视图是一个<strong>虚拟表</strong>，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。<br>视图一经定义便存储在数据库中，与其相对应的数据并没有像表那样在数据库中再存储一份，通过视图看到的数据只是存放在基本表中的数据。对视图的操作与对表的操作一样，可以对其进行查询、修改和删除。<br>当对通过视图看到的数据进行修改时，相应的基本表数据也要发生变化；同时，若基本表的数据发生变化，则这种变化也可以自动的反映到视图中。</p>
+<h3 id="视图的作用"><a href="#视图的作用" class="headerlink" title="视图的作用"></a>视图的作用</h3><p>与直接从数据表中读取相比，视图有以下优点：</p>
+<ul>
+<li><p>简单化<br><strong>看到的就是需要的</strong>。视图不仅可以简化用户对数据的理解，也可以简化他们的操作。<br>那些被经常使用的查询可以被定义为视图，从而使得用户不必为以后的操作每次指定全部的条件。</p>
+</li>
+<li><p>安全性<br><strong>通过视图用户只能查询和修改他们所能见到的数据</strong>。<br>数据库中的其他数据则既看不见也取不到。数据库授权命令可以使每个用户对数据库的检索限制到特定的数据库对象上，但不能授权到数据库特定行和特定的列上。通过视图，用户可以被限制在数据的不同子集上：</p>
+<ul>
+<li>使用权限可被限制在基表的行的子集上;</li>
+<li>使用权限可被限制在基表的列的子集上;</li>
+<li>使用权限可被限制在基表的行和列的子集上;</li>
+<li>使用权限可被限制在多个基表的连接所限定的行上;</li>
+<li>使用权限可被限制在基表中的数据的统计汇总上;</li>
+<li>使用权限可被限制在另一视图的一个子集上，或是一些视图和基表表合并后的子集上。</li>
+</ul>
+</li>
+<li><p>逻辑数据独立性<br>视图可帮助用户屏蔽真实表结构变化带来的影响。视图就相当于一个<strong>抽象层</strong>，用户面向的是抽象后的而不是底层表的细节。</p>
+</li>
+</ul>
+
             <blockquote>
                 <p>
                 本文地址：

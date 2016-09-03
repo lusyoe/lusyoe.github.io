@@ -3,36 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Debian桌面编译安装Tenda U1 USB无线网卡驱动 | 风格 | 风起于青萍之末</title>
+  <title>MySQL基础之视图理论篇 | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="USB,Linux驱动">
-  <meta name="description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。
-驱动安装
-从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+  <meta name="keywords" content="MySQL,视图">
+  <meta name="description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。
+视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Debian桌面编译安装Tenda U1 USB无线网卡驱动">
-<meta property="og:url" content="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html">
+<meta property="og:title" content="MySQL基础之视图理论篇">
+<meta property="og:url" content="https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。
-驱动安装
-从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
-<meta property="og:updated_time" content="2016-09-02T15:29:43.571Z">
+<meta property="og:description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。
+视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
+<meta property="og:updated_time" content="2016-09-03T02:08:29.644Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Debian桌面编译安装Tenda U1 USB无线网卡驱动">
-<meta name="twitter:description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。
-驱动安装
-从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+<meta name="twitter:title" content="MySQL基础之视图理论篇">
+<meta name="twitter:description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。
+视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
   
     <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;h1 id=&quot;前序&quot;&gt;&lt;a href=&quot;#前序&quot; class=&quot;headerlink&quot; title=&quot;前序&quot;&gt;&lt;/a&gt;前序&lt;/h1&gt;&lt;p&gt;朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。&lt;br&gt;由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。&lt;br&gt;结果Linux系统由于驱动问题，不识别那个网卡。&lt;br&gt;没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。&lt;/p&gt;
-&lt;h1 id=&quot;驱动安装&quot;&gt;&lt;a href=&quot;#驱动安装&quot; class=&quot;headerlink&quot; title=&quot;驱动安装&quot;&gt;&lt;/a&gt;驱动安装&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;从官方网站下载适用于Linux的驱动&lt;br&gt;&lt;code&gt;# wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;">
+  <meta name="summary" content="null">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -110,7 +104,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Debian桌面编译安装Tenda U1 USB无线网卡驱动</div>
+        <div class="flex-col header-title ellipsis">MySQL基础之视图理论篇</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -131,15 +125,15 @@
 </header>
 <header class="content-header">
   <div class="container">
-    <h1 class="author">Debian桌面编译安装Tenda U1 USB无线网卡驱动</h1>
+    <h1 class="author">MySQL基础之视图理论篇</h1>
     <h5 class="subtitle">
         
-            <time datetime="2016-09-02T15:14:01.000Z" itemprop="datePublished" class="page-time">
-  2016-09-02
+            <time datetime="2016-08-29T15:15:05.000Z" itemprop="datePublished" class="page-time">
+  2016-08-29
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/USB/">USB</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
 
         
     </h5>
@@ -147,11 +141,11 @@
 </header>
 
     <div class="container body-wrap">
-      <article id="post-Debian桌面编译安装Tenda-U1-USB无线网卡驱动" 
+      <article id="post-MySQL基础之视图理论篇" 
   class="article article-type-post" itemprop="blogPost">
     <div class="post-meta flex-row">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux驱动/">Linux驱动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/USB/">USB</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视图/">视图</a></li></ul>
 
     </div>
     <div class="post-body">
@@ -198,7 +192,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前序"><span class="post-toc-text">前序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#驱动安装"><span class="post-toc-text">驱动安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图概述"><span class="post-toc-text">视图概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图的含义"><span class="post-toc-text">视图的含义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图的作用"><span class="post-toc-text">视图的作用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#简单化"><span class="post-toc-text">简单化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安全性"><span class="post-toc-text">安全性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑数据独立性"><span class="post-toc-text">逻辑数据独立性</span></a></li></ol></li></ol></li></ol></li></ol>
             </nav>
             
         </aside>
@@ -206,31 +200,25 @@
         <div class="post-main">
 
             <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p>
-<h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul>
-<li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li>
-</ul>
-<a id="more"></a>
+            <h1 id="视图概述"><a href="#视图概述" class="headerlink" title="视图概述"></a>视图概述</h1><p>视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个<strong>虚拟表</strong>。<br>在视图中用户可以使用<code>SELECT</code>语句查询数据，以及使用<code>INSERT、UPDATE、DELETE</code>修改记录。<br>从<strong>MySQL 5.0</strong>开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。</p>
+<h1 id="视图的含义"><a href="#视图的含义" class="headerlink" title="视图的含义"></a>视图的含义</h1><p>视图是一个<strong>虚拟表</strong>，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。<br>视图一经定义便存储在数据库中，与其相对应的数据并没有像表那样在数据库中再存储一份，通过视图看到的数据只是存放在基本表中的数据。对视图的操作与对表的操作一样，可以对其进行查询、修改和删除。<br>当对通过视图看到的数据进行修改时，相应的基本表数据也要发生变化；同时，若基本表的数据发生变化，则这种变化也可以自动的反映到视图中。</p>
+<h1 id="视图的作用"><a href="#视图的作用" class="headerlink" title="视图的作用"></a>视图的作用</h1><p>与直接从数据表中读取相比，视图有以下优点：</p>
+<h4 id="简单化"><a href="#简单化" class="headerlink" title="简单化"></a>简单化</h4><p><strong>看到的就是需要的</strong>。视图不仅可以简化用户对数据的理解，也可以简化他们的操作。<br>那些被经常使用的查询可以被定义为视图，从而使得用户不必为以后的操作每次指定全部的条件。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p><strong>通过视图用户只能查询和修改他们所能见到的数据</strong>。<br>数据库中的其他数据则既看不见也取不到。数据库授权命令可以使每个用户对数据库的检索限制到特定的数据库对象上，但不能授权到数据库特定行和特定的列上。<br>通过视图，用户可以被限制在数据的不同子集上：</p>
 <ul>
-<li><p>编译</p>
-<ul>
-<li>解压zip包<br><code># unzip U1_linux.zip</code></li>
-<li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li>
-<li>执行自动编译脚本<br><code># sh install.sh</code></li>
+<li>使用权限可被限制在基表的行的子集上;</li>
+<li>使用权限可被限制在基表的列的子集上;</li>
+<li>使用权限可被限制在基表的行和列的子集上;</li>
+<li>使用权限可被限制在多个基表的连接所限定的行上;</li>
+<li>使用权限可被限制在基表中的数据的统计汇总上;</li>
+<li>使用权限可被限制在另一视图的一个子集上，或是一些视图和基表表合并后的子集上。</li>
 </ul>
-</li>
-<li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo apt-get install linux-headers-`uname -r`</span><br></pre></td></tr></table></figure>
-<p>然后继续编译即可<br><code># sh install.sh</code></p>
-<p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>
+<h4 id="逻辑数据独立性"><a href="#逻辑数据独立性" class="headerlink" title="逻辑数据独立性"></a>逻辑数据独立性</h4><p>视图可帮助用户屏蔽真实表结构变化带来的影响。视图就相当于一个<strong>抽象层</strong>，用户面向的是抽象后的而不是底层表的细节。</p>
 
             <blockquote>
                 <p>
                 本文地址：
-                <a href="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" target="_blank" rel="external">https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/</a>
+                <a href="https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/" target="_blank" rel="external">https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/</a>
                 </p>
                 <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
             </blockquote>
@@ -239,18 +227,18 @@
 <nav class="post-nav">
   
     <div class="waves-block waves-effect prev fl">
-      <a href="/2016/09/03/MySQL基础之视图实战篇/" id="post-prev" class="post-nav-link">
+      <a href="/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">MySQL基础之视图实战篇</h4>
+        <h4 class="title">Debian桌面编译安装Tenda U1 USB无线网卡驱动</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next fr">
-      <a href="/2016/08/29/MySQL基础之视图理论篇/" id="post-next" class="post-nav-link">
+      <a href="/2016/08/29/Gitlab-CI-Multi-Runner搭建CI持续集成环境/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">MySQL基础之视图理论篇</h4>
+        <h4 class="title">Gitlab CI Multi Runner搭建CI持续集成环境</h4>
       </a>
     </div>
   
@@ -261,7 +249,7 @@
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Debian桌面编译安装Tenda-U1-USB无线网卡驱动" data-title="Debian桌面编译安装Tenda U1 USB无线网卡驱动" data-url="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html"></div>
+	<div class="ds-thread" data-thread-key="MySQL基础之视图理论篇" data-title="MySQL基础之视图理论篇" data-url="https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -292,10 +280,10 @@
 
 <script>
 var BLOG_SHARE = {
-    title: "Debian桌面编译安装Tenda U1 USB无线网卡驱动",
+    title: "MySQL基础之视图理论篇",
     pic: "/img/logo.jpg",
     summary: document.getElementsByName('summary')[0].content,
-    url: "https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html"
+    url: "https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/index.html"
 };
 </script>
 <div class="global-share" id="global-share">
