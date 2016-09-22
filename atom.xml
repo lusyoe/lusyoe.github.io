@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2016-09-20T11:35:23.575Z</updated>
+  <updated>2016-09-22T14:05:44.354Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Data JPA使用JpaRepository自动装配报No qualifying bean of type错误</title>
+    <link href="https://lusyoe.github.io/2016/09/22/Spring-Data-JPA%E4%BD%BF%E7%94%A8JpaRepository%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%8A%A5No-qualifying-bean-of-type%E9%94%99%E8%AF%AF/"/>
+    <id>https://lusyoe.github.io/2016/09/22/Spring-Data-JPA使用JpaRepository自动装配报No-qualifying-bean-of-type错误/</id>
+    <published>2016-09-22T13:50:31.000Z</published>
+    <updated>2016-09-22T14:05:44.354Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天遇到一个问题折腾蛮久的，在这里记录一下。<br>毕竟是才刚开始使用Jpa这个技术，总是会遇到各种配置问题。<br>使用Spring Data Jpa非常的方便，一些简单的操作基本上都不用写具体的实现，<br>直接写一个接口继承JpaRepository就行了，注意需要带有一个泛型。k = 表映射的实体类，value = 表的Id类型。</p>
+<p>在使用的时候直接自动装配就好。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> xxxRepository repository;</span><br></pre></td></tr></table></figure>
+<p>然后就可以使用一些常用的数据库操作，如：findxxx、delete、save。<br>不过默认没有<code>update</code>方法，如果需要的话，就要在接口中再添加。</p>
+<p>好了，说下我遇到的那个问题。<br><code>Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.example.rest.repository.UserRepository] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}</code><br>写个Demo自动装配的时候，测试报这个错误。<br>检查一下spring配置文件，才发现少了声明repository所在包位置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 表示JPA Repository所在的包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jpa:repositories</span> <span class="attr">base-package</span>=<span class="string">"com.example.rest.repository"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>添加以上配置即可。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天遇到一个问题折腾蛮久的，在这里记录一下。&lt;br&gt;毕竟是才刚开始使用Jpa这个技术，总是会遇到各种配置问题。&lt;br&gt;使用Spring Data Jpa非常的方便，一些简单的操作基本上都不用写具体的实现，&lt;br&gt;直接写一个接口继承JpaRepository就行了，注意需要带
+    
+    </summary>
+    
+      <category term="Spring" scheme="https://lusyoe.github.io/categories/Spring/"/>
+    
+    
+      <category term="Web" scheme="https://lusyoe.github.io/tags/Web/"/>
+    
+      <category term="Spring" scheme="https://lusyoe.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Data JPA配置出现Not a managed type错误</title>
@@ -74,9 +105,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -141,9 +172,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
+    
+      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -786,49 +817,6 @@
 &lt;li&gt;指定&lt;br&gt;&lt;code&gt;$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;无需密码登陆服务器&quot;&gt;&lt;a href=&quot;#无需密码登陆服务器&quot; class=&quot;headerlink&quot; title=&quot;无需密码登陆服务器&quot;&gt;&lt;/a&gt;无需密码登陆服务器&lt;/h2&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux软件篇</title>
-    <link href="https://lusyoe.github.io/2016/03/06/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87/"/>
-    <id>https://lusyoe.github.io/2016/03/06/Linux软件篇/</id>
-    <published>2016-03-06T07:27:58.000Z</published>
-    <updated>2016-08-29T15:09:29.803Z</updated>
-    
-    <content type="html"><![CDATA[<p>总结一下，在Linux下使用过的一些软件，不包括开发使用的</p>
-<h4 id="axel-终端下载器"><a href="#axel-终端下载器" class="headerlink" title="axel 终端下载器"></a>axel 终端下载器</h4><p>可通过 <code>-n x(数字)</code> 设置下载时使用的线程数 ,如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ axel -n 5 &lt;URL&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="新立得包依赖管理器"><a href="#新立得包依赖管理器" class="headerlink" title="新立得包依赖管理器"></a>新立得包依赖管理器</h4><a id="more"></a>
-<p><code>synaptic</code><br>虽然一般直接使用<code>apt-get</code>的比较多，不过在处理依赖方面，这个软件还是挺强大的</p>
-<h4 id="查找库文件以及对应包的神器"><a href="#查找库文件以及对应包的神器" class="headerlink" title="查找库文件以及对应包的神器"></a>查找库文件以及对应包的神器</h4><p><code>apt-file</code><br>第一次安装成功后，需要更新数据库<br><code>$ apt-file update</code><br>查找包信息或库文件所在包<br><code>$ apt-file search xxx</code></p>
-<h4 id="文件编码转换"><a href="#文件编码转换" class="headerlink" title="文件编码转换"></a>文件编码转换</h4><p><code>iconv</code>，一般情况下使用方法：<br><code>$ iconv -f 原来编码 -t 新编码 文件名</code></p>
-<h4 id="词典"><a href="#词典" class="headerlink" title="词典"></a>词典</h4><p><code>goldendict</code></p>
-<h4 id="文本比较工具"><a href="#文本比较工具" class="headerlink" title="文本比较工具"></a>文本比较工具</h4><p><code>Meld Diff</code></p>
-<h4 id="Mac-托盘效果"><a href="#Mac-托盘效果" class="headerlink" title="Mac 托盘效果"></a>Mac 托盘效果</h4><p><code>Cairo-dock</code></p>
-<h4 id="可视化系统管理面板-web端"><a href="#可视化系统管理面板-web端" class="headerlink" title="可视化系统管理面板(web端)"></a>可视化系统管理面板(web端)</h4><p><code>ajenti</code></p>
-<h4 id="网络端口流量监控"><a href="#网络端口流量监控" class="headerlink" title="网络端口流量监控"></a>网络端口流量监控</h4><p><code>iftop</code></p>
-<h4 id="截图工具"><a href="#截图工具" class="headerlink" title="截图工具"></a>截图工具</h4><p><code>shutter</code></p>
-<h4 id="markdown可视化工具"><a href="#markdown可视化工具" class="headerlink" title="markdown可视化工具"></a>markdown可视化工具</h4><p><code>remarkable</code></p>
-<h4 id="tty显示中文"><a href="#tty显示中文" class="headerlink" title="tty显示中文"></a>tty显示中文</h4><p><code>fbterm</code></p>
-<h4 id="摄像头软件"><a href="#摄像头软件" class="headerlink" title="摄像头软件"></a>摄像头软件</h4><p><code>Camorama</code></p>
-<h4 id="笔记本数字小键盘工具"><a href="#笔记本数字小键盘工具" class="headerlink" title="笔记本数字小键盘工具"></a>笔记本数字小键盘工具</h4><p><code>numlockx</code></p>
-<ul>
-<li>激活小键盘 <code>numlockx on</code></li>
-<li>禁用小键盘 <code>numlockx off</code></li>
-</ul>
-<h4 id="基于终端的文件浏览器"><a href="#基于终端的文件浏览器" class="headerlink" title="基于终端的文件浏览器"></a>基于终端的文件浏览器</h4><p><code>ranger</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;总结一下，在Linux下使用过的一些软件，不包括开发使用的&lt;/p&gt;
-&lt;h4 id=&quot;axel-终端下载器&quot;&gt;&lt;a href=&quot;#axel-终端下载器&quot; class=&quot;headerlink&quot; title=&quot;axel 终端下载器&quot;&gt;&lt;/a&gt;axel 终端下载器&lt;/h4&gt;&lt;p&gt;可通过 &lt;code&gt;-n x(数字)&lt;/code&gt; 设置下载时使用的线程数 ,如：&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ axel -n 5 &amp;lt;URL&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h4 id=&quot;新立得包依赖管理器&quot;&gt;&lt;a href=&quot;#新立得包依赖管理器&quot; class=&quot;headerlink&quot; title=&quot;新立得包依赖管理器&quot;&gt;&lt;/a&gt;新立得包依赖管理器&lt;/h4&gt;
     
     </summary>
     
