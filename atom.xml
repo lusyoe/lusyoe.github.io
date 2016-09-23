@@ -105,9 +105,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -116,7 +116,7 @@
     <link href="https://lusyoe.github.io/2016/09/03/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%A7%86%E5%9B%BE%E5%AE%9E%E6%88%98%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/09/03/MySQL基础之视图实战篇/</id>
     <published>2016-09-03T02:05:49.000Z</published>
-    <updated>2016-09-23T15:23:13.280Z</updated>
+    <updated>2016-09-23T15:37:51.123Z</updated>
     
     <content type="html"><![CDATA[<h1 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h1><p>基本语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">OR</span> <span class="keyword">REPLACE</span>][ALGORITHM = &#123;UNDEFINED | <span class="keyword">MERGE</span> |TEMPTABLE&#125;]</span><br><span class="line">    <span class="keyword">VIEW</span> view_name [(column_list)]</span><br><span class="line">    <span class="keyword">AS</span> SELECT_statement</span><br><span class="line">    [<span class="keyword">WITH</span>[<span class="keyword">CASCADED</span> | <span class="keyword">LOCAL</span>] <span class="keyword">CHECK</span> <span class="keyword">OPTION</span>]</span><br></pre></td></tr></table></figure></p>
 <p>其中，<strong>CREATE</strong> 表示创建新的视图，<strong>REPLACE</strong>表示替换已经创建的视图;<strong>ALGORITHM</strong>表示视图选择的算法；<br><strong>view_name</strong> 为视图的名称，<strong>column_list</strong>为属性列；<strong>SELECT_statement</strong>表示<code>SELECT</code>语句;<br><strong>WITH [CASCADED | LOCAL] CHECK OPTION</strong>参数表示视图在更新时保证在视图的权限范围之内。</p>
@@ -155,7 +155,21 @@
 <li><strong>ALTER</strong>语句<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> quantity <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h2>]]></content>
+<h2 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h2><p>更新视图是指通过视图来插入、更新、删除表中的数据，因为视图是一个虚拟表，其中没有数据。<br>通过视图更新的时候都是转到基本表上进行更新的，如果对视图增加或者删除记录，实际上是对其基本表增加或者删除记录。</p>
+<ul>
+<li><p><strong>UPDATE</strong>语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> view_t <span class="keyword">SET</span> quantity=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>INSERT</strong>语句<br>在基本表中插入语句，其关联视图也会进行相应改变的。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t <span class="keyword">VALUES</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> view_t;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DELETE</strong>语句<br>在视图中删除一行数据，其基本表也会进行相应的删除。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> view_t <span class="keyword">WHERE</span> price=<span class="number">50</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2><p>当视图不再需要时，可以将其删除，删除一个或多个视图可以使用<code>DROP VIEW</code>语句。语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> [<span class="keyword">IF</span> <span class="keyword">EXISTS</span>]</span><br><span class="line">    view_name [, view_name]...</span><br><span class="line">    [RESTRICT | <span class="keyword">CASCADE</span>]</span><br></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> stu_glass;</span><br></pre></td></tr></table></figure></p>
+]]></content>
     
     <summary type="html">
     
@@ -213,9 +227,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
-    
       <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
     
   </entry>
   
