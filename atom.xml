@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2016-09-22T14:05:44.354Z</updated>
+  <updated>2016-09-27T14:47:44.875Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jenkins远程部署war包到tomcat</title>
+    <link href="https://lusyoe.github.io/2016/09/27/Jenkins%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2war%E5%8C%85%E5%88%B0tomcat/"/>
+    <id>https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/</id>
+    <published>2016-09-27T13:46:33.000Z</published>
+    <updated>2016-09-27T14:47:44.875Z</updated>
+    
+    <content type="html"><![CDATA[<p>网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。<br>关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等<br>配置好环境变量同时，在Jenkins和Gitlab上创建好项目。</p>
+<h1 id="项目文件配置"><a href="#项目文件配置" class="headerlink" title="项目文件配置"></a>项目文件配置</h1><p>来依次看一下关于项目的文件配置，包括Maven的配置等。</p>
+<h3 id="pom-xml配置"><a href="#pom-xml配置" class="headerlink" title="pom.xml配置"></a>pom.xml配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">warPackageName</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">warPackageName</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tomcat.deploy.server</span>&gt;</span>tomcat8<span class="tag">&lt;/<span class="name">tomcat.deploy.server</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tomcat.deploy.serverUrl</span>&gt;</span>http://192.168.1.2:8088/manager/text<span class="tag">&lt;/<span class="name">tomcat.deploy.serverUrl</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">server</span>&gt;</span>$&#123;tomcat.deploy.server&#125;<span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">url</span>&gt;</span>$&#123;tomcat.deploy.serverUrl&#125;<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">path</span>&gt;</span>/$&#123;warPackageName&#125;<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我这里tomcat版本使用的8，如果使用的是tomcat6.x的话，serverUrl需要改为<code>http://192.168.1.2:8080/manager</code>。<br>在这里<code>&lt;tomcat.deploy.server&gt;tomcat8&lt;/tomcat.deploy.server&gt;</code>，其中tomcat8是需要在Maven的<strong>.settings.xml</strong>文件中配置的。</p>
+<h3 id="Maven-settings配置"><a href="#Maven-settings配置" class="headerlink" title="Maven settings配置"></a>Maven settings配置</h3><p>~/.m2/.settings.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span></span><br><span class="line">          <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">          <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">password</span>&gt;</span>lhy123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>tomcat8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">username</span>&gt;</span>deployer<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">password</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servers</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">name</span>&gt;</span>internal nexus repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://192.168.1.2:8081/repository/maven-central/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这里主要是看server中的tomcat8配置，需要tomcat的用户名和密码。至于其他的是关于nexus的配置，以后有机会再写一篇详细说明Nexus的吧。<br>tomcat的用户名和密码就需要我们到服务器上去配置了。</p>
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>服务器上主要是<strong>tomcat用户配置</strong>和<strong>Maven settings配置</strong>。<br>是的，本地配置那个是方便在本地就可以直接部署到服务器，但是如果是用Jenkins来帮我们自动的部署的话就需要在服务器上也配置一下Maven Settings了，否则在构建好后是无法进行远程部署的，因为不知道tomcat的用户名和密码。<br>在这里我们直接复制本地的.settings.xml文件到服务器就好，也有个地方需要注意了。<br><strong>.settings.xml</strong>这个文件不是随便放的，需要放到启动jenkins的用户的那个home目录下面的.m2/目录中。<br>因为我是直接从<a href="https://jenkins.io/" target="_blank" rel="external">Jenkins官网</a>下载了war包，然后丢到tomcat中运行的。<br>所以这里我需要将<strong>.settings.xml</strong>文件放到<code>/usr/share/tomcat8/.m2/</code>中。<br>需要注意的是文件权限问题，我是为了偷懒直接用系统<code># apt-get install tomcat8</code>安装的，系统会自动创建tomcat8用户。<br>所以还需要额外执行一条命令：<code># chown tomcat8:tomcat8 .settings.xml</code>即可。<br>如果是自己从<a href="http://tomcat.apache.org/" target="_blank" rel="external">apache tomcat官网</a>下载的压缩包的话，就看你启动tomcat服务用的哪个系统用户了，就把<strong>.settings.xml</strong>文件丢到那个用户的<code>$HOME/.m2/</code>下即可。</p>
+<h3 id="tomcat配置"><a href="#tomcat配置" class="headerlink" title="tomcat配置"></a>tomcat配置</h3><p>先在tomcat用户配置文件中添加一个用户，并给予<strong>manager-script</strong>权限就行。<br>在我这里是编辑<code>/etc/tomcat8/tomcat-users.xml</code>文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tomcat-users</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"admin-gui"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-gui"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"tomcat"</span> <span class="attr">password</span>=<span class="string">"tomcat"</span> <span class="attr">roles</span>=<span class="string">"admin-gui,manager-gui"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"deployer"</span> <span class="attr">password</span>=<span class="string">"dev"</span> <span class="attr">roles</span>=<span class="string">"manager-script"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">tomcat-users</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主要看deployer这个用户就行了。</p>
+<h3 id="Jenkins构建配置"><a href="#Jenkins构建配置" class="headerlink" title="Jenkins构建配置"></a>Jenkins构建配置</h3><p>好了，最后再说一下，在Jenkins中执行的构建命令<br><img src="/image/maven-build.png" alt="maven-build"><br>这里需要注意,执行的是<strong>mvn tomcat:redeploy</strong>。<br>网上很多教程说的是<strong>mvn tomcat7:redeploy</strong>，我这边死活不行，总是报错。<br><code>No plugin found for prefix &#39;tomcat7&#39; in the current project.</code><br>暂时不知道是什么原因，先不管了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>做开发的就是一路趟坑啊，尤其是web方面。感觉就这么一点小小的东西都折腾了好一番，真是路漫漫兮其修远矣。但是为了前途咱还是得一路顶上去呢，吾必将上下而求索~</p>
+<p>致还在年轻奋斗的我们。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。&lt;br&gt;关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。&lt;/p&gt;
+&lt;h1 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;header
+    
+    </summary>
+    
+      <category term="CI持续集成" scheme="https://lusyoe.github.io/categories/CI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+    
+      <category term="CI持续集成" scheme="https://lusyoe.github.io/tags/CI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Data JPA使用JpaRepository自动装配报No qualifying bean of type错误</title>
@@ -105,9 +142,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -227,9 +264,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
+    
+      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -829,49 +866,6 @@
 &lt;li&gt;恢复最上面的一个Session&lt;br&gt;&lt;code&gt;$ tmux a&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;恢复指定Session&lt;br&gt;&lt;code&gt;$ tmux attach-session -t &amp;lt;session-name&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux软件篇之ssh</title>
-    <link href="https://lusyoe.github.io/2016/03/06/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8Bssh/"/>
-    <id>https://lusyoe.github.io/2016/03/06/Linux软件篇之ssh/</id>
-    <published>2016-03-06T08:16:57.000Z</published>
-    <updated>2016-08-29T15:09:29.803Z</updated>
-    
-    <content type="html"><![CDATA[<p>ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。<br>一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
-<h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><ul>
-<li>本机<br><code>$ ssh-keygen</code></li>
-<li>指定<br><code>$ ssh-keygen -t rsa -C &quot;xxx@xx.com&quot;</code></li>
-</ul>
-<h2 id="无需密码登陆服务器"><a href="#无需密码登陆服务器" class="headerlink" title="无需密码登陆服务器"></a>无需密码登陆服务器</h2><a id="more"></a>
-<p>将公钥(一般位于<strong>~/.ssh/id_rsa.pub</strong>)内容，存放到远程服务器指定账户的Home目录下面的<strong>~/.ssh/authorized_keys</strong>中,如果没有authorized_keys文件的话就新键一个。<br>在这里有一个很方便的命令可以直接使用：<br><code>$ ssh-copy-id 服务器用户名@域名或ip</code><br>下次登陆服务器就无需再次输入密码了,登陆命令：<br><code>$ ssh username@addr</code></p>
-<h2 id="快速连接"><a href="#快速连接" class="headerlink" title="快速连接"></a>快速连接</h2><p>通过config配置文件，可无需每次都输入远程用户名和地址即可进行连接。<br>在<strong>~/.ssh</strong>下新建<strong>config</strong>文件，编辑添加内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="built_in">test</span></span><br><span class="line">HostName xxx.xxx.xxx.xxx(远程服务器ip)</span><br><span class="line">User root(登陆远程的用户名)</span><br><span class="line">Port 22(登陆的端口)</span><br></pre></td></tr></table></figure></p>
-<p>之后连接直接使用：<code>$ ssh test</code>即可</p>
-<h2 id="远程与本地传输文件"><a href="#远程与本地传输文件" class="headerlink" title="远程与本地传输文件"></a>远程与本地传输文件</h2><p>通过<code>scp</code>命令进行本地与远程之间的数据传递.</p>
-<ul>
-<li><p>从远程主机拷贝到本地<br><code>$ scp 远程user@addr:文件路径(默认用户home目录)  本地路径(同上)</code></p>
-</li>
-<li><p>将本地文件拷贝到远程主机<br><code>$ scp 本地文件路径  远程user@addr:文件路径(默认用户home目录)</code></p>
-</li>
-<li><p>拷贝目录(递归)<br><code>$ scp -r</code></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;ssh 可以说是最常用的一个远程登陆服务器进行控制的软件了，总结一下。&lt;br&gt;一般的Linux发行版都自带了ssh客户端，如果需要安装服务端的话，执行&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install openssh-server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h2 id=&quot;生成公私密钥&quot;&gt;&lt;a href=&quot;#生成公私密钥&quot; class=&quot;headerlink&quot; title=&quot;生成公私密钥&quot;&gt;&lt;/a&gt;生成公私密钥&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本机&lt;br&gt;&lt;code&gt;$ ssh-keygen&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;指定&lt;br&gt;&lt;code&gt;$ ssh-keygen -t rsa -C &amp;quot;xxx@xx.com&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;无需密码登陆服务器&quot;&gt;&lt;a href=&quot;#无需密码登陆服务器&quot; class=&quot;headerlink&quot; title=&quot;无需密码登陆服务器&quot;&gt;&lt;/a&gt;无需密码登陆服务器&lt;/h2&gt;
     
     </summary>
     
