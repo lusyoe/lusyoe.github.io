@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hibernate+JNDI配置 | 风格 | 风起于青萍之末</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Hibernate,JNDI">
+  <meta name="description" content="刚开始使用JNDI，网上也查了不少资料，磕磕盼盼鼓捣了大半天才成功，在此记录一下。
+介绍首先还是再啰嗦两句，介绍一下JNDI技术。JNDI是Java 命名和目录接口（Java Naming and Directory Interface，JNDI）的简称.从一开始就一直是 JavaEE 企业的核心技术之一。在JMS，JMail,JDBC,EJB等技术中，就大量应用的这种技术。
+服务端容器配置(基于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate+JNDI配置">
+<meta property="og:url" content="https://lusyoe.github.io/2016/10/05/Hibernate-JNDI配置/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="刚开始使用JNDI，网上也查了不少资料，磕磕盼盼鼓捣了大半天才成功，在此记录一下。
+介绍首先还是再啰嗦两句，介绍一下JNDI技术。JNDI是Java 命名和目录接口（Java Naming and Directory Interface，JNDI）的简称.从一开始就一直是 JavaEE 企业的核心技术之一。在JMS，JMail,JDBC,EJB等技术中，就大量应用的这种技术。
+服务端容器配置(基于">
+<meta property="og:image" content="https://lusyoe.github.io/image/JNDI_project.jpg">
+<meta property="og:image" content="https://lusyoe.github.io/image/bookshop_tb.png">
+<meta property="og:image" content="https://lusyoe.github.io/image/bookshop_des.png">
+<meta property="og:updated_time" content="2016-10-05T09:21:14.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate+JNDI配置">
+<meta name="twitter:description" content="刚开始使用JNDI，网上也查了不少资料，磕磕盼盼鼓捣了大半天才成功，在此记录一下。
+介绍首先还是再啰嗦两句，介绍一下JNDI技术。JNDI是Java 命名和目录接口（Java Naming and Directory Interface，JNDI）的简称.从一开始就一直是 JavaEE 企业的核心技术之一。在JMS，JMail,JDBC,EJB等技术中，就大量应用的这种技术。
+服务端容器配置(基于">
+<meta name="twitter:image" content="https://lusyoe.github.io/image/JNDI_project.jpg">
+  
+    <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
+  
+  <meta name="summary" content="null">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">卢浩元</h5>
+        <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav flex-col">
+    
+        <li class="waves-block waves-effect">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/lusyoe" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>风格 &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Hibernate+JNDI配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Hibernate+JNDI配置</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-10-05T09:08:38.000Z" itemprop="datePublished" class="page-time">
+  2016-10-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web/">Web</a></li></ul>
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-Hibernate-JNDI配置" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNDI/">JNDI</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务端容器配置-基于Tomcat"><span class="post-toc-text">服务端容器配置(基于Tomcat)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目配置"><span class="post-toc-text">项目配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hibernate配置"><span class="post-toc-text">Hibernate配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#web-xml配置"><span class="post-toc-text">web.xml配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目代码结构"><span class="post-toc-text">项目代码结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库配置"><span class="post-toc-text">数据库配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>刚开始使用JNDI，网上也查了不少资料，磕磕盼盼鼓捣了大半天才成功，在此记录一下。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>首先还是再啰嗦两句，介绍一下JNDI技术。<br>JNDI是Java 命名和目录接口（Java Naming and Directory Interface，JNDI）的简称.从一开始就一直是 JavaEE 企业的核心技术之一。在JMS，JMail,JDBC,EJB等技术中，就大量应用的这种技术。</p>
+<h2 id="服务端容器配置-基于Tomcat"><a href="#服务端容器配置-基于Tomcat" class="headerlink" title="服务端容器配置(基于Tomcat)"></a>服务端容器配置(基于Tomcat)</h2><p>修改<strong>conf/server.xml</strong>文件，在<strong>GlobalNamingResources</strong>节点中添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">"jdbc/bookshop"</span> <span class="attr">auth</span>=<span class="string">"Container"</span></span><br><span class="line">                <span class="attr">scope</span>=<span class="string">"jdbc/bookshop"</span></span><br><span class="line">                <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></span><br><span class="line">                <span class="attr">driverClassName</span>=<span class="string">"com.mysql.jdbc.Driver"</span></span><br><span class="line">                <span class="attr">url</span>=<span class="string">"jdbc:mysql://192.168.1.2:3306/bookshop"</span></span><br><span class="line">                <span class="attr">username</span>=<span class="string">"root"</span></span><br><span class="line">                <span class="attr">password</span>=<span class="string">"lu123"</span></span><br><span class="line">                <span class="attr">maxActive</span>=<span class="string">"50"</span></span><br><span class="line">                <span class="attr">maxIdle</span>=<span class="string">"30"</span></span><br><span class="line">                <span class="attr">maxWait</span>=<span class="string">"10000"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后接着再修改<strong>conf/context.xml</strong>文件，在<strong>Context</strong>节点中添加引用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ResourceLink</span></span><br><span class="line">            <span class="attr">global</span>=<span class="string">"jdbc/bookshop"</span></span><br><span class="line">            <span class="attr">name</span>=<span class="string">"jdbc/bookshop"</span></span><br><span class="line">            <span class="attr">auth</span>=<span class="string">"Container"</span></span><br><span class="line">            <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>很简单，这个服务器就配置好了，最后还需要重启一下tomcat服务，别忘啦。。接下来再看看项目配置。</p>
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>项目只是一个简单的测试Demo，首先看看<strong>pom.xml</strong>文件项目依赖配置。</p>
+<p>###　项目依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">dependencies&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.0.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--&lt;dependency&gt;--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;groupId&gt;mysql&lt;/groupId&gt;--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;version&gt;6.0.3&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;/dependency&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- Java Servlet --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet.jsp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这里因为我们使用JNDI技术，数据库的驱动由Tomcat容器提供，所以我们的项目中就不需要再依赖它了，这样一来灵活性也非常高了。</p>
+<h3 id="Hibernate配置"><a href="#Hibernate配置" class="headerlink" title="Hibernate配置"></a>Hibernate配置</h3><p>这里列出简单的hibernate配置，新建一个<strong>hibernate.cfg.xml</strong>文件放置到项目<strong>classpath</strong>中，我用的是Idea，也可以放在resources目录中，添加文件内容：</p>
+<p>hibernate.cfg.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span><br><span class="line">    "-//Hibernate/Hibernate Configuration DTD//EN"</span><br><span class="line">    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;property name="connection.url"&gt;jdbc:mysql://192.168.1.2:3306/bookshop&lt;/property&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;property name="connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;property name="connection.username"&gt;root&lt;/property&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;property name="connection.password"&gt;lu123&lt;/property&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- JNDI --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.datasource"</span>&gt;</span>java:comp/env/jdbc/bookshop<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"format_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dialect"</span>&gt;</span>org.hibernate.dialect.MySQL5Dialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"Users.hbm.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到，在使用JNDI之前需要配置一大堆的东西，如:url，数据库连接用户名，密码，驱动类等等。现在使用JNDI之后，只需要提供一个数据源即可，确实比之前方便不少。<br>注意配置文件中映射了一个<strong>Users.hbm.xml</strong>文件，这个文件其实就是用hibernate映射一个JavaBean的配置文件，不过貌似现在都提倡使用注解的方式了。但是还是有可能会遇到需要维护旧的项目，而旧的项目大都是使用xml来进行配置的，所以还是了解下这个比较好。</p>
+<p>Users.hbm.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">        "http://www.hibernate.org/xsd/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"com.example.hibernate.bean.Users"</span> <span class="attr">table</span>=<span class="string">"users"</span> <span class="attr">catalog</span>=<span class="string">"bookshop"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"Id"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>&gt;</span><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"loginName"</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"LoginName"</span> <span class="attr">length</span>=<span class="string">"50"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"loginPwd"</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"LoginPwd"</span> <span class="attr">length</span>=<span class="string">"16"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>很简单，就不做过多介绍，根据这个再创建JavaBean类就行，就不贴那个了。</p>
+<h3 id="web-xml配置"><a href="#web-xml配置" class="headerlink" title="web.xml配置"></a>web.xml配置</h3><p>一般JavaEE web项目都需要一个web.xml文件的，不过貌似随着Spring的潮流，提倡不需要web.xml也可以了。。但还是那句老话，旧的项目正<strong>赚钱</strong>着不可能都给推掉了。</p>
+<p>web.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee"</span></span><br><span class="line">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span></span><br><span class="line">         <span class="attr">version</span>=<span class="string">"3.1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>user<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.example.hibernate.controller.UserController<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>user<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个文件很简单，就只配置一个Servlet，项目配置的东西基本上就都说完了，现在再来看看项目代码结构了。</p>
+<h2 id="项目代码结构"><a href="#项目代码结构" class="headerlink" title="项目代码结构"></a>项目代码结构</h2><p><img src="/image/JNDI_project.jpg" alt="Idea"><br>我使用的是IntelliJ IDEA，据说这个是Java中最好的IDE。。<br>项目结构也很简单，能省的都给省了。<br>先看一下<strong>HibernateSessionFactory.java</strong>这个文件，它主要就是在项目中引入Hibernate的配置，并获取到Session，而我们增删改查等操作就都是通过这个Session来控制的。</p>
+<p>HibernateSessionFactory.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.hibernate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.SessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.cfg.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by Administrator on 2016/9/25.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HibernateSessionFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Configuration configure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        configure = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line">        sessionFactory = configure.buildSessionFactory();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sessionFactory.openSession();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也很简单的操作，就是根据配置文件来获取Session的，而Hibernate的实际操作就是通过这个Session来完成的。<br>我们先从DAO层开始，来看下<strong>BaseHibernateDAO.java</strong>文件</p>
+<p>BaseHibernateDAO.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">package com.example.hibernate.dao;</span><br><span class="line"></span><br><span class="line">import com.example.hibernate.HibernateSessionFactory;</span><br><span class="line">import org.hibernate.Session;</span><br><span class="line">import org.hibernate.Transaction;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by Administrator on 2016/9/25.</span><br><span class="line"> */</span><br><span class="line">public abstract class BaseHibernateDAO &#123;</span><br><span class="line"></span><br><span class="line">    protected void add(Object object) &#123;</span><br><span class="line">        Transaction tx = null;</span><br><span class="line"></span><br><span class="line">        // 获取session</span><br><span class="line">        Session session = HibernateSessionFactory.getSession();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            // 开始事务</span><br><span class="line">            tx = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">            // 持久化操作</span><br><span class="line">            session.save(object);</span><br><span class="line"></span><br><span class="line">            tx.commit();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            if (tx != null) &#123;</span><br><span class="line">                // 回滚事务</span><br><span class="line">                tx.rollback();</span><br><span class="line">            &#125;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            // 关闭session</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    protected Object get(Class cla, Serializable id) &#123;</span><br><span class="line">        Object obj = null;</span><br><span class="line"></span><br><span class="line">        Session session = HibernateSessionFactory.getSession();</span><br><span class="line">        try &#123;</span><br><span class="line">            obj = session.get(cla, id);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected void delete(Object object) &#123;</span><br><span class="line"></span><br><span class="line">        Transaction tx = null;</span><br><span class="line"></span><br><span class="line">        Session session = HibernateSessionFactory.getSession();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            tx = session.beginTransaction();</span><br><span class="line">            session.delete(object);</span><br><span class="line"></span><br><span class="line">            tx.commit();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            if (tx != null) &#123;</span><br><span class="line">                tx.rollback();</span><br><span class="line">            &#125;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    protected void update(Object object) &#123;</span><br><span class="line">        Transaction tx = null;</span><br><span class="line">        Session session = HibernateSessionFactory.getSession();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            tx = session.beginTransaction();</span><br><span class="line">            session.update(object);</span><br><span class="line"></span><br><span class="line">            tx.commit();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">            if (tx != null) &#123;</span><br><span class="line">                tx.rollback();</span><br><span class="line">            &#125;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里也很简单，毕竟只是为了演示测试使用，真正的项目肯定不应该这样的。<br>再来看看<strong>UserDAO.java</strong>文件，它主要是提供了上层能够操作的接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.hibernate.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.hibernate.bean.Users;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by Administrator on 2016/9/25.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDAO</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(Users users)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(Users users)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Users <span class="title">load</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Users users)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserDAOImpl.java也没什么内容，其实就是我懒。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package com.example.hibernate.dao;</span><br><span class="line"></span><br><span class="line">import com.example.hibernate.bean.Users;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by Administrator on 2016/9/25.</span><br><span class="line"> */</span><br><span class="line">public class UserDAOImpl extends BaseHibernateDAO implements UserDAO &#123;</span><br><span class="line">    public void add(Users users) &#123;</span><br><span class="line">        super.add(users);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void delete(Users users) &#123;</span><br><span class="line">        super.delete(users);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Users load(Integer id) &#123;</span><br><span class="line">        return (Users) super.get(Users.class, id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void update(Users users) &#123;</span><br><span class="line">        super.update(users);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再来看看关键的Controller，主要就是响应web页面的请求的。</p>
+<p>UserController.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.example.hibernate.controller;</span><br><span class="line"></span><br><span class="line">import com.example.hibernate.bean.Users;</span><br><span class="line">import com.example.hibernate.dao.UserDAO;</span><br><span class="line">import com.example.hibernate.dao.UserDAOImpl;</span><br><span class="line"></span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServlet;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.PrintWriter;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by Administrator on 2016/10/2.</span><br><span class="line"> */</span><br><span class="line">public class UserController extends HttpServlet &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        UserDAO dao = new UserDAOImpl();</span><br><span class="line">        Users load = dao.load(3);</span><br><span class="line"></span><br><span class="line">        PrintWriter writer = resp.getWriter();</span><br><span class="line">        writer.print(&quot;get = &quot; + load.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也很简单，相信初学者也都能看懂，当然了我也是一个Web的初学者，之前都是做Android应用开发，现在是做Android系统Framework开发，而未来我打算想做Web后端开发，努力学习ing…</p>
+<p>哦，对了。还有最关键的数据库方面还没说。。</p>
+<h2 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h2><p><img src="/image/bookshop_tb.png" alt="Mysql user data"></p>
+<p>使用Navicat for MySQL可以很方便设计数据库表和进行增删改查等操作，挺强大的一个功能是还能从excel表格中导入数据。</p>
+<p><img src="/image/bookshop_des.png" alt="mysql user design"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，一个简单Hibernate+JNDI配置就说到这吧。当然，配置的方式有很多种，但是只要适合自己就好了。<br>这里最后再吐槽一句，网上的教程一大堆也太不完整了，东一点西一点的，说一大堆还是不会用。即使是只作为自己的一个笔记，起码也要说清楚一点比较好吧，万一后来自己再来翻的时候都看不懂，那就笑了。<br>而作为一个教程类，起码得要能run跑起来吧？</p>
+
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="https://lusyoe.github.io/2016/10/05/Hibernate-JNDI配置/" target="_blank" rel="external">https://lusyoe.github.io/2016/10/05/Hibernate-JNDI配置/</a>
+                </p>
+                <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/09/27/Jenkins远程部署war包到tomcat/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Jenkins远程部署war包到tomcat</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Hibernate-JNDI配置" data-title="Hibernate+JNDI配置" data-url="https://lusyoe.github.io/2016/10/05/Hibernate-JNDI配置/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lusyoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "Hibernate+JNDI配置",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "https://lusyoe.github.io/2016/10/05/Hibernate-JNDI配置/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
