@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2016-10-07T00:27:14.517Z</updated>
+  <updated>2016-10-11T00:03:18.701Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决Jenkins+Gitlab出现的Permission denied权限问题</title>
+    <link href="https://lusyoe.github.io/2016/10/11/%E8%A7%A3%E5%86%B3Jenkins-Gitlab%E5%87%BA%E7%8E%B0%E7%9A%84Permission-denied%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/"/>
+    <id>https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/</id>
+    <published>2016-10-11T00:02:40.000Z</published>
+    <updated>2016-10-11T00:03:18.701Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Started by user lhy</span><br><span class="line">Building in workspace /usr/share/tomcat8/.jenkins/workspace/zxpm</span><br><span class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</span><br><span class="line">Fetching changes from the remote Git repository</span><br><span class="line"> &gt; git config remote.origin.url git@192.168.1.2:web/zxpm.git # timeout=10</span><br><span class="line">Fetching upstream changes from git@192.168.1.2:web/zxpm.git</span><br><span class="line"> &gt; git --version # timeout=10</span><br><span class="line">using GIT_SSH to set credentials </span><br><span class="line"> &gt; git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">ERROR: Error fetching remote repo &apos;origin&apos;</span><br><span class="line">hudson.plugins.git.GitException: Failed to fetch from git@192.168.1.2:web/zxpm.git</span><br><span class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:799)</span><br><span class="line">	at hudson.plugins.git.GitSCM.retrieveChanges(GitSCM.java:1055)</span><br><span class="line">	at hudson.plugins.git.GitSCM.checkout(GitSCM.java:1086)</span><br><span class="line">	at hudson.scm.SCM.checkout(SCM.java:485)</span><br><span class="line">	at hudson.model.AbstractProject.checkout(AbstractProject.java:1269)</span><br><span class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.defaultCheckout(AbstractBuild.java:604)</span><br><span class="line">	at jenkins.scm.SCMCheckoutStrategy.checkout(SCMCheckoutStrategy.java:86)</span><br><span class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:529)</span><br><span class="line">	at hudson.model.Run.execute(Run.java:1741)</span><br><span class="line">	at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:531)</span><br><span class="line">	at hudson.model.ResourceController.execute(ResourceController.java:98)</span><br><span class="line">	at hudson.model.Executor.run(Executor.java:410)</span><br><span class="line">Caused by: hudson.plugins.git.GitException: Command &quot;git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*&quot; returned status code 128:</span><br><span class="line">stdout: </span><br><span class="line">stderr: Permission denied, please try again.</span><br><span class="line">Permission denied, please try again.</span><br><span class="line">Permission denied (publickey,password).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line"></span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:1740)</span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandWithCredentials(CliGitAPIImpl.java:1476)</span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.access$300(CliGitAPIImpl.java:63)</span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$1.execute(CliGitAPIImpl.java:314)</span><br><span class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:797)</span><br><span class="line">	... 11 more</span><br><span class="line">ERROR: null</span><br><span class="line">Finished: FAILURE</span><br></pre></td></tr></table></figure></p>
+<p>这个问题只需要细心点就可以了。配置Jenkins项目时，在源码管理中选择Git(前提是已安装好Git插件)，填好仓库地址，认证点击Add，如图<br><img src="/image/jenkins_git.png" alt="jenkins git"></p>
+<p><img src="/image/private_key.png" alt="private key"><br>在Kind中选择<strong>SSH Username with private key</strong>，下面的Private Key选择<strong>Enter directly</strong>直接输入在<strong>Gitlab</strong>部署了public key对应的private key即可。一般public key是在<code>~/.ssh/id_rsa.pub</code>,而private key是<code>~/.ssh/id_rsa</code>。<br>点击OK，保存项目再次构建就好了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;lin
+    
+    </summary>
+    
+      <category term="Jenkins" scheme="https://lusyoe.github.io/categories/Jenkins/"/>
+    
+    
+      <category term="Jenkins" scheme="https://lusyoe.github.io/tags/Jenkins/"/>
+    
+      <category term="Gitlab" scheme="https://lusyoe.github.io/tags/Gitlab/"/>
+    
+  </entry>
   
   <entry>
     <title>解决Hibernate使用HQL查询出现is not mapped问题</title>
@@ -234,9 +261,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -356,9 +383,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
-    
       <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
     
   </entry>
   
@@ -817,38 +844,6 @@
     
     
       <category term="OpenWrt" scheme="https://lusyoe.github.io/tags/OpenWrt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux软件篇之Docker</title>
-    <link href="https://lusyoe.github.io/2016/03/09/Linux%E8%BD%AF%E4%BB%B6%E7%AF%87%E4%B9%8BDocker/"/>
-    <id>https://lusyoe.github.io/2016/03/09/Linux软件篇之Docker/</id>
-    <published>2016-03-09T14:49:05.000Z</published>
-    <updated>2016-08-29T15:09:29.803Z</updated>
-    
-    <content type="html"><![CDATA[<p>我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。<br>    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。<br>然后当时公司服务器都使用的是centos，但android编译环境可要求的是Ubuntu呀，没办法就想到了虚拟化。最后就又想到Docker了，在网上找了找，果然已经有国外的大神写好了针对<a href="https://github.com/stucki/docker-cyanogenmod" target="_blank" rel="external">CyanogenMod</a>的dockerfile环境搭建了。拉下来一键就部署好了。</p>
-<a id="more"></a>
-<p>下面记录一下当时使用的笔记吧。</p>
-<h3 id="Ubuntu修改Docker服务启动默认数据文件存放位置"><a href="#Ubuntu修改Docker服务启动默认数据文件存放位置" class="headerlink" title="Ubuntu修改Docker服务启动默认数据文件存放位置"></a>Ubuntu修改Docker服务启动默认数据文件存放位置</h3><p>默认Docker将数据文件都放在<code>/var/lib/docker</code>中，如果该分区不是很大的话，不利于后期的扩展，尤其是作为android源码项目来说的，因此可修改配置文件，使其数据存储路径指定在其他位置。</p>
-<ul>
-<li>Upstart方式：编辑<code>/etc/default/docker</code> ，添加<code>DOCKER_OPTS=&quot;-g /opt/docker&quot;</code> 即可改到/opt/docker路径中。</li>
-<li>Systemd方式：</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我是在2014年就开始接触docker的，那时候docker刚刚火起来，最开始只是把它当做是虚拟机的一种替代品吧，而且启动速度快，消耗的硬件资源也没一般虚拟机那么大，可以说是跟主机共享使用资源的，不像虚拟机，要一开始就固定的进行分配。。&lt;br&gt;    在2015年的时候，我就开始尝试着在工作中使用它了。那时候刚做android系统开发，被那个编译环境搭建搞的欲死欲活的，就想有什么方法可以一键搭建哦。&lt;br&gt;然后当时公司服务器都使用的是centos，但android编译环境可要求的是Ubuntu呀，没办法就想到了虚拟化。最后就又想到Docker了，在网上找了找，果然已经有国外的大神写好了针对&lt;a href=&quot;https://github.com/stucki/docker-cyanogenmod&quot;&gt;CyanogenMod&lt;/a&gt;的dockerfile环境搭建了。拉下来一键就部署好了。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="https://lusyoe.github.io/tags/Linux/"/>
-    
-      <category term="Docker" scheme="https://lusyoe.github.io/tags/Docker/"/>
     
   </entry>
   

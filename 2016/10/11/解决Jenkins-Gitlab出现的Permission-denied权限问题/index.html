@@ -3,36 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Debian桌面编译安装Tenda U1 USB无线网卡驱动 | 风格 | 风起于青萍之末</title>
+  <title>解决Jenkins+Gitlab出现的Permission denied权限问题 | 风格 | 风起于青萍之末</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="Linux驱动,USB">
-  <meta name="description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。
-驱动安装
-从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+  <meta name="keywords" content="Jenkins,Gitlab">
+  <meta name="description" content="在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：1234567891011121314151617181920212223242526272829303132333435363738394041Started by user lhyBuilding in workspace /usr/share/tomcat8/.jenkins/workspac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Debian桌面编译安装Tenda U1 USB无线网卡驱动">
-<meta property="og:url" content="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html">
+<meta property="og:title" content="解决Jenkins+Gitlab出现的Permission denied权限问题">
+<meta property="og:url" content="https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。
-驱动安装
-从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
-<meta property="og:updated_time" content="2016-09-04T12:56:15.610Z">
+<meta property="og:description" content="在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：1234567891011121314151617181920212223242526272829303132333435363738394041Started by user lhyBuilding in workspace /usr/share/tomcat8/.jenkins/workspac">
+<meta property="og:image" content="https://lusyoe.github.io/image/jenkins_git.png">
+<meta property="og:image" content="https://lusyoe.github.io/image/private_key.png">
+<meta property="og:updated_time" content="2016-10-11T00:03:18.701Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Debian桌面编译安装Tenda U1 USB无线网卡驱动">
-<meta name="twitter:description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。
-驱动安装
-从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+<meta name="twitter:title" content="解决Jenkins+Gitlab出现的Permission denied权限问题">
+<meta name="twitter:description" content="在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：1234567891011121314151617181920212223242526272829303132333435363738394041Started by user lhyBuilding in workspace /usr/share/tomcat8/.jenkins/workspac">
+<meta name="twitter:image" content="https://lusyoe.github.io/image/jenkins_git.png">
   
     <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;h1 id=&quot;前序&quot;&gt;&lt;a href=&quot;#前序&quot; class=&quot;headerlink&quot; title=&quot;前序&quot;&gt;&lt;/a&gt;前序&lt;/h1&gt;&lt;p&gt;朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。&lt;br&gt;由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。&lt;br&gt;结果Linux系统由于驱动问题，不识别那个网卡。&lt;br&gt;没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。&lt;/p&gt;
-&lt;h1 id=&quot;驱动安装&quot;&gt;&lt;a href=&quot;#驱动安装&quot; class=&quot;headerlink&quot; title=&quot;驱动安装&quot;&gt;&lt;/a&gt;驱动安装&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;从官方网站下载适用于Linux的驱动&lt;br&gt;&lt;code&gt;# wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;">
+  <meta name="summary" content="null">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -110,7 +104,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Debian桌面编译安装Tenda U1 USB无线网卡驱动</div>
+        <div class="flex-col header-title ellipsis">解决Jenkins+Gitlab出现的Permission denied权限问题</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -131,15 +125,15 @@
 </header>
 <header class="content-header">
   <div class="container">
-    <h1 class="author">Debian桌面编译安装Tenda U1 USB无线网卡驱动</h1>
+    <h1 class="author">解决Jenkins+Gitlab出现的Permission denied权限问题</h1>
     <h5 class="subtitle">
         
-            <time datetime="2016-09-02T15:14:01.000Z" itemprop="datePublished" class="page-time">
-  2016-09-02
+            <time datetime="2016-10-11T00:02:40.000Z" itemprop="datePublished" class="page-time">
+  2016-10-11
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Jenkins/">Jenkins</a></li></ul>
 
         
     </h5>
@@ -147,11 +141,11 @@
 </header>
 
     <div class="container body-wrap">
-      <article id="post-Debian桌面编译安装Tenda-U1-USB无线网卡驱动" 
+      <article id="post-解决Jenkins-Gitlab出现的Permission-denied权限问题" 
   class="article article-type-post" itemprop="blogPost">
     <div class="post-meta flex-row">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux驱动/">Linux驱动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/USB/">USB</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitlab/">Gitlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
 
     </div>
     <div class="post-body">
@@ -198,7 +192,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前序"><span class="post-toc-text">前序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#驱动安装"><span class="post-toc-text">驱动安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            
             </nav>
             
         </aside>
@@ -206,31 +200,14 @@
         <div class="post-main">
 
             <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p>
-<h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul>
-<li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>编译</p>
-<ul>
-<li>解压zip包<br><code># unzip U1_linux.zip</code></li>
-<li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li>
-<li>执行自动编译脚本<br><code># sh install.sh</code></li>
-</ul>
-</li>
-<li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo apt-get install linux-headers-`uname -r`</span><br></pre></td></tr></table></figure>
-<p>然后继续编译即可<br><code># sh install.sh</code></p>
-<p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>
+            <p>在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Started by user lhy</span><br><span class="line">Building in workspace /usr/share/tomcat8/.jenkins/workspace/zxpm</span><br><span class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</span><br><span class="line">Fetching changes from the remote Git repository</span><br><span class="line"> &gt; git config remote.origin.url git@192.168.1.2:web/zxpm.git # timeout=10</span><br><span class="line">Fetching upstream changes from git@192.168.1.2:web/zxpm.git</span><br><span class="line"> &gt; git --version # timeout=10</span><br><span class="line">using GIT_SSH to set credentials </span><br><span class="line"> &gt; git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">ERROR: Error fetching remote repo &apos;origin&apos;</span><br><span class="line">hudson.plugins.git.GitException: Failed to fetch from git@192.168.1.2:web/zxpm.git</span><br><span class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:799)</span><br><span class="line">	at hudson.plugins.git.GitSCM.retrieveChanges(GitSCM.java:1055)</span><br><span class="line">	at hudson.plugins.git.GitSCM.checkout(GitSCM.java:1086)</span><br><span class="line">	at hudson.scm.SCM.checkout(SCM.java:485)</span><br><span class="line">	at hudson.model.AbstractProject.checkout(AbstractProject.java:1269)</span><br><span class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.defaultCheckout(AbstractBuild.java:604)</span><br><span class="line">	at jenkins.scm.SCMCheckoutStrategy.checkout(SCMCheckoutStrategy.java:86)</span><br><span class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:529)</span><br><span class="line">	at hudson.model.Run.execute(Run.java:1741)</span><br><span class="line">	at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:531)</span><br><span class="line">	at hudson.model.ResourceController.execute(ResourceController.java:98)</span><br><span class="line">	at hudson.model.Executor.run(Executor.java:410)</span><br><span class="line">Caused by: hudson.plugins.git.GitException: Command &quot;git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*&quot; returned status code 128:</span><br><span class="line">stdout: </span><br><span class="line">stderr: Permission denied, please try again.</span><br><span class="line">Permission denied, please try again.</span><br><span class="line">Permission denied (publickey,password).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line"></span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:1740)</span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandWithCredentials(CliGitAPIImpl.java:1476)</span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.access$300(CliGitAPIImpl.java:63)</span><br><span class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$1.execute(CliGitAPIImpl.java:314)</span><br><span class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:797)</span><br><span class="line">	... 11 more</span><br><span class="line">ERROR: null</span><br><span class="line">Finished: FAILURE</span><br></pre></td></tr></table></figure></p>
+<p>这个问题只需要细心点就可以了。配置Jenkins项目时，在源码管理中选择Git(前提是已安装好Git插件)，填好仓库地址，认证点击Add，如图<br><img src="/image/jenkins_git.png" alt="jenkins git"></p>
+<p><img src="/image/private_key.png" alt="private key"><br>在Kind中选择<strong>SSH Username with private key</strong>，下面的Private Key选择<strong>Enter directly</strong>直接输入在<strong>Gitlab</strong>部署了public key对应的private key即可。一般public key是在<code>~/.ssh/id_rsa.pub</code>,而private key是<code>~/.ssh/id_rsa</code>。<br>点击OK，保存项目再次构建就好了。</p>
 
             <blockquote>
                 <p>
                 本文地址：
-                <a href="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" target="_blank" rel="external">https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/</a>
+                <a href="https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" target="_blank" rel="external">https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/</a>
                 </p>
                 <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
             </blockquote>
@@ -238,19 +215,12 @@
             
 <nav class="post-nav">
   
-    <div class="waves-block waves-effect prev fl">
-      <a href="/2016/09/03/MySQL基础之视图实战篇/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">MySQL基础之视图实战篇</h4>
-      </a>
-    </div>
-  
 
   
     <div class="waves-block waves-effect next fr">
-      <a href="/2016/08/29/MySQL基础之视图理论篇/" id="post-next" class="post-nav-link">
+      <a href="/2016/10/07/解决Hibernate使用HQL查询出现is-not-mapped问题/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">MySQL基础之视图理论篇</h4>
+        <h4 class="title">解决Hibernate使用HQL查询出现is not mapped问题</h4>
       </a>
     </div>
   
@@ -261,7 +231,7 @@
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Debian桌面编译安装Tenda-U1-USB无线网卡驱动" data-title="Debian桌面编译安装Tenda U1 USB无线网卡驱动" data-url="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html"></div>
+	<div class="ds-thread" data-thread-key="解决Jenkins-Gitlab出现的Permission-denied权限问题" data-title="解决Jenkins+Gitlab出现的Permission denied权限问题" data-url="https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -292,10 +262,10 @@
 
 <script>
 var BLOG_SHARE = {
-    title: "Debian桌面编译安装Tenda U1 USB无线网卡驱动",
+    title: "解决Jenkins+Gitlab出现的Permission denied权限问题",
     pic: "/img/logo.jpg",
     summary: document.getElementsByName('summary')[0].content,
-    url: "https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html"
+    url: "https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/index.html"
 };
 </script>
 <div class="global-share" id="global-share">
