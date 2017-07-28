@@ -10,19 +10,18 @@
   
   
   <meta name="keywords" content="MySQL,视图">
-  <meta name="description" content="创建视图基本语法：1234CREATE [OR REPLACE][ALGORITHM = &amp;#123;UNDEFINED | MERGE |TEMPTABLE&amp;#125;]    VIEW view_name [(column_list)]    AS SELECT_statement    [WITH[CASCADED | LOCAL] CHECK OPTION]
-其中，CREATE 表示创建新">
+  <meta name="description" content="创建视图基本语法：1234CREATE [OR REPLACE][ALGORITHM = &amp;#123;UNDEFINED | MERGE |TEMPTABLE&amp;#125;]    VIEW view_name [(column_list)]    AS SELECT_statement    [WITH[CASCADED | LOCAL] CHECK OPTION] 其中，CREATE 表示创建新">
+<meta name="keywords" content="MySQL,视图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL基础之视图实战篇">
 <meta property="og:url" content="https://lusyoe.github.io/2016/09/03/MySQL基础之视图实战篇/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description" content="创建视图基本语法：1234CREATE [OR REPLACE][ALGORITHM = &amp;#123;UNDEFINED | MERGE |TEMPTABLE&amp;#125;]    VIEW view_name [(column_list)]    AS SELECT_statement    [WITH[CASCADED | LOCAL] CHECK OPTION]
-其中，CREATE 表示创建新">
-<meta property="og:updated_time" content="2016-09-23T15:37:51.123Z">
+<meta property="og:description" content="创建视图基本语法：1234CREATE [OR REPLACE][ALGORITHM = &amp;#123;UNDEFINED | MERGE |TEMPTABLE&amp;#125;]    VIEW view_name [(column_list)]    AS SELECT_statement    [WITH[CASCADED | LOCAL] CHECK OPTION] 其中，CREATE 表示创建新">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-07-28T12:47:51.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL基础之视图实战篇">
-<meta name="twitter:description" content="创建视图基本语法：1234CREATE [OR REPLACE][ALGORITHM = &amp;#123;UNDEFINED | MERGE |TEMPTABLE&amp;#125;]    VIEW view_name [(column_list)]    AS SELECT_statement    [WITH[CASCADED | LOCAL] CHECK OPTION]
-其中，CREATE 表示创建新">
+<meta name="twitter:description" content="创建视图基本语法：1234CREATE [OR REPLACE][ALGORITHM = &amp;#123;UNDEFINED | MERGE |TEMPTABLE&amp;#125;]    VIEW view_name [(column_list)]    AS SELECT_statement    [WITH[CASCADED | LOCAL] CHECK OPTION] 其中，CREATE 表示创建新">
   
     <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
   
@@ -89,7 +88,7 @@
 
   <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>风格 &copy; 2016</p>
+  <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
@@ -200,24 +199,24 @@
         <div class="post-main">
 
             <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h1><p>基本语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">OR</span> <span class="keyword">REPLACE</span>][ALGORITHM = &#123;UNDEFINED | <span class="keyword">MERGE</span> |TEMPTABLE&#125;]</span><br><span class="line">    <span class="keyword">VIEW</span> view_name [(column_list)]</span><br><span class="line">    <span class="keyword">AS</span> SELECT_statement</span><br><span class="line">    [<span class="keyword">WITH</span>[<span class="keyword">CASCADED</span> | <span class="keyword">LOCAL</span>] <span class="keyword">CHECK</span> <span class="keyword">OPTION</span>]</span><br></pre></td></tr></table></figure></p>
+            <h1 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h1><p>基本语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> [<span class="keyword">OR</span> <span class="keyword">REPLACE</span>][ALGORITHM = &#123;UNDEFINED | <span class="keyword">MERGE</span> |TEMPTABLE&#125;]</div><div class="line">    <span class="keyword">VIEW</span> view_name [(column_list)]</div><div class="line">    <span class="keyword">AS</span> SELECT_statement</div><div class="line">    [<span class="keyword">WITH</span>[<span class="keyword">CASCADED</span> | <span class="keyword">LOCAL</span>] <span class="keyword">CHECK</span> <span class="keyword">OPTION</span>]</div></pre></td></tr></table></figure></p>
 <p>其中，<strong>CREATE</strong> 表示创建新的视图，<strong>REPLACE</strong>表示替换已经创建的视图;<strong>ALGORITHM</strong>表示视图选择的算法；<br><strong>view_name</strong> 为视图的名称，<strong>column_list</strong>为属性列；<strong>SELECT_statement</strong>表示<code>SELECT</code>语句;<br><strong>WITH [CASCADED | LOCAL] CHECK OPTION</strong>参数表示视图在更新时保证在视图的权限范围之内。</p>
 <h3 id="在单表上创建视图"><a href="#在单表上创建视图" class="headerlink" title="在单表上创建视图"></a>在单表上创建视图</h3><p>视图是基于表之上的虚拟表，所以必须要先有表。</p>
 <ul>
 <li><p>创建表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t(</span><br><span class="line">    <span class="keyword">id</span>       <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">    quantity <span class="built_in">INT</span>,</span><br><span class="line">    price    <span class="keyword">DOUBLE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t(</div><div class="line">    <span class="keyword">id</span>       <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</div><div class="line">    quantity <span class="built_in">INT</span>,</div><div class="line">    price    <span class="keyword">DOUBLE</span></div><div class="line">);</div></pre></td></tr></table></figure>
 </li>
 <li><p>创建视图</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> quantity, price, quantity*price <span class="keyword">AS</span> total <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> quantity, price, quantity*price <span class="keyword">AS</span> total <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="在多表上创建视图"><a href="#在多表上创建视图" class="headerlink" title="在多表上创建视图"></a>在多表上创建视图</h3><ul>
-<li>创建表<br>表1:<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(</span><br><span class="line">  <span class="keyword">id</span>     <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="built_in">number</span> <span class="built_in">INT</span>,</span><br><span class="line">  <span class="keyword">name</span>   <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<li>创建表<br>表1:<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(</div><div class="line">  <span class="keyword">id</span>     <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</div><div class="line">  <span class="built_in">number</span> <span class="built_in">INT</span>,</div><div class="line">  <span class="keyword">name</span>   <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>表2:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stutent_info(</span><br><span class="line">  <span class="keyword">id</span>      <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="keyword">class</span>   <span class="built_in">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line">  address <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>表2:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stutent_info(</div><div class="line">  <span class="keyword">id</span>      <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</div><div class="line">  <span class="keyword">class</span>   <span class="built_in">VARCHAR</span>(<span class="number">10</span>),</div><div class="line">  address <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
 <ul>
-<li>创建视图<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> stu_glass(<span class="keyword">id</span>, <span class="keyword">name</span>, glass) <span class="keyword">AS</span> <span class="keyword">SELECT</span> student.<span class="keyword">id</span>, student.<span class="keyword">name</span>, stutent_info.<span class="keyword">class</span></span><br><span class="line"><span class="keyword">FROM</span> student, student_info <span class="keyword">WHERE</span> student.<span class="keyword">id</span>=student_info.<span class="keyword">id</span>;</span><br></pre></td></tr></table></figure>
+<li>创建视图<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> stu_glass(<span class="keyword">id</span>, <span class="keyword">name</span>, glass) <span class="keyword">AS</span> <span class="keyword">SELECT</span> student.id, student.name, stutent_info.class</div><div class="line"><span class="keyword">FROM</span> student, student_info <span class="keyword">WHERE</span> student.id=student_info.id;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="查看视图"><a href="#查看视图" class="headerlink" title="查看视图"></a>查看视图</h2><p>视图创建好了后，可以查看视图的一些信息，如以下几种:</p>
@@ -229,28 +228,28 @@
 </ul>
 <h2 id="修改视图"><a href="#修改视图" class="headerlink" title="修改视图"></a>修改视图</h2><p>当数据库中的基本表某些字段发生变化的时候，可以通过修改视图来保持与基本表的一致性。<br>在Mysql中可以通过<code>CREATE OR REPLACE VIEW</code>语句和<code>ALTER</code>语句来修改视图。</p>
 <ul>
-<li><strong>CREATE OR REPLACE VIEW</strong>语句<br>使用改语句时，如果视图已经存在则对视图进行修改，当视图不存在时，就创建视图。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+<li><strong>CREATE OR REPLACE VIEW</strong>语句<br>使用改语句时，如果视图已经存在则对视图进行修改，当视图不存在时，就创建视图。<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>可通过<code>DESC view_t</code>语句来查看修改后的视图结构。</p>
 <ul>
-<li><strong>ALTER</strong>语句<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> quantity <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+<li><strong>ALTER</strong>语句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> view_t <span class="keyword">AS</span> <span class="keyword">SELECT</span> quantity <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h2><p>更新视图是指通过视图来插入、更新、删除表中的数据，因为视图是一个虚拟表，其中没有数据。<br>通过视图更新的时候都是转到基本表上进行更新的，如果对视图增加或者删除记录，实际上是对其基本表增加或者删除记录。</p>
 <ul>
 <li><p><strong>UPDATE</strong>语句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> view_t <span class="keyword">SET</span> quantity=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> view_t <span class="keyword">SET</span> quantity=<span class="number">5</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p><strong>INSERT</strong>语句<br>在基本表中插入语句，其关联视图也会进行相应改变的。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t <span class="keyword">VALUES</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> view_t;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t <span class="keyword">VALUES</span>(<span class="number">2</span>, <span class="number">2</span>);</div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> view_t;</div></pre></td></tr></table></figure>
 </li>
 <li><p><strong>DELETE</strong>语句<br>在视图中删除一行数据，其基本表也会进行相应的删除。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> view_t <span class="keyword">WHERE</span> price=<span class="number">50</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> view_t <span class="keyword">WHERE</span> price=<span class="number">50</span>;</div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2><p>当视图不再需要时，可以将其删除，删除一个或多个视图可以使用<code>DROP VIEW</code>语句。语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> [<span class="keyword">IF</span> <span class="keyword">EXISTS</span>]</span><br><span class="line">    view_name [, view_name]...</span><br><span class="line">    [RESTRICT | <span class="keyword">CASCADE</span>]</span><br></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> stu_glass;</span><br></pre></td></tr></table></figure></p>
+<h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2><p>当视图不再需要时，可以将其删除，删除一个或多个视图可以使用<code>DROP VIEW</code>语句。语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> [<span class="keyword">IF</span> <span class="keyword">EXISTS</span>]</div><div class="line">    view_name [, view_name]...</div><div class="line">    [RESTRICT | <span class="keyword">CASCADE</span>]</div></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> stu_glass;</div></pre></td></tr></table></figure></p>
 
             <blockquote>
                 <p>
