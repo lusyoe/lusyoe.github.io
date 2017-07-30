@@ -19,7 +19,7 @@
 <meta property="og:description" content="目录  简介 logread 上传到远程rsyslog服务器 配置rsyslog 处理问题 总结   简介我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因． logread在OpenWrt中可通过logread命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．不过每次查看log，都要登陆进去，然后不断的敲logread也">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://lusyoe.github.io/image/log.png">
-<meta property="og:updated_time" content="2017-07-28T12:47:51.973Z">
+<meta property="og:updated_time" content="2017-07-28T12:47:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenWrt之Log篇">
 <meta name="twitter:description" content="目录  简介 logread 上传到远程rsyslog服务器 配置rsyslog 处理问题 总结   简介我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因． logread在OpenWrt中可通过logread命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．不过每次查看log，都要登陆进去，然后不断的敲logread也">
@@ -61,46 +61,47 @@
       </hgroup>
     </div>
   </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>
-            Weibo
-          </a>
-        </li>
-    
-  </ul>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+    </ul>
 
-  <footer class="footer">
+    <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
   <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -108,6 +109,7 @@
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
+  </div>
 </div>
 
   </nav>
@@ -205,7 +207,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#logread"><span class="post-toc-text">logread</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#上传到远程rsyslog服务器"><span class="post-toc-text">上传到远程rsyslog服务器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置rsyslog"><span class="post-toc-text">配置rsyslog</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#处理问题"><span class="post-toc-text">处理问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#logread"><span class="post-toc-number">2.</span> <span class="post-toc-text">logread</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#上传到远程rsyslog服务器"><span class="post-toc-number">3.</span> <span class="post-toc-text">上传到远程rsyslog服务器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置rsyslog"><span class="post-toc-number">4.</span> <span class="post-toc-text">配置rsyslog</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#处理问题"><span class="post-toc-number">5.</span> <span class="post-toc-text">处理问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">6.</span> <span class="post-toc-text">总结</span></a></li></ol>
             </nav>
             
         </aside>
@@ -242,6 +244,9 @@
 <h1 id="处理问题"><a href="#处理问题" class="headerlink" title="处理问题"></a>处理问题</h1><p>上面说了一大堆log的配置，最终的目的只是方便分析日志．而我们分析日志就是为了解决问题的．．．<br>分析日志：<br>发现有很多的这种信息<br><code>daemon.warn odhcpd[903]: A default route is present but there is no public prefix on br-lan thus we don&#39;t announce a default route!</code><br>这个是因为开启了IPv6的原因，我们用不上，关掉即可</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我感觉问题不太可能是出现在IPv6上面的，虽然我关掉后确实断线的情况好了很多．．<br>通过这次鼓捣，让我又对OpenWrt熟悉了不少，当然最大的收获还是rsyslog了，<br>之前虽然知道有这么个东西，但一直没有机会去用上它，配置过一次后感觉以后就熟悉多了．</p>
 
+
+            
+            
             <blockquote>
                 <p>
                 本文地址：
@@ -300,6 +305,7 @@
         </div>
     </div>
 </article>
+
     </div>
   </main>
 <div class="mask" id="mask"></div>
@@ -348,7 +354,6 @@ var BLOG_SHARE = {
       </li>
     </ul>
  </div>
-
 
 
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>

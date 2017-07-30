@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="风格">
 <meta property="og:description" content="环境：Hibernate 5.1.0.Final，IntelliJ IDEA 2016.2.2 首先检查实体Bean配置一切正常，检查映射配置文件和hibernate.cfg.xml配置文件也是正常的。通过搜索都说是HQL查询根据的是实体名而不是表名查找的，那个我也是对的，实在想不通会出现is not mapped问题。异常信息如下：12345678910111213141516171819202">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-07-28T12:47:52.065Z">
+<meta property="og:updated_time" content="2017-07-28T12:47:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决Hibernate使用HQL查询出现is not mapped问题">
 <meta name="twitter:description" content="环境：Hibernate 5.1.0.Final，IntelliJ IDEA 2016.2.2 首先检查实体Bean配置一切正常，检查映射配置文件和hibernate.cfg.xml配置文件也是正常的。通过搜索都说是HQL查询根据的是实体名而不是表名查找的，那个我也是对的，实在想不通会出现is not mapped问题。异常信息如下：12345678910111213141516171819202">
@@ -47,46 +47,47 @@
       </hgroup>
     </div>
   </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>
-            Weibo
-          </a>
-        </li>
-    
-  </ul>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+    </ul>
 
-  <footer class="footer">
+    <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
   <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -94,6 +95,7 @@
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
+  </div>
 </div>
 
   </nav>
@@ -206,6 +208,9 @@
 <p>我只是简单的将main方法注释掉了，其实问题就是出在<strong>serviceRegistry</strong>上面的，只要移除掉这个就好了。<br>修改后为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SessionFactory ourSessionFactory;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Configuration configuration = <span class="keyword">new</span> Configuration();</div><div class="line">            configuration.configure();</div><div class="line"></div><div class="line">            ourSessionFactory = configuration.buildSessionFactory();</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable ex) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ExceptionInInitializerError(ex);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> <span class="keyword">throws</span> HibernateException </span>&#123;</div><div class="line">        <span class="keyword">return</span> ourSessionFactory.openSession();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>因为才刚开始学，具体的原因还没有进行分析，以后有时间再慢慢查找资料阅读源码分析吧。</p>
 
+
+            
+            
             <blockquote>
                 <p>
                 本文地址：
@@ -264,6 +269,7 @@
         </div>
     </div>
 </article>
+
     </div>
   </main>
 <div class="mask" id="mask"></div>
@@ -312,7 +318,6 @@ var BLOG_SHARE = {
       </li>
     </ul>
  </div>
-
 
 
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>

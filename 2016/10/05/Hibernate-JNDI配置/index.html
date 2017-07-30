@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://lusyoe.github.io/image/JNDI_project.jpg">
 <meta property="og:image" content="https://lusyoe.github.io/image/bookshop_tb.png">
 <meta property="og:image" content="https://lusyoe.github.io/image/bookshop_des.png">
-<meta property="og:updated_time" content="2017-07-28T12:47:52.033Z">
+<meta property="og:updated_time" content="2017-07-28T12:47:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate+JNDI配置">
 <meta name="twitter:description" content="刚开始使用JNDI，网上也查了不少资料，磕磕盼盼鼓捣了大半天才成功，在此记录一下。 介绍首先还是再啰嗦两句，介绍一下JNDI技术。JNDI是Java 命名和目录接口（Java Naming and Directory Interface，JNDI）的简称.从一开始就一直是 JavaEE 企业的核心技术之一。在JMS，JMail,JDBC,EJB等技术中，就大量应用的这种技术。 服务端容器配置(基于">
@@ -51,46 +51,47 @@
       </hgroup>
     </div>
   </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>
-            Weibo
-          </a>
-        </li>
-    
-  </ul>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+    </ul>
 
-  <footer class="footer">
+    <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
   <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -98,6 +99,7 @@
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
+  </div>
 </div>
 
   </nav>
@@ -195,7 +197,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务端容器配置-基于Tomcat"><span class="post-toc-text">服务端容器配置(基于Tomcat)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目配置"><span class="post-toc-text">项目配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hibernate配置"><span class="post-toc-text">Hibernate配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#web-xml配置"><span class="post-toc-text">web.xml配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目代码结构"><span class="post-toc-text">项目代码结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库配置"><span class="post-toc-text">数据库配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务端容器配置-基于Tomcat"><span class="post-toc-number">2.</span> <span class="post-toc-text">服务端容器配置(基于Tomcat)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">项目配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hibernate配置"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Hibernate配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#web-xml配置"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">web.xml配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目代码结构"><span class="post-toc-number">4.</span> <span class="post-toc-text">项目代码结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">数据库配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">6.</span> <span class="post-toc-text">总结</span></a></li></ol>
             </nav>
             
         </aside>
@@ -242,6 +244,9 @@
 <p><img src="/image/bookshop_des.png" alt="mysql user design"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，一个简单Hibernate+JNDI配置就说到这吧。当然，配置的方式有很多种，但是只要适合自己就好了。<br>这里最后再吐槽一句，网上的教程一大堆也太不完整了，东一点西一点的，说一大堆还是不会用。即使是只作为自己的一个笔记，起码也要说清楚一点比较好吧，万一后来自己再来翻的时候都看不懂，那就笑了。<br>而作为一个教程类，起码得要能run跑起来吧？</p>
 
+
+            
+            
             <blockquote>
                 <p>
                 本文地址：
@@ -300,6 +305,7 @@
         </div>
     </div>
 </article>
+
     </div>
   </main>
 <div class="mask" id="mask"></div>
@@ -348,7 +354,6 @@ var BLOG_SHARE = {
       </li>
     </ul>
  </div>
-
 
 
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>

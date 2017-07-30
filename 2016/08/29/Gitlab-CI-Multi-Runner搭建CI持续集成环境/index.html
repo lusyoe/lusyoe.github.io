@@ -19,7 +19,7 @@
 <meta property="og:description" content="GitLab不仅仅只是代码托管的工具，它还集成了CI的功能，通过Gitlab CI Multi Runner工具可以更方便的搭建持续集成环境。在安装好GitLab之后还需要再安装一个叫gitlab-ci-multi-runner的工具。PS: 当然了肯定没有Jenkins那么强大，毕竟可用插件太多了。 安装gitlab-ci-multi-runner">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://lusyoe.github.io/image/runner.png">
-<meta property="og:updated_time" content="2017-07-28T12:47:51.992Z">
+<meta property="og:updated_time" content="2017-07-28T12:47:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitlab CI Multi Runner搭建CI持续集成环境">
 <meta name="twitter:description" content="GitLab不仅仅只是代码托管的工具，它还集成了CI的功能，通过Gitlab CI Multi Runner工具可以更方便的搭建持续集成环境。在安装好GitLab之后还需要再安装一个叫gitlab-ci-multi-runner的工具。PS: 当然了肯定没有Jenkins那么强大，毕竟可用插件太多了。 安装gitlab-ci-multi-runner">
@@ -50,46 +50,47 @@
       </hgroup>
     </div>
   </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>
-            Weibo
-          </a>
-        </li>
-    
-  </ul>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+    </ul>
 
-  <footer class="footer">
+    <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
   <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -97,6 +98,7 @@
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
+  </div>
 </div>
 
   </nav>
@@ -194,7 +196,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装gitlab-ci-multi-runner"><span class="post-toc-text">安装gitlab-ci-multi-runner</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#gitlab-runner命令介绍"><span class="post-toc-text">gitlab-runner命令介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#服务状态"><span class="post-toc-text">服务状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册一个runner"><span class="post-toc-text">注册一个runner</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看runner配置信息"><span class="post-toc-text">查看runner配置信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除注册信息"><span class="post-toc-text">删除注册信息</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目自动化构建配置"><span class="post-toc-text">项目自动化构建配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装gitlab-ci-multi-runner"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装gitlab-ci-multi-runner</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#gitlab-runner命令介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">gitlab-runner命令介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#服务状态"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">服务状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册一个runner"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">注册一个runner</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看runner配置信息"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">查看runner配置信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除注册信息"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">删除注册信息</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目自动化构建配置"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">项目自动化构建配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol>
             </nav>
             
         </aside>
@@ -225,6 +227,9 @@
 <h2 id="项目自动化构建配置"><a href="#项目自动化构建配置" class="headerlink" title="项目自动化构建配置"></a>项目自动化构建配置</h2><p>配置好了runner，想要开始自动构建还需要在项目根目录添加一个<strong>.gitlab-ci.yaml</strong>文件。<br>关于<strong>.gitlab-ci.yaml</strong>文件的配置说明可参考<a href="http://docs.gitlab.com/ce/ci/yaml/README.html" target="_blank" rel="external">官方文档</a>。<br>下面贴一下我做测试Demo时使用的，不要笑，很简单只做演示用的。。<br>.gitlab-ci.yaml<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">stages:</div><div class="line">  - build</div><div class="line">  - deploy</div><div class="line">job1:</div><div class="line">  stage: build</div><div class="line">  script: "mvn package"</div><div class="line">job2:</div><div class="line">  stage: deploy</div><div class="line">  script: "mvn tomcat:redeploy -Dmaven.test.skip=truey -e -X"</div></pre></td></tr></table></figure></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里关于CI持续集成的差不多就说那么多了，当然了还有很多都没说到，这就要看实际的项目需求进行相应的配置了。<br>总的来说呢，gitlab-runner虽然跟Gitlab集成的比较好，但是功能方面还是有点不如老牌的Jenkins。<br>不过它对Docker倒是支持的蛮好的，说起来我接触Docker也是挺早的了，它2013年开源，我2014年就开始接触了，并且2015年也在公司服务器上实际部署了，后面有时间再写点关于Docker的吧。不过跳槽后就用的少了，但愿别都忘了好:)。</p>
 
+
+            
+            
             <blockquote>
                 <p>
                 本文地址：
@@ -283,6 +288,7 @@
         </div>
     </div>
 </article>
+
     </div>
   </main>
 <div class="mask" id="mask"></div>
@@ -331,7 +337,6 @@ var BLOG_SHARE = {
       </li>
     </ul>
  </div>
-
 
 
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2017-07-28T13:39:08.627Z</updated>
+  <updated>2017-07-30T03:08:11.285Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -16,11 +16,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>杭州第一次周末加班记录</title>
+    <link href="https://lusyoe.github.io/2017/07/30/%E6%9D%AD%E5%B7%9E%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%91%A8%E6%9C%AB%E5%8A%A0%E7%8F%AD%E8%AE%B0%E5%BD%95/"/>
+    <id>https://lusyoe.github.io/2017/07/30/杭州第一次周末加班记录/</id>
+    <published>2017-07-30T03:00:05.000Z</published>
+    <updated>2017-07-30T03:08:11.285Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是来杭州上班的第三个周末，本来是不用加班的，公司也是很少有加班情况。<br>一切都是因为有个喜欢的人要来杭州玩了，为了有调休假期就主动跑到公司来加班啦，而且一加就是2天。。</p>
+<p>回想一下，从15年开始正式迈入IT职场，中间加班的情况挺少的。<br>一个自己不想加，二个公司也都还不错，没有遇到那种强制996等加班情况。</p>
+<p>真的是没想到，自己也有主动周末加班的那一天。而且还不是因为工作项目上的事情，只因为妹子：）</p>
+<p>最后估摸着下个周末还要再加班2天。<br>因为妹子假期较多，打算在这边玩6天，我当然是舍命陪美女啦。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是来杭州上班的第三个周末，本来是不用加班的，公司也是很少有加班情况。&lt;br&gt;一切都是因为有个喜欢的人要来杭州玩了，为了有调休假期就主动跑到公司来加班啦，而且一加就是2天。。&lt;/p&gt;
+&lt;p&gt;回想一下，从15年开始正式迈入IT职场，中间加班的情况挺少的。&lt;br&gt;一个自己不想加
+    
+    </summary>
+    
+      <category term="生活" scheme="https://lusyoe.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="生活" scheme="https://lusyoe.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2017重新出发</title>
     <link href="https://lusyoe.github.io/2017/07/28/2017%E9%87%8D%E6%96%B0%E5%87%BA%E5%8F%91/"/>
     <id>https://lusyoe.github.io/2017/07/28/2017重新出发/</id>
     <published>2017-07-28T13:05:36.000Z</published>
-    <updated>2017-07-28T13:39:08.627Z</updated>
+    <updated>2017-07-28T13:39:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>2017年重新出发！今天偶尔打开Github发现pages这个仓库有10个月没更新提交了。<br>之前那段时间不是没有写blog，只是都是在<a href="http://blog.csdn.net/lusyoe" target="_blank" rel="external">CSDN</a>上面写的。<br>还记得去年的这个时候在深圳TCL因为无法连接外网，只能访问有限的blog网站。<br>迫不得已只能将blog都写在csdn了。。</p>
 <p>晃眼间从深圳来到杭州了，目前这家公司感觉还行。只是项目处于维护状态，基本上开发的比较少。<br>最开心的是公司可以无限制的上外网，这样我又可以玩hexo，更新github pages了。</p>
@@ -47,7 +74,7 @@
     <link href="https://lusyoe.github.io/2016/10/11/%E8%A7%A3%E5%86%B3Jenkins-Gitlab%E5%87%BA%E7%8E%B0%E7%9A%84Permission-denied%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/"/>
     <id>https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/</id>
     <published>2016-10-11T00:02:40.000Z</published>
-    <updated>2017-07-28T12:47:51.973Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">Started by user lhy</div><div class="line">Building in workspace /usr/share/tomcat8/.jenkins/workspace/zxpm</div><div class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</div><div class="line">Fetching changes from the remote Git repository</div><div class="line"> &gt; git config remote.origin.url git@192.168.1.2:web/zxpm.git # timeout=10</div><div class="line">Fetching upstream changes from git@192.168.1.2:web/zxpm.git</div><div class="line"> &gt; git --version # timeout=10</div><div class="line">using GIT_SSH to set credentials </div><div class="line"> &gt; git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*</div><div class="line">ERROR: Error fetching remote repo &apos;origin&apos;</div><div class="line">hudson.plugins.git.GitException: Failed to fetch from git@192.168.1.2:web/zxpm.git</div><div class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:799)</div><div class="line">	at hudson.plugins.git.GitSCM.retrieveChanges(GitSCM.java:1055)</div><div class="line">	at hudson.plugins.git.GitSCM.checkout(GitSCM.java:1086)</div><div class="line">	at hudson.scm.SCM.checkout(SCM.java:485)</div><div class="line">	at hudson.model.AbstractProject.checkout(AbstractProject.java:1269)</div><div class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.defaultCheckout(AbstractBuild.java:604)</div><div class="line">	at jenkins.scm.SCMCheckoutStrategy.checkout(SCMCheckoutStrategy.java:86)</div><div class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:529)</div><div class="line">	at hudson.model.Run.execute(Run.java:1741)</div><div class="line">	at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:531)</div><div class="line">	at hudson.model.ResourceController.execute(ResourceController.java:98)</div><div class="line">	at hudson.model.Executor.run(Executor.java:410)</div><div class="line">Caused by: hudson.plugins.git.GitException: Command &quot;git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*&quot; returned status code 128:</div><div class="line">stdout: </div><div class="line">stderr: Permission denied, please try again.</div><div class="line">Permission denied, please try again.</div><div class="line">Permission denied (publickey,password).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line"></div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div><div class="line"></div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:1740)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandWithCredentials(CliGitAPIImpl.java:1476)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.access$300(CliGitAPIImpl.java:63)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$1.execute(CliGitAPIImpl.java:314)</div><div class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:797)</div><div class="line">	... 11 more</div><div class="line">ERROR: null</div><div class="line">Finished: FAILURE</div></pre></td></tr></table></figure></p>
 <p>这个问题只需要细心点就可以了。配置Jenkins项目时，在源码管理中选择Git(前提是已安装好Git插件)，填好仓库地址，认证点击Add，如图<br><img src="/image/jenkins_git.png" alt="jenkins git"></p>
@@ -74,7 +101,7 @@
     <link href="https://lusyoe.github.io/2016/10/07/%E8%A7%A3%E5%86%B3Hibernate%E4%BD%BF%E7%94%A8HQL%E6%9F%A5%E8%AF%A2%E5%87%BA%E7%8E%B0is-not-mapped%E9%97%AE%E9%A2%98/"/>
     <id>https://lusyoe.github.io/2016/10/07/解决Hibernate使用HQL查询出现is-not-mapped问题/</id>
     <published>2016-10-07T00:26:16.000Z</published>
-    <updated>2017-07-28T12:47:52.065Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>环境：Hibernate 5.1.0.Final，IntelliJ IDEA 2016.2.2</p>
 <p>首先检查实体Bean配置一切正常，检查映射配置文件和hibernate.cfg.xml配置文件也是正常的。<br>通过搜索都说是HQL查询根据的是实体名而不是表名查找的，那个我也是对的，实在想不通会出现<strong>is not mapped</strong>问题。异常信息如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">Exception in thread <span class="string">"main"</span> org.hibernate.hql.internal.ast.QuerySyntaxException: UsersEntity is not mapped [FROM UsersEntity ]</div><div class="line">    at org.hibernate.hql.internal.ast.QuerySyntaxException.generateQueryException(QuerySyntaxException.java:<span class="number">79</span>)</div><div class="line">    at org.hibernate.QueryException.wrapWithQueryString(QueryException.java:<span class="number">103</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:<span class="number">218</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:<span class="number">142</span>)</div><div class="line">    at org.hibernate.engine.query.spi.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:<span class="number">115</span>)</div><div class="line">    at org.hibernate.engine.query.spi.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:<span class="number">76</span>)</div><div class="line">    at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:<span class="number">150</span>)</div><div class="line">    at org.hibernate.internal.AbstractSessionImpl.getHQLQueryPlan(AbstractSessionImpl.java:<span class="number">302</span>)</div><div class="line">    at org.hibernate.internal.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:<span class="number">240</span>)</div><div class="line">    at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:<span class="number">1907</span>)</div><div class="line">    at TestHibernate.main(TestHibernate.java:<span class="number">18</span>)</div><div class="line">    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:<span class="number">62</span>)</div><div class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">43</span>)</div><div class="line">    at java.lang.reflect.Method.invoke(Method.java:<span class="number">498</span>)</div><div class="line">    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:<span class="number">147</span>)</div><div class="line">Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: UsersEntity is not mapped</div><div class="line">    at org.hibernate.hql.internal.ast.util.SessionFactoryHelper.requireClassPersister(SessionFactoryHelper.java:<span class="number">171</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.tree.FromElementFactory.addFromElement(FromElementFactory.java:<span class="number">91</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.tree.FromClause.addFromElement(FromClause.java:<span class="number">79</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.HqlSqlWalker.createFromElement(HqlSqlWalker.java:<span class="number">321</span>)</div><div class="line">    at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromElement(HqlSqlBaseWalker.java:<span class="number">3704</span>)</div><div class="line">    at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromElementList(HqlSqlBaseWalker.java:<span class="number">3593</span>)</div><div class="line">    at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromClause(HqlSqlBaseWalker.java:<span class="number">718</span>)</div><div class="line">    at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.query(HqlSqlBaseWalker.java:<span class="number">574</span>)</div><div class="line">    at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.selectStatement(HqlSqlBaseWalker.java:<span class="number">311</span>)</div><div class="line">    at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.statement(HqlSqlBaseWalker.java:<span class="number">259</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.QueryTranslatorImpl.analyze(QueryTranslatorImpl.java:<span class="number">262</span>)</div><div class="line">    at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:<span class="number">190</span>)</div><div class="line">    ... <span class="number">13</span> more</div></pre></td></tr></table></figure></p>
@@ -103,7 +130,7 @@
     <link href="https://lusyoe.github.io/2016/10/05/Hibernate-JNDI%E9%85%8D%E7%BD%AE/"/>
     <id>https://lusyoe.github.io/2016/10/05/Hibernate-JNDI配置/</id>
     <published>2016-10-05T09:08:38.000Z</published>
-    <updated>2017-07-28T12:47:52.033Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>刚开始使用JNDI，网上也查了不少资料，磕磕盼盼鼓捣了大半天才成功，在此记录一下。</p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>首先还是再啰嗦两句，介绍一下JNDI技术。<br>JNDI是Java 命名和目录接口（Java Naming and Directory Interface，JNDI）的简称.从一开始就一直是 JavaEE 企业的核心技术之一。在JMS，JMail,JDBC,EJB等技术中，就大量应用的这种技术。</p>
@@ -166,7 +193,7 @@
     <link href="https://lusyoe.github.io/2016/09/27/Jenkins%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2war%E5%8C%85%E5%88%B0tomcat/"/>
     <id>https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/</id>
     <published>2016-09-27T13:46:33.000Z</published>
-    <updated>2017-07-28T12:47:51.961Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。<br>关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。</p>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等<br>配置好环境变量同时，在Jenkins和Gitlab上创建好项目。</p>
@@ -203,7 +230,7 @@
     <link href="https://lusyoe.github.io/2016/09/22/Spring-Data-JPA%E4%BD%BF%E7%94%A8JpaRepository%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%8A%A5No-qualifying-bean-of-type%E9%94%99%E8%AF%AF/"/>
     <id>https://lusyoe.github.io/2016/09/22/Spring-Data-JPA使用JpaRepository自动装配报No-qualifying-bean-of-type错误/</id>
     <published>2016-09-22T13:50:31.000Z</published>
-    <updated>2017-07-28T12:47:52.058Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>今天遇到一个问题折腾蛮久的，在这里记录一下。<br>毕竟是才刚开始使用Jpa这个技术，总是会遇到各种配置问题。<br>使用Spring Data Jpa非常的方便，一些简单的操作基本上都不用写具体的实现，<br>直接写一个接口继承JpaRepository就行了，注意需要带有一个泛型。k = 表映射的实体类，value = 表的Id类型。</p>
 <p>在使用的时候直接自动装配就好。</p>
@@ -234,7 +261,7 @@
     <link href="https://lusyoe.github.io/2016/09/20/Spring-Data-JPA%E9%85%8D%E7%BD%AE%E5%87%BA%E7%8E%B0Not-a-managed-type%E9%94%99%E8%AF%AF/"/>
     <id>https://lusyoe.github.io/2016/09/20/Spring-Data-JPA配置出现Not-a-managed-type错误/</id>
     <published>2016-09-20T11:25:46.000Z</published>
-    <updated>2017-07-28T12:47:51.990Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近在学习Spring框架，配置数据库连接的时候出现这个错误。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Caused by: java.lang.IllegalArgumentException: Not a managed type: <span class="class"><span class="keyword">class</span> ...</span></div></pre></td></tr></table></figure></p>
 <p>才刚学不久，被这个问题折腾了有一会，后来检查的时候无意中发现在<strong>persistence.xml</strong>文件漏了东西啦。</p>
@@ -262,7 +289,7 @@
     <link href="https://lusyoe.github.io/2016/09/04/Debian-8%E6%A1%8C%E9%9D%A2%E5%AE%89%E8%A3%85Nvidia-GTX960%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
     <id>https://lusyoe.github.io/2016/09/04/Debian-8桌面安装Nvidia-GTX960显卡驱动/</id>
     <published>2016-09-04T12:55:52.000Z</published>
-    <updated>2017-07-28T12:47:52.052Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>还是上次那个朋友，帮他把组装电脑装好Debian系统后，首先是出现USB无线网卡驱动问题，现在又是出现显卡驱动问题。<br>因为没有安装显卡闭源驱动，每次开机都会出现提示<code>没有使用硬件加速，不推荐使用</code>之类的信息，整个系统界面也显示的很模糊。<br>这是因为默认使用的是内核中自带的开源驱动，效果肯定很差了。没办法了，只能叫我来帮他安装驱动了。</p>
 <a id="more"></a>
@@ -299,7 +326,7 @@
     <link href="https://lusyoe.github.io/2016/09/03/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%A7%86%E5%9B%BE%E5%AE%9E%E6%88%98%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/09/03/MySQL基础之视图实战篇/</id>
     <published>2016-09-03T02:05:49.000Z</published>
-    <updated>2017-07-28T12:47:51.981Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h1><p>基本语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> [<span class="keyword">OR</span> <span class="keyword">REPLACE</span>][ALGORITHM = &#123;UNDEFINED | <span class="keyword">MERGE</span> |TEMPTABLE&#125;]</div><div class="line">    <span class="keyword">VIEW</span> view_name [(column_list)]</div><div class="line">    <span class="keyword">AS</span> SELECT_statement</div><div class="line">    [<span class="keyword">WITH</span>[<span class="keyword">CASCADED</span> | <span class="keyword">LOCAL</span>] <span class="keyword">CHECK</span> <span class="keyword">OPTION</span>]</div></pre></td></tr></table></figure></p>
 <p>其中，<strong>CREATE</strong> 表示创建新的视图，<strong>REPLACE</strong>表示替换已经创建的视图;<strong>ALGORITHM</strong>表示视图选择的算法；<br><strong>view_name</strong> 为视图的名称，<strong>column_list</strong>为属性列；<strong>SELECT_statement</strong>表示<code>SELECT</code>语句;<br><strong>WITH [CASCADED | LOCAL] CHECK OPTION</strong>参数表示视图在更新时保证在视图的权限范围之内。</p>
@@ -374,7 +401,7 @@
     <link href="https://lusyoe.github.io/2016/09/02/Debian%E6%A1%8C%E9%9D%A2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Tenda-U1-USB%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
     <id>https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/</id>
     <published>2016-09-02T15:14:01.000Z</published>
-    <updated>2017-07-28T12:47:52.066Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p>
 <h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul>
@@ -421,7 +448,7 @@
     <link href="https://lusyoe.github.io/2016/08/29/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%A7%86%E5%9B%BE%E7%90%86%E8%AE%BA%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/</id>
     <published>2016-08-29T15:15:05.000Z</published>
-    <updated>2017-07-28T12:47:52.044Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="视图概述"><a href="#视图概述" class="headerlink" title="视图概述"></a>视图概述</h1><p>视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个<strong>虚拟表</strong>。<br>在视图中用户可以使用<code>SELECT</code>语句查询数据，以及使用<code>INSERT、UPDATE、DELETE</code>修改记录。<br>从<strong>MySQL 5.0</strong>开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。</p>
 <h1 id="视图的含义"><a href="#视图的含义" class="headerlink" title="视图的含义"></a>视图的含义</h1><p>视图是一个<strong>虚拟表</strong>，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。<br>视图一经定义便存储在数据库中，与其相对应的数据并没有像表那样在数据库中再存储一份，通过视图看到的数据只是存放在基本表中的数据。对视图的操作与对表的操作一样，可以对其进行查询、修改和删除。<br>当对通过视图看到的数据进行修改时，相应的基本表数据也要发生变化；同时，若基本表的数据发生变化，则这种变化也可以自动的反映到视图中。</p>
@@ -459,7 +486,7 @@
     <link href="https://lusyoe.github.io/2016/08/29/Gitlab-CI-Multi-Runner%E6%90%AD%E5%BB%BACI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%8E%AF%E5%A2%83/"/>
     <id>https://lusyoe.github.io/2016/08/29/Gitlab-CI-Multi-Runner搭建CI持续集成环境/</id>
     <published>2016-08-29T12:32:56.000Z</published>
-    <updated>2017-07-28T12:47:51.992Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>GitLab不仅仅只是代码托管的工具，它还集成了CI的功能，通过Gitlab CI Multi Runner工具可以更方便的搭建持续集成环境。<br>在安装好GitLab之后还需要再安装一个叫gitlab-ci-multi-runner的工具。<br>PS: 当然了肯定没有Jenkins那么强大，毕竟可用插件太多了。</p>
 <h1 id="安装gitlab-ci-multi-runner"><a href="#安装gitlab-ci-multi-runner" class="headerlink" title="安装gitlab-ci-multi-runner"></a>安装gitlab-ci-multi-runner</h1><a id="more"></a>
@@ -504,7 +531,7 @@
     <link href="https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab%E6%90%AD%E5%BB%BACI%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E6%9E%B6%E6%9E%84/"/>
     <id>https://lusyoe.github.io/2016/08/28/Jenkins-Gitlab搭建CI持续集成架构/</id>
     <published>2016-08-28T12:54:20.000Z</published>
-    <updated>2017-07-28T12:47:52.047Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="首先安装Jenkins和Gitlab"><a href="#首先安装Jenkins和Gitlab" class="headerlink" title="首先安装Jenkins和Gitlab"></a>首先安装Jenkins和Gitlab</h1><p>很简单就不多说了，贴个地址<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins" target="_blank" rel="external">Installing Jenkins</a><br><a href="https://about.gitlab.com/downloads" target="_blank" rel="external">Install a GitLab CE</a><br><a id="more"></a><br>需要注意的是，在中国大陆由于墙的问题，Gitlab下载非常的慢，有可能导致下载失败了。。<br>在这里推荐一下清华大学镜像源，在国内速度杠杠的。<br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="external">Gitlab Community Edition 镜像使用帮助</a><br>有兴趣的可以看看它们的<a href="https://mirrors.tuna.tsinghua.edu.cn" target="_blank" rel="external">镜像首页</a>，目前支持的镜像挺多的，而且还在不断的增加呢。</p>
 <h1 id="安装Jenkins插件"><a href="#安装Jenkins插件" class="headerlink" title="安装Jenkins插件"></a>安装Jenkins插件</h1><p>做持续集成，Jenkins默认安装后还需要再安装一些插件。<br>安装插件很简单，通过浏览器进入安装好Jenkins的服务器首页——&gt;点击系统管理——&gt;管理插件——&gt;可选插件<br>然后过滤查找以下插件，勾选安装即可</p>
@@ -545,7 +572,7 @@
     <link href="https://lusyoe.github.io/2016/08/21/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%B4%A2%E5%BC%95%E5%AE%9E%E6%88%98%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/08/21/MySQL基础之索引实战篇/</id>
     <published>2016-08-21T13:29:38.000Z</published>
-    <updated>2017-07-28T12:47:51.963Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>在上一篇已经较为全面的讲述了索引的理论，现在进行实战操作。</p>
 <p>在这里只列出常用索引类型的操作，关于更多的索引分类参看<a href="/2016/08/21/MySQL基础之索引理论篇/">MySQL基础之索引理论篇</a></p>
@@ -594,7 +621,7 @@
     <link href="https://lusyoe.github.io/2016/08/21/MySQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%B4%A2%E5%BC%95%E7%90%86%E8%AE%BA%E7%AF%87/"/>
     <id>https://lusyoe.github.io/2016/08/21/MySQL基础之索引理论篇/</id>
     <published>2016-08-21T12:19:23.000Z</published>
-    <updated>2017-07-28T12:47:51.936Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。</p>
 <h1 id="索引的含义和特点"><a href="#索引的含义和特点" class="headerlink" title="索引的含义和特点"></a>索引的含义和特点</h1><p>索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。<br>使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，<br>对于相关列使用索引是提高查询操作速度的最佳途径。<br><a id="more"></a></p>
@@ -653,7 +680,7 @@
     <link href="https://lusyoe.github.io/2016/08/21/Idea-Maven%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
     <id>https://lusyoe.github.io/2016/08/21/Idea-Maven项目无法下载依赖问题汇总/</id>
     <published>2016-08-21T11:31:50.000Z</published>
-    <updated>2017-07-28T12:47:52.006Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>在使用IntelliJ IDEA开发Web的时候，刚开始总是遇到Maven的各种问题。<br>现在总结一下关于无法下载依赖jar的问题。</p>
 <h3 id="依赖语法错误"><a href="#依赖语法错误" class="headerlink" title="依赖语法错误"></a>依赖语法错误</h3><a id="more"></a>
@@ -681,7 +708,7 @@
     <link href="https://lusyoe.github.io/2016/08/20/%E5%9B%9E%E9%A6%96%E6%84%9F%E6%82%9F/"/>
     <id>https://lusyoe.github.io/2016/08/20/回首感悟/</id>
     <published>2016-08-20T13:42:22.000Z</published>
-    <updated>2017-07-28T12:47:52.026Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>人生总是充满着选择，每一个选择又会造成截然不同的结果。<br>从13年毕业至今，感觉人生真的是变化很快啊。<br>毕业后，毅然决然的选择了转行，到现在也算是差不多完全融入IT这一行了。<br>很庆幸，当初并没有选择错误。虽然不是科班出身，但凭着一股浓厚的兴趣，能真正入行也是不容易了。</p>
 <p>回首一下这3年</p>
@@ -735,7 +762,7 @@
     <link href="https://lusyoe.github.io/2016/08/10/Jenkins%E6%96%B0%E5%BB%BAMaven%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E5%87%BA%E7%8E%B0mvn-command-execution-faild/"/>
     <id>https://lusyoe.github.io/2016/08/10/Jenkins新建Maven项目构建出现mvn-command-execution-faild/</id>
     <published>2016-08-09T22:49:44.000Z</published>
-    <updated>2017-07-28T12:47:52.012Z</updated>
+    <updated>2017-07-28T12:47:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>第一次用Jenkins作持续集成自动化构建，难免经验不足。<br>安装好，一来就直接新建一个Maven任务，然后就立即构建了，结果控制台总是输出<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FATAL: <span class="built_in">command</span> execution failed</div><div class="line">java.io.IOException: Cannot run program <span class="string">"mvn"</span> (<span class="keyword">in</span> directory)</div><div class="line">....</div></pre></td></tr></table></figure></p>
 <p>百度google，无果。最终发现了原来是Jenkins工具里没有配置Maven…</p>
@@ -765,7 +792,7 @@
     <link href="https://lusyoe.github.io/2016/07/27/Shadowsocks%E6%97%A5%E5%BF%97%E4%B8%ADfailed-to-recv-data-in-handshakeReceive2Callback%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/</id>
     <published>2016-07-27T15:12:30.000Z</published>
-    <updated>2017-07-28T12:47:51.995Z</updated>
+    <updated>2017-07-28T12:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，<br>但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。<br>最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，<br>找到了<a href="http://www.hudawei.net/archives/38" target="_blank" rel="external">胡大伟的官方网站</a>的这篇blog，刚好解决了问题。:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Win+r services.msc打开服务管理窗口在里面找到xlserviceplatform把这个服务禁用了。</div><div class="line">找到C:\Program Files(x86)\Common Files\Thunder Network\ServicePlatform\XLSP.dll文件</div><div class="line">删除之即可</div></pre></td></tr></table></figure></p>
 <p>幕后真凶原来是迅雷，对国内这些东西已经是彻底无语了。</p>
@@ -782,70 +809,6 @@
     
     
       <category term="shadowsocks" scheme="https://lusyoe.github.io/tags/shadowsocks/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OpenWrt之Log篇</title>
-    <link href="https://lusyoe.github.io/2016/06/04/OpenWrt%E4%B9%8BLog%E7%AF%87/"/>
-    <id>https://lusyoe.github.io/2016/06/04/OpenWrt之Log篇/</id>
-    <published>2016-06-04T15:50:16.000Z</published>
-    <updated>2017-07-28T12:47:51.973Z</updated>
-    
-    <content type="html"><![CDATA[<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-<p><strong>目录</strong></p>
-<ul>
-<li><a href="#简介">简介</a></li>
-<li><a href="#logread">logread</a></li>
-<li><a href="#上传到远程rsyslog服务器">上传到远程rsyslog服务器</a></li>
-<li><a href="#配置rsyslog">配置rsyslog</a></li>
-<li><a href="#处理问题">处理问题</a></li>
-<li><a href="#总结">总结</a><!-- markdown-toc end -->
-</li>
-</ul>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因．</p>
-<h1 id="logread"><a href="#logread" class="headerlink" title="logread"></a>logread</h1><p>在OpenWrt中可通过<code>logread</code>命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．<br>不过每次查看log，都要登陆进去，然后不断的敲logread也是很麻烦的，<br>正好OpenWrt的web设置界面中有设置上传日志的选项，在我这是 系统—&gt;日志里面<br><a id="more"></a></p>
-<h1 id="上传到远程rsyslog服务器"><a href="#上传到远程rsyslog服务器" class="headerlink" title="上传到远程rsyslog服务器"></a>上传到远程rsyslog服务器</h1><p>由于之前每次看日志都不太方便，我们可以将日志文件上传到本地的Linux机器中，<br>我一般使用的是Ubuntu/Debian系的，现在一般的Linux发行系统都已经预装了rsyslog了，<br>因此我们只需要配置一下即可．</p>
-<h1 id="配置rsyslog"><a href="#配置rsyslog" class="headerlink" title="配置rsyslog"></a>配置rsyslog</h1><p>首先配置服务端，也即是我们使用的Linux系统主机.<br><code>$ sudo vim /etc/rsyslog.conf</code><br>找到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># provides UDP syslog reception</span></div><div class="line"><span class="comment">#module(load="imudp")</span></div><div class="line"><span class="comment">#input(type="imudp" port="514")</span></div><div class="line"></div><div class="line"><span class="comment"># provides TCP syslog reception</span></div><div class="line"><span class="comment">#module(load="imtcp")</span></div><div class="line"><span class="comment">#input(type="imtcp" port="514"</span></div></pre></td></tr></table></figure></p>
-<p>一般只需要打开TCP就好，不过为了还有其他用途可以将UDP的也全部都打开，除去相应的<strong>#</strong>注释即可．<br>修改后的样子<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># provides UDP syslog reception</span></div><div class="line">module(load=<span class="string">"imudp"</span>)</div><div class="line">input(<span class="built_in">type</span>=<span class="string">"imudp"</span> port=<span class="string">"514"</span>)</div><div class="line"></div><div class="line"><span class="comment"># provides TCP syslog reception</span></div><div class="line">module(load=<span class="string">"imtcp"</span>)</div><div class="line">input(<span class="built_in">type</span>=<span class="string">"imtcp"</span> port=<span class="string">"514"</span></div></pre></td></tr></table></figure></p>
-<p>这样还没完，我们还需要配置log存放的位置．<br>进入<code>/etc/rsyslog.d/</code>目录，新建一个<code>router.conf</code>文件<br>编辑添加<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">:fromhost-ip, isequal, <span class="string">"192.168.1.1"</span> /var/spool/rsyslog/router.log</div><div class="line">&amp;~</div></pre></td></tr></table></figure></p>
-<p><code>192.168.1.1</code>表示路由器的地址<br>后面路径就表示了上传到本地主机的log地址了<br>最后的符号<strong>&amp;~</strong>表示了一个重定向规则，被用来告知rsyslog守护进程停止对日志消息的进一步处理，并且不要在本地写入。<br>如果没有使用该重定向规则，那么所有的远程消息都会在写入上述描述的日志文件之外同时被写入到本地日志文件，这就意味着日志消息实际上被写了两次。</p>
-<p>然后如果还有什么特殊需求的话，比如：像系统日志一样，自动打包之类的<br>可以在<code>/etc/logrotate.d/</code>目录下面新建文件，然后进行添加．<br>在这里我偷个懒，直接写在<strong>rsyslog</strong>文件里面．</p>
-<p><code>$ sudo vim /etc/logrotate.d/rsyslog</code><br>随便找一个规则，将我们路由器log存放的地址写在上面即可</p>
-<p>最后还有，需要重启一下rsyslog系统服务<br><code>$ sudo systemctl restart rsyslog.service</code></p>
-<p>查看一下是否在监听<br><code>$ sudo netstat -tulpn |grep rsyslogd</code></p>
-<p>以上服务端配置好了，客户端也就是路由器那里就很好配了．<br>可以通过可视化的web界面进行管理，也可以直接命令行登陆进路由器,然后改配置文件的方式．</p>
-<p>下面是我的路由器管理界面<br><img src="/image/log.png" alt="log"></p>
-<p>改配置文件的话，就直接ssh连进路由器<br><code># vim /etc/config/system</code><br>找到<strong>config system</strong>在下面添加即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">config system</div><div class="line">        option hostname <span class="string">'OpenWrt'</span></div><div class="line">        option conloglevel <span class="string">'8'</span></div><div class="line">        option cronloglevel <span class="string">'8'</span></div><div class="line">        option log_ip <span class="string">'192.168.1.247'</span></div><div class="line">        option log_port <span class="string">'514'</span></div><div class="line">        option log_size <span class="string">'200'</span></div></pre></td></tr></table></figure></p>
-<p>然后保存并应用，过一会就可以在本机上看到路由上的log了</p>
-<h1 id="处理问题"><a href="#处理问题" class="headerlink" title="处理问题"></a>处理问题</h1><p>上面说了一大堆log的配置，最终的目的只是方便分析日志．而我们分析日志就是为了解决问题的．．．<br>分析日志：<br>发现有很多的这种信息<br><code>daemon.warn odhcpd[903]: A default route is present but there is no public prefix on br-lan thus we don&#39;t announce a default route!</code><br>这个是因为开启了IPv6的原因，我们用不上，关掉即可</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我感觉问题不太可能是出现在IPv6上面的，虽然我关掉后确实断线的情况好了很多．．<br>通过这次鼓捣，让我又对OpenWrt熟悉了不少，当然最大的收获还是rsyslog了，<br>之前虽然知道有这么个东西，但一直没有机会去用上它，配置过一次后感觉以后就熟悉多了．</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;!-- markdown-toc start - Don&#39;t edit this section. Run M-x markdown-toc-generate-toc again --&gt;
-&lt;p&gt;&lt;strong&gt;目录&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#简介&quot;&gt;简介&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#logread&quot;&gt;logread&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#上传到远程rsyslog服务器&quot;&gt;上传到远程rsyslog服务器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#配置rsyslog&quot;&gt;配置rsyslog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#处理问题&quot;&gt;处理问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#总结&quot;&gt;总结&lt;/a&gt;&lt;!-- markdown-toc end --&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;我接触OpenWrt也不长，之所以关注log这个东西，主要是前段时间路由器总是断线，所以想要分析一下原因．&lt;/p&gt;
-&lt;h1 id=&quot;logread&quot;&gt;&lt;a href=&quot;#logread&quot; class=&quot;headerlink&quot; title=&quot;logread&quot;&gt;&lt;/a&gt;logread&lt;/h1&gt;&lt;p&gt;在OpenWrt中可通过&lt;code&gt;logread&lt;/code&gt;命令查看运行时的log日志，我一般都是通过ssh进行远程访问路由器的．&lt;br&gt;不过每次查看log，都要登陆进去，然后不断的敲logread也是很麻烦的，&lt;br&gt;正好OpenWrt的web设置界面中有设置上传日志的选项，在我这是 系统—&amp;gt;日志里面&lt;br&gt;
-    
-    </summary>
-    
-      <category term="OpenWrt | Log" scheme="https://lusyoe.github.io/categories/OpenWrt-Log/"/>
-    
-    
-      <category term="OpenWrt" scheme="https://lusyoe.github.io/tags/OpenWrt/"/>
-    
-      <category term="Log" scheme="https://lusyoe.github.io/tags/Log/"/>
     
   </entry>
   

@@ -19,7 +19,7 @@
 <meta property="og:description" content="网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。 准备在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等配置好环境变量同时，在Jenkins和Gitlab上创建好项目。 项目文件配置来依次看一下关于项目的文件配置，包括Maven的配置等。 pom.xml配">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://lusyoe.github.io/image/maven-build.png">
-<meta property="og:updated_time" content="2017-07-28T12:47:51.961Z">
+<meta property="og:updated_time" content="2017-07-28T12:47:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins远程部署war包到tomcat">
 <meta name="twitter:description" content="网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。 准备在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等配置好环境变量同时，在Jenkins和Gitlab上创建好项目。 项目文件配置来依次看一下关于项目的文件配置，包括Maven的配置等。 pom.xml配">
@@ -49,46 +49,47 @@
       </hgroup>
     </div>
   </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>
-            Weibo
-          </a>
-        </li>
-    
-  </ul>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+    </ul>
 
-  <footer class="footer">
+    <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
   <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -96,6 +97,7 @@
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
+  </div>
 </div>
 
   </nav>
@@ -193,7 +195,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#准备"><span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目文件配置"><span class="post-toc-text">项目文件配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pom-xml配置"><span class="post-toc-text">pom.xml配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Maven-settings配置"><span class="post-toc-text">Maven settings配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务器配置"><span class="post-toc-text">服务器配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tomcat配置"><span class="post-toc-text">tomcat配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Jenkins构建配置"><span class="post-toc-text">Jenkins构建配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目文件配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">项目文件配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pom-xml配置"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">pom.xml配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Maven-settings配置"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">Maven settings配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务器配置"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">服务器配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tomcat配置"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">tomcat配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Jenkins构建配置"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">Jenkins构建配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol>
             </nav>
             
         </aside>
@@ -216,6 +218,9 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>做开发的就是一路趟坑啊，尤其是web方面。感觉就这么一点小小的东西都折腾了好一番，真是路漫漫兮其修远矣。但是为了前途咱还是得一路顶上去呢，吾必将上下而求索~</p>
 <p>致还在年轻奋斗的我们。。</p>
 
+
+            
+            
             <blockquote>
                 <p>
                 本文地址：
@@ -274,6 +279,7 @@
         </div>
     </div>
 </article>
+
     </div>
   </main>
 <div class="mask" id="mask"></div>
@@ -322,7 +328,6 @@ var BLOG_SHARE = {
       </li>
     </ul>
  </div>
-
 
 
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>

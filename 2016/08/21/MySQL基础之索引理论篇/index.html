@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="风格">
 <meta property="og:description" content="简介索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。 索引的含义和特点索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，对于相关列使用索引是提高查询操作速度的最佳途径。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-07-28T12:47:51.936Z">
+<meta property="og:updated_time" content="2017-07-28T12:47:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL基础之索引理论篇">
 <meta name="twitter:description" content="简介索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可极大提高数据库查询的速度。 索引的含义和特点索引是一个单独的、存储在磁盘上的数据库接口，它们包含着对数据表里索引记录的引用指针。使用索引用于快速找出在某个或多个列中有一特定的行，所有MySQL列类型都可以被所有，对于相关列使用索引是提高查询操作速度的最佳途径。">
@@ -48,46 +48,47 @@
       </hgroup>
     </div>
   </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="http://www.weibo.com/lusyoe" target="_blank" >
-            <i class="icon icon-lg icon-weibo"></i>
-            Weibo
-          </a>
-        </li>
-    
-  </ul>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/lusyoe" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+    </ul>
 
-  <footer class="footer">
+    <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
   <p>风格 &copy; 2017</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -95,6 +96,7 @@
   <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
+  </div>
 </div>
 
   </nav>
@@ -192,7 +194,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的含义和特点"><span class="post-toc-text">索引的含义和特点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的优点"><span class="post-toc-text">索引的优点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#索引的缺点"><span class="post-toc-text">索引的缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的分类"><span class="post-toc-text">索引的分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#普通索引和唯一索引"><span class="post-toc-text">普通索引和唯一索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单列索引和组合索引"><span class="post-toc-text">单列索引和组合索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全文索引"><span class="post-toc-text">全文索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#空间索引"><span class="post-toc-text">空间索引</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的设计原则"><span class="post-toc-text">索引的设计原则</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的含义和特点"><span class="post-toc-number">2.</span> <span class="post-toc-text">索引的含义和特点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的优点"><span class="post-toc-number">3.</span> <span class="post-toc-text">索引的优点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#索引的缺点"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">索引的缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的分类"><span class="post-toc-number">4.</span> <span class="post-toc-text">索引的分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#普通索引和唯一索引"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">普通索引和唯一索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单列索引和组合索引"><span class="post-toc-number">4.0.2.</span> <span class="post-toc-text">单列索引和组合索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全文索引"><span class="post-toc-number">4.0.3.</span> <span class="post-toc-text">全文索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#空间索引"><span class="post-toc-number">4.0.4.</span> <span class="post-toc-text">空间索引</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#索引的设计原则"><span class="post-toc-number">5.</span> <span class="post-toc-text">索引的设计原则</span></a></li></ol>
             </nav>
             
         </aside>
@@ -235,6 +237,9 @@
 </li>
 </ul>
 
+
+            
+            
             <blockquote>
                 <p>
                 本文地址：
@@ -293,6 +298,7 @@
         </div>
     </div>
 </article>
+
     </div>
   </main>
 <div class="mask" id="mask"></div>
@@ -341,7 +347,6 @@ var BLOG_SHARE = {
       </li>
     </ul>
  </div>
-
 
 
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
