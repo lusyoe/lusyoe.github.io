@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>解决Jenkins+Gitlab出现的Permission denied权限问题 | 风格 | 风起于青萍之末</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="theme-color" content="#3F51B5">
-  
-  
-  <meta name="keywords" content="Jenkins,Gitlab">
-  <meta name="description" content="在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：1234567891011121314151617181920212223242526272829303132333435363738394041Started by user lhyBuilding in workspace /usr/share/tomcat8/.jenkins/workspac">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>解决Jenkins+Gitlab出现的Permission denied权限问题 | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Jenkins,Gitlab">
+    <meta name="description" content="在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：1234567891011121314151617181920212223242526272829303132333435363738394041Started by user lhyBuilding in workspace /usr/share/tomcat8/.jenkins/workspac">
 <meta name="keywords" content="Jenkins,Gitlab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Jenkins+Gitlab出现的Permission denied权限问题">
@@ -25,85 +35,89 @@
 <meta name="twitter:title" content="解决Jenkins+Gitlab出现的Permission denied权限问题">
 <meta name="twitter:description" content="在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：1234567891011121314151617181920212223242526272829303132333435363738394041Started by user lhyBuilding in workspace /usr/share/tomcat8/.jenkins/workspac">
 <meta name="twitter:image" content="https://lusyoe.github.io/image/jenkins_git.png">
-  
-    <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
-  
-  <meta name="summary" content="null">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
-  <div id="loading" class="active"></div>
+    <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">卢浩元</h5>
-        <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
-      </hgroup>
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-  <div class="scroll-wrap flex-col">
-    <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/"  >
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/archives"  >
-              <i class="icon icon-lg icon-archives"></i>
-              Archives
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags"  >
-              <i class="icon icon-lg icon-tags"></i>
-              Tags
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/lusyoe" target="_blank" >
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="http://www.weibo.com/lusyoe" target="_blank" >
-              <i class="icon icon-lg icon-weibo"></i>
-              Weibo
-            </a>
-          </li>
-      
-    </ul>
+</aside>
 
-    <footer class="footer">
-  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>风格 &copy; 2017</p>
-  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
-  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
-  <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
-</footer>
-
-  </div>
-</div>
-
-  </nav>
-  <main id="main">
-    <header class="top-header" id="header">
+    <main id="main">
+        <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -114,115 +128,163 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
         
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">解决Jenkins+Gitlab出现的Permission denied权限问题</h1>
-    <h5 class="subtitle">
-        
-            <time datetime="2016-10-11T00:02:40.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">解决Jenkins+Gitlab出现的Permission denied权限问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-11T00:02:40.000Z" itemprop="datePublished" class="page-time">
   2016-10-11
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Jenkins/">Jenkins</a></li></ul>
 
-        
-    </h5>
-  </div>
+            
+        </h5>
+    </div>
+
+    
+
+
 </header>
 
-    <div class="container body-wrap">
-      <article id="post-解决Jenkins-Gitlab出现的Permission-denied权限问题" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meta flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitlab/">Gitlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
 
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
+<div class="container body-wrap">
+    
+<article id="post-解决Jenkins-Gitlab出现的Permission-denied权限问题"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">解决Jenkins+Gitlab出现的Permission denied权限问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-11 08:02:40" datetime="2016-10-11T00:02:40.000Z"  itemprop="datePublished">2016-10-11</time>
 
             
-            <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Jenkins/">Jenkins</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">Started by user lhy</div><div class="line">Building in workspace /usr/share/tomcat8/.jenkins/workspace/zxpm</div><div class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</div><div class="line">Fetching changes from the remote Git repository</div><div class="line"> &gt; git config remote.origin.url git@192.168.1.2:web/zxpm.git # timeout=10</div><div class="line">Fetching upstream changes from git@192.168.1.2:web/zxpm.git</div><div class="line"> &gt; git --version # timeout=10</div><div class="line">using GIT_SSH to set credentials </div><div class="line"> &gt; git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*</div><div class="line">ERROR: Error fetching remote repo &apos;origin&apos;</div><div class="line">hudson.plugins.git.GitException: Failed to fetch from git@192.168.1.2:web/zxpm.git</div><div class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:799)</div><div class="line">	at hudson.plugins.git.GitSCM.retrieveChanges(GitSCM.java:1055)</div><div class="line">	at hudson.plugins.git.GitSCM.checkout(GitSCM.java:1086)</div><div class="line">	at hudson.scm.SCM.checkout(SCM.java:485)</div><div class="line">	at hudson.model.AbstractProject.checkout(AbstractProject.java:1269)</div><div class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.defaultCheckout(AbstractBuild.java:604)</div><div class="line">	at jenkins.scm.SCMCheckoutStrategy.checkout(SCMCheckoutStrategy.java:86)</div><div class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:529)</div><div class="line">	at hudson.model.Run.execute(Run.java:1741)</div><div class="line">	at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:531)</div><div class="line">	at hudson.model.ResourceController.execute(ResourceController.java:98)</div><div class="line">	at hudson.model.Executor.run(Executor.java:410)</div><div class="line">Caused by: hudson.plugins.git.GitException: Command &quot;git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*&quot; returned status code 128:</div><div class="line">stdout: </div><div class="line">stderr: Permission denied, please try again.</div><div class="line">Permission denied, please try again.</div><div class="line">Permission denied (publickey,password).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line"></div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div><div class="line"></div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:1740)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandWithCredentials(CliGitAPIImpl.java:1476)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.access$300(CliGitAPIImpl.java:63)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$1.execute(CliGitAPIImpl.java:314)</div><div class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:797)</div><div class="line">	... 11 more</div><div class="line">ERROR: null</div><div class="line">Finished: FAILURE</div></pre></td></tr></table></figure></p>
+<p>这个问题只需要细心点就可以了。配置Jenkins项目时，在源码管理中选择Git(前提是已安装好Git插件)，填好仓库地址，认证点击Add，如图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/jenkins_git.png" alt="jenkins git" title="">
+                </div>
+                <div class="image-caption">jenkins git</div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/private_key.png" alt="private key" title="">
+                </div>
+                <div class="image-caption">private key</div>
+            </figure>
+<p>在Kind中选择<strong>SSH Username with private key</strong>，下面的Private Key选择<strong>Enter directly</strong>直接输入在<strong>Gitlab</strong>部署了public key对应的private key即可。一般public key是在<code>~/.ssh/id_rsa.pub</code>,而private key是<code>~/.ssh/id_rsa</code>。<br>点击OK，保存项目再次构建就好了。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-07-28T12:47:51.973Z" itemprop="dateUpdated">2017-07-28 20:47:51</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" target="_blank" rel="external">https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/</a>
+        
+    </div>
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitlab/">Gitlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/&title=《解决Jenkins+Gitlab出现的Permission denied权限问题》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/&title=《解决Jenkins+Gitlab出现的Permission denied权限问题》 — 风格&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决Jenkins+Gitlab出现的Permission denied权限问题》 — 风格&url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/&via=https://lusyoe.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
-            
-
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            
-            </nav>
-            
-        </aside>
-
-        <div class="post-main">
-
-            <div class="post-content" id="post-content" itemprop="postContent">
-            <p>在使用Jenkins构建拉取Gitlab上的仓库时总是出现权限失败，无法访问的情况，如打印以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">Started by user lhy</div><div class="line">Building in workspace /usr/share/tomcat8/.jenkins/workspace/zxpm</div><div class="line"> &gt; git rev-parse --is-inside-work-tree # timeout=10</div><div class="line">Fetching changes from the remote Git repository</div><div class="line"> &gt; git config remote.origin.url git@192.168.1.2:web/zxpm.git # timeout=10</div><div class="line">Fetching upstream changes from git@192.168.1.2:web/zxpm.git</div><div class="line"> &gt; git --version # timeout=10</div><div class="line">using GIT_SSH to set credentials </div><div class="line"> &gt; git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*</div><div class="line">ERROR: Error fetching remote repo &apos;origin&apos;</div><div class="line">hudson.plugins.git.GitException: Failed to fetch from git@192.168.1.2:web/zxpm.git</div><div class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:799)</div><div class="line">	at hudson.plugins.git.GitSCM.retrieveChanges(GitSCM.java:1055)</div><div class="line">	at hudson.plugins.git.GitSCM.checkout(GitSCM.java:1086)</div><div class="line">	at hudson.scm.SCM.checkout(SCM.java:485)</div><div class="line">	at hudson.model.AbstractProject.checkout(AbstractProject.java:1269)</div><div class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.defaultCheckout(AbstractBuild.java:604)</div><div class="line">	at jenkins.scm.SCMCheckoutStrategy.checkout(SCMCheckoutStrategy.java:86)</div><div class="line">	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:529)</div><div class="line">	at hudson.model.Run.execute(Run.java:1741)</div><div class="line">	at hudson.maven.MavenModuleSetBuild.run(MavenModuleSetBuild.java:531)</div><div class="line">	at hudson.model.ResourceController.execute(ResourceController.java:98)</div><div class="line">	at hudson.model.Executor.run(Executor.java:410)</div><div class="line">Caused by: hudson.plugins.git.GitException: Command &quot;git -c core.askpass=true fetch --tags --progress git@192.168.1.2:web/zxpm.git +refs/heads/*:refs/remotes/origin/*&quot; returned status code 128:</div><div class="line">stdout: </div><div class="line">stderr: Permission denied, please try again.</div><div class="line">Permission denied, please try again.</div><div class="line">Permission denied (publickey,password).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line"></div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div><div class="line"></div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:1740)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandWithCredentials(CliGitAPIImpl.java:1476)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.access$300(CliGitAPIImpl.java:63)</div><div class="line">	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$1.execute(CliGitAPIImpl.java:314)</div><div class="line">	at hudson.plugins.git.GitSCM.fetchFrom(GitSCM.java:797)</div><div class="line">	... 11 more</div><div class="line">ERROR: null</div><div class="line">Finished: FAILURE</div></pre></td></tr></table></figure></p>
-<p>这个问题只需要细心点就可以了。配置Jenkins项目时，在源码管理中选择Git(前提是已安装好Git插件)，填好仓库地址，认证点击Add，如图<br><img src="/image/jenkins_git.png" alt="jenkins git"></p>
-<p><img src="/image/private_key.png" alt="private key"><br>在Kind中选择<strong>SSH Username with private key</strong>，下面的Private Key选择<strong>Enter directly</strong>直接输入在<strong>Gitlab</strong>部署了public key对应的private key即可。一般public key是在<code>~/.ssh/id_rsa.pub</code>,而private key是<code>~/.ssh/id_rsa</code>。<br>点击OK，保存项目再次构建就好了。</p>
 
 
-            
-            
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" target="_blank" rel="external">https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/</a>
-                </p>
-                <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2017/07/28/2017重新出发/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">2017重新出发</h4>
@@ -231,7 +293,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/10/07/解决Hibernate使用HQL查询出现is-not-mapped问题/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">解决Hibernate使用HQL查询出现is not mapped问题</h4>
@@ -241,77 +303,116 @@
 </nav>
 
 
-            
-            
+
+    
 
 
 
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
 </article>
 
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-  </main>
-<div class="mask" id="mask"></div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "解决Jenkins+Gitlab出现的Permission denied权限问题",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/index.html"
-};
-</script>
-<div class="global-share" id="global-share">
-    <div class="tit">分享到：</div>
+
+
+<div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/&title=《解决Jenkins+Gitlab出现的Permission denied权限问题》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/&title=《解决Jenkins+Gitlab出现的Permission denied权限问题》 — 风格&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决Jenkins+Gitlab出现的Permission denied权限问题》 — 风格&url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/&via=https://lusyoe.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
 
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://lusyoe.github.io/2016/10/11/解决Jenkins-Gitlab出现的Permission-denied权限问题/" alt="微信分享二维码">
+</div>
 
-<script src="/js/main.js"></script>
 
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -321,15 +422,33 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
 </script>
-
-<script src="/js/search.js"></script>
-
-
-
-
-
-
 
 
 

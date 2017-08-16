@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Jenkins远程部署war包到tomcat | 风格 | 风起于青萍之末</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="theme-color" content="#3F51B5">
-  
-  
-  <meta name="keywords" content="CI持续集成">
-  <meta name="description" content="网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。 准备在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等配置好环境变量同时，在Jenkins和Gitlab上创建好项目。 项目文件配置来依次看一下关于项目的文件配置，包括Maven的配置等。 pom.xml配">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Jenkins远程部署war包到tomcat | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="CI持续集成">
+    <meta name="description" content="网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。 准备在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等配置好环境变量同时，在Jenkins和Gitlab上创建好项目。 项目文件配置来依次看一下关于项目的文件配置，包括Maven的配置等。 pom.xml配">
 <meta name="keywords" content="CI持续集成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jenkins远程部署war包到tomcat">
@@ -24,85 +34,89 @@
 <meta name="twitter:title" content="Jenkins远程部署war包到tomcat">
 <meta name="twitter:description" content="网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。 准备在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等配置好环境变量同时，在Jenkins和Gitlab上创建好项目。 项目文件配置来依次看一下关于项目的文件配置，包括Maven的配置等。 pom.xml配">
 <meta name="twitter:image" content="https://lusyoe.github.io/image/maven-build.png">
-  
-    <link rel="alternative" href="/404.html" title="风格" type="application/atom+xml">
-  
-  <meta name="summary" content="null">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
-  <div id="loading" class="active"></div>
+    <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">卢浩元</h5>
-        <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
-      </hgroup>
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-  <div class="scroll-wrap flex-col">
-    <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/"  >
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/archives"  >
-              <i class="icon icon-lg icon-archives"></i>
-              Archives
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags"  >
-              <i class="icon icon-lg icon-tags"></i>
-              Tags
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/lusyoe" target="_blank" >
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="http://www.weibo.com/lusyoe" target="_blank" >
-              <i class="icon icon-lg icon-weibo"></i>
-              Weibo
-            </a>
-          </li>
-      
-    </ul>
+</aside>
 
-    <footer class="footer">
-  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>风格 &copy; 2017</p>
-  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
-  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
-  <a href="/404.html" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
-</footer>
-
-  </div>
-</div>
-
-  </nav>
-  <main id="main">
-    <header class="top-header" id="header">
+    <main id="main">
+        <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -113,96 +127,68 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
         
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">Jenkins远程部署war包到tomcat</h1>
-    <h5 class="subtitle">
-        
-            <time datetime="2016-09-27T13:46:33.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Jenkins远程部署war包到tomcat</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-09-27T13:46:33.000Z" itemprop="datePublished" class="page-time">
   2016-09-27
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CI持续集成/">CI持续集成</a></li></ul>
 
-        
-    </h5>
-  </div>
+            
+        </h5>
+    </div>
+
+    
+
+
 </header>
 
-    <div class="container body-wrap">
-      <article id="post-Jenkins远程部署war包到tomcat" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meta flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI持续集成/">CI持续集成</a></li></ul>
 
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
-
-            
-            <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
-        </a>
-      </li>
-    </ul>
- </div>
-
-            
-
-            
-            <nav class="post-toc-wrap" id="post-toc">
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目文件配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">项目文件配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pom-xml配置"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">pom.xml配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Maven-settings配置"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">Maven settings配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务器配置"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">服务器配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tomcat配置"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">tomcat配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Jenkins构建配置"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">Jenkins构建配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol>
-            </nav>
+        </nav>
+    </aside>
+    
+<article id="post-Jenkins远程部署war包到tomcat"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Jenkins远程部署war包到tomcat</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-09-27 21:46:33" datetime="2016-09-27T13:46:33.000Z"  itemprop="datePublished">2016-09-27</time>
+
             
-        </aside>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CI持续集成/">CI持续集成</a></li></ul>
 
-        <div class="post-main">
 
-            <div class="post-content" id="post-content" itemprop="postContent">
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
             <p>网上关于这个的文章也是数不胜数了，但是稍不注意还是会掉坑里了，好不容易配置成功在这里记录一下。<br>关于怎么搭建Jenkins自动构建之前已经写过，这里就再补充一下自动远程部署的情况。</p>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>在开始之前，服务器上需要有安装好环境，如：JDK，Tomcat等<br>配置好环境变量同时，在Jenkins和Gitlab上创建好项目。</p>
 <h1 id="项目文件配置"><a href="#项目文件配置" class="headerlink" title="项目文件配置"></a>项目文件配置</h1><p>来依次看一下关于项目的文件配置，包括Maven的配置等。</p>
@@ -214,25 +200,101 @@
 <h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>服务器上主要是<strong>tomcat用户配置</strong>和<strong>Maven settings配置</strong>。<br>是的，本地配置那个是方便在本地就可以直接部署到服务器，但是如果是用Jenkins来帮我们自动的部署的话就需要在服务器上也配置一下Maven Settings了，否则在构建好后是无法进行远程部署的，因为不知道tomcat的用户名和密码。<br>在这里我们直接复制本地的.settings.xml文件到服务器就好，也有个地方需要注意了。<br><strong>.settings.xml</strong>这个文件不是随便放的，需要放到启动jenkins的用户的那个home目录下面的.m2/目录中。<br>因为我是直接从<a href="https://jenkins.io/" target="_blank" rel="external">Jenkins官网</a>下载了war包，然后丢到tomcat中运行的。<br>所以这里我需要将<strong>.settings.xml</strong>文件放到<code>/usr/share/tomcat8/.m2/</code>中。<br>需要注意的是文件权限问题，我是为了偷懒直接用系统<code># apt-get install tomcat8</code>安装的，系统会自动创建tomcat8用户。<br>所以还需要额外执行一条命令：<code># chown tomcat8:tomcat8 .settings.xml</code>即可。<br>如果是自己从<a href="http://tomcat.apache.org/" target="_blank" rel="external">apache tomcat官网</a>下载的压缩包的话，就看你启动tomcat服务用的哪个系统用户了，就把<strong>.settings.xml</strong>文件丢到那个用户的<code>$HOME/.m2/</code>下即可。</p>
 <h3 id="tomcat配置"><a href="#tomcat配置" class="headerlink" title="tomcat配置"></a>tomcat配置</h3><p>先在tomcat用户配置文件中添加一个用户，并给予<strong>manager-script</strong>权限就行。<br>在我这里是编辑<code>/etc/tomcat8/tomcat-users.xml</code>文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tomcat-users</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"admin-gui"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-gui"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"tomcat"</span> <span class="attr">password</span>=<span class="string">"tomcat"</span> <span class="attr">roles</span>=<span class="string">"admin-gui,manager-gui"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"deployer"</span> <span class="attr">password</span>=<span class="string">"dev"</span> <span class="attr">roles</span>=<span class="string">"manager-script"</span>/&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">tomcat-users</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>主要看deployer这个用户就行了。</p>
-<h3 id="Jenkins构建配置"><a href="#Jenkins构建配置" class="headerlink" title="Jenkins构建配置"></a>Jenkins构建配置</h3><p>好了，最后再说一下，在Jenkins中执行的构建命令<br><img src="/image/maven-build.png" alt="maven-build"><br>这里需要注意,执行的是<strong>mvn tomcat:redeploy</strong>。<br>网上很多教程说的是<strong>mvn tomcat7:redeploy</strong>，我这边死活不行，总是报错。<br><code>No plugin found for prefix &#39;tomcat7&#39; in the current project.</code><br>暂时不知道是什么原因，先不管了。</p>
+<h3 id="Jenkins构建配置"><a href="#Jenkins构建配置" class="headerlink" title="Jenkins构建配置"></a>Jenkins构建配置</h3><p>好了，最后再说一下，在Jenkins中执行的构建命令<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/maven-build.png" alt="maven-build" title="">
+                </div>
+                <div class="image-caption">maven-build</div>
+            </figure><br>这里需要注意,执行的是<strong>mvn tomcat:redeploy</strong>。<br>网上很多教程说的是<strong>mvn tomcat7:redeploy</strong>，我这边死活不行，总是报错。<br><code>No plugin found for prefix &#39;tomcat7&#39; in the current project.</code><br>暂时不知道是什么原因，先不管了。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>做开发的就是一路趟坑啊，尤其是web方面。感觉就这么一点小小的东西都折腾了好一番，真是路漫漫兮其修远矣。但是为了前途咱还是得一路顶上去呢，吾必将上下而求索~</p>
 <p>致还在年轻奋斗的我们。。</p>
 
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-07-28T12:47:51.961Z" itemprop="dateUpdated">2017-07-28 20:47:51</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/09/27/Jenkins远程部署war包到tomcat/" target="_blank" rel="external">https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/</a>
+        
+    </div>
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI持续集成/">CI持续集成</a></li></ul>
+
 
             
-            
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/" target="_blank" rel="external">https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/</a>
-                </p>
-                <footer><cite><a href="https://lusyoe.github.io">@风格</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/&title=《Jenkins远程部署war包到tomcat》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/&title=《Jenkins远程部署war包到tomcat》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Jenkins远程部署war包到tomcat》 — 风格&url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/10/05/Hibernate-JNDI配置/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Hibernate+JNDI配置</h4>
@@ -241,7 +303,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/09/22/Spring-Data-JPA使用JpaRepository自动装配报No-qualifying-bean-of-type错误/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Spring Data JPA使用JpaRepository自动装配报No qualifying bean of type错误</h4>
@@ -251,77 +313,116 @@
 </nav>
 
 
-            
-            
+
+    
 
 
 
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
 </article>
 
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-  </main>
-<div class="mask" id="mask"></div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "Jenkins远程部署war包到tomcat",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/index.html"
-};
-</script>
-<div class="global-share" id="global-share">
-    <div class="tit">分享到：</div>
+
+
+<div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/&title=《Jenkins远程部署war包到tomcat》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/&title=《Jenkins远程部署war包到tomcat》 — 风格&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Jenkins远程部署war包到tomcat》 — 风格&url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/&via=https://lusyoe.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
 
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://lusyoe.github.io/2016/09/27/Jenkins远程部署war包到tomcat/" alt="微信分享二维码">
+</div>
 
-<script src="/js/main.js"></script>
 
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -331,15 +432,33 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
 </script>
-
-<script src="/js/search.js"></script>
-
-
-
-
-
-
 
 
 
