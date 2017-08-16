@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2017-08-16T15:42:23.248Z</updated>
+  <updated>2017-08-16T15:03:20.921Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -14,30 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test</title>
-    <link href="https://lusyoe.github.io/2017/08/16/test/"/>
-    <id>https://lusyoe.github.io/2017/08/16/test/</id>
-    <published>2017-08-16T15:41:56.000Z</published>
-    <updated>2017-08-16T15:42:23.248Z</updated>
-    
-    <content type="html"><![CDATA[<p>Hello, Test.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Hello, Test.&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="Test" scheme="https://lusyoe.github.io/categories/Test/"/>
-    
-    
-      <category term="Test" scheme="https://lusyoe.github.io/tags/Test/"/>
-    
-  </entry>
   
   <entry>
     <title>2017.8浙江旅游回顾</title>
@@ -860,6 +836,31 @@
     
     
       <category term="Jenkins" scheme="https://lusyoe.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shadowsocks日志中failed to recv data in handshakeReceive2Callback的错误解决办法</title>
+    <link href="https://lusyoe.github.io/2016/07/27/Shadowsocks%E6%97%A5%E5%BF%97%E4%B8%ADfailed-to-recv-data-in-handshakeReceive2Callback%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>https://lusyoe.github.io/2016/07/27/Shadowsocks日志中failed-to-recv-data-in-handshakeReceive2Callback的错误解决办法/</id>
+    <published>2016-07-27T15:12:30.000Z</published>
+    <updated>2017-07-28T12:47:51.995Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，<br>但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。<br>最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效信息)，<br>找到了<a href="http://www.hudawei.net/archives/38" target="_blank" rel="external">胡大伟的官方网站</a>的这篇blog，刚好解决了问题。:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Win+r services.msc打开服务管理窗口在里面找到xlserviceplatform把这个服务禁用了。</div><div class="line">找到C:\Program Files(x86)\Common Files\Thunder Network\ServicePlatform\XLSP.dll文件</div><div class="line">删除之即可</div></pre></td></tr></table></figure></p>
+<p>幕后真凶原来是迅雷，对国内这些东西已经是彻底无语了。</p>
+<p>在这里感谢下胡大伟!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近重装了一下Win7系统，装好常用软件后，突然发现上google的时候shadowsocks不能用了，&lt;br&gt;但是在Linux下用的好好的，刚开始还以为是系统的问题，差点就再重装了。&lt;br&gt;最后通过log日志分析，然后再通过VPN进行goole搜索(百度基本搜不到什么有效
+    
+    </summary>
+    
+      <category term="shadowsocks" scheme="https://lusyoe.github.io/categories/shadowsocks/"/>
+    
+    
+      <category term="shadowsocks" scheme="https://lusyoe.github.io/tags/shadowsocks/"/>
     
   </entry>
   
