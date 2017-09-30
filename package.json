@@ -1,0 +1,20 @@
+{
+  "name": "lusyoe.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo hello test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lusyoe/lusyoe.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lusyoe/lusyoe.github.io/issues"
+  },
+  "homepage": "https://github.com/lusyoe/lusyoe.github.io#readme"
+}
