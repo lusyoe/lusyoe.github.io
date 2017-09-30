@@ -1,0 +1,4 @@
+deploy:
+    type: git
+    repo: git@github.com:lusyoe/lusyoe.github.io.git
+    branch: master
