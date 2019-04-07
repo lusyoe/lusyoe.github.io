@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Debian桌面编译安装Tenda U1 USB无线网卡驱动 | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux驱动,USB">
+    <meta name="description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。 驱动安装 从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+<meta name="keywords" content="Linux驱动,USB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Debian桌面编译安装Tenda U1 USB无线网卡驱动">
+<meta property="og:url" content="https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。 驱动安装 从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T14:27:39.175Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Debian桌面编译安装Tenda U1 USB无线网卡驱动">
+<meta name="twitter:description" content="前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。结果Linux系统由于驱动问题，不识别那个网卡。没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。 驱动安装 从官方网站下载适用于Linux的驱动# wget http://down.tenda.com">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Debian桌面编译安装Tenda U1 USB无线网卡驱动</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Debian桌面编译安装Tenda U1 USB无线网卡驱动</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-09-02T15:14:01.000Z" itemprop="datePublished" class="page-time">
+  2016-09-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前序"><span class="post-toc-number">1.</span> <span class="post-toc-text">前序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#驱动安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">驱动安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Debian桌面编译安装Tenda-U1-USB无线网卡驱动" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Debian桌面编译安装Tenda U1 USB无线网卡驱动</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-09-02 23:14:01" datetime="2016-09-02T15:14:01.000Z" itemprop="datePublished">2016-09-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p>
+<h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul>
+<li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>编译</p>
+<ul>
+<li>解压zip包<br><code># unzip U1_linux.zip</code></li>
+<li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li>
+<li>执行自动编译脚本<br><code># sh install.sh</code></li>
+</ul>
+</li>
+<li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> sudo apt-get install linux-headers-`uname -r`</span><br></pre></td></tr></table></figure>
+<p>然后继续编译即可<br><code># sh install.sh</code></p>
+<p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T14:27:39.175Z" itemprop="dateUpdated">2019-04-07 22:27:39</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" target="_blank" rel="external">https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux驱动/">Linux驱动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/USB/">USB</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/&title=《Debian桌面编译安装Tenda U1 USB无线网卡驱动》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/&title=《Debian桌面编译安装Tenda U1 USB无线网卡驱动》 — 风格&source=前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Debian桌面编译安装Tenda U1 USB无线网卡驱动》 — 风格&url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/09/03/MySQL基础之视图实战篇/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MySQL基础之视图实战篇</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/29/MySQL基础之视图理论篇/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MySQL基础之视图理论篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2016 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/&title=《Debian桌面编译安装Tenda U1 USB无线网卡驱动》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/&title=《Debian桌面编译安装Tenda U1 USB无线网卡驱动》 — 风格&source=前序朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Debian桌面编译安装Tenda U1 USB无线网卡驱动》 — 风格&url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADI0lEQVR42u3awa7iQAwEQP7/p9nLHp60ArptWIV5lVMEIXENEsb23G7xcf9x/PvK8+Pn9fn5o+c+iu32iQMbGxv7S9h50G2IM2oe86Pz5xZsbGzsU9n5rZNXnieehJonrWQRsbGxsbE3S5MswWyJk89iY2NjY28SRrsQUQlRLhk2Njb272Hnzf22uTMbCez7+W/rpWFjY2Nfnr1vx1/n/CPzbWxsbOwLs+/l0RYMyZXtNZv4/94BGxsb+yB2O3Ztw8qbQfkTZ2UGNjY29tnsWeJpt+/kn0qWePb1DEsUbGxs7Muzn7f19/2ZvJxIYkjejZYAGxsb+yB28oE2uDxFJa/PWkur7xwbGxv7q9jtNp0k/SRLsElIm2dhY2Njn8SeDWiHnap1Esrv8yJObGxs7OPY+8FtW4S8K6UNLdjY2NgHsdsZaLv9sb2yHSEk528Y/WJjY2NfmD0Leta7arfg5GVSvUkIGxsb+zj2vgGUFCH5Np3ZtqFCgY2NjX0cu01jM0xb8Mxa/1HM2NjY2Aex89/zvHHTprpZcZLE8OLO2NjY2AexZy34vHgo2j2jZLb5FDY2NvZJ7OJHf7QhJlnEdsk2C42NjY19Ersdl7YJL1/1fLibFB4vyiFsbGzsg9ibEWz7bp7e2mPzFWJjY2N/Ozv5Q78vWpJW/qzl1LaWsLGxsU9l5wG1xUC7xSffADQbZmBjY2Ofyk620bRFxez+bfIbji6wsbGxD2LvQ9wPA2aL9bbGFjY2Nvah7E0iaQPdlCtvaHhhY2Njfzm7HaZuHpkXIbMnFkUUNjY29qHsWWupDagdOXyknYSNjY19NLv9xz4rBmYj232bCRsbG/tsdlt+FMPU0VLmybUtUbCxsbHPYN/LIy9g2pbQp7fyYGNjY5/KnqWc2ZVJUTG7fz4GrvHY2NjYX8LOS4I8dbUJKX/ifmiBjY2NfSp7thWmHRvnbaN8UWapDhsbG/s3s/eMdniwGRU/TJzY2NjY2GVjaNNIaquJaHiAjY2NfRw7T0t56po19PMi5z+NB7CxsbEvz25TxT7oZJDQDjPylImNjY19EPsPZ0GlgXC1krQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

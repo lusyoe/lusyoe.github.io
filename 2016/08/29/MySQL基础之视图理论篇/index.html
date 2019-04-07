@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>MySQL基础之视图理论篇 | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="MySQL,视图">
+    <meta name="description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。 视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
+<meta name="keywords" content="MySQL,视图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL基础之视图理论篇">
+<meta property="og:url" content="https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。 视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T14:27:39.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL基础之视图理论篇">
+<meta name="twitter:description" content="视图概述视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个虚拟表。在视图中用户可以使用SELECT语句查询数据，以及使用INSERT、UPDATE、DELETE修改记录。从MySQL 5.0开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。 视图的含义视图是一个虚拟表，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。视图一经定义">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL基础之视图理论篇</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">MySQL基础之视图理论篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-08-29T15:15:05.000Z" itemprop="datePublished" class="page-time">
+  2016-08-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">视图概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图的含义"><span class="post-toc-number">2.</span> <span class="post-toc-text">视图的含义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#视图的作用"><span class="post-toc-number">3.</span> <span class="post-toc-text">视图的作用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#简单化"><span class="post-toc-number">3.0.0.1.</span> <span class="post-toc-text">简单化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安全性"><span class="post-toc-number">3.0.0.2.</span> <span class="post-toc-text">安全性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逻辑数据独立性"><span class="post-toc-number">3.0.0.3.</span> <span class="post-toc-text">逻辑数据独立性</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-MySQL基础之视图理论篇" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MySQL基础之视图理论篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-08-29 23:15:05" datetime="2016-08-29T15:15:05.000Z" itemprop="datePublished">2016-08-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="视图概述"><a href="#视图概述" class="headerlink" title="视图概述"></a>视图概述</h1><p>视图是一个或者多个表中导出的，视图的行为与表非常的相似，但视图是一个<strong>虚拟表</strong>。<br>在视图中用户可以使用<code>SELECT</code>语句查询数据，以及使用<code>INSERT、UPDATE、DELETE</code>修改记录。<br>从<strong>MySQL 5.0</strong>开始可以使用视图，视图可以使用户操作方便，而且可以保障数据库系统的安全。</p>
+<h1 id="视图的含义"><a href="#视图的含义" class="headerlink" title="视图的含义"></a>视图的含义</h1><p>视图是一个<strong>虚拟表</strong>，是从数据库中一个或多个表中导出来的表。视图还可以从已经存在的视图的基础上定义。<br>视图一经定义便存储在数据库中，与其相对应的数据并没有像表那样在数据库中再存储一份，通过视图看到的数据只是存放在基本表中的数据。对视图的操作与对表的操作一样，可以对其进行查询、修改和删除。<br>当对通过视图看到的数据进行修改时，相应的基本表数据也要发生变化；同时，若基本表的数据发生变化，则这种变化也可以自动的反映到视图中。</p>
+<h1 id="视图的作用"><a href="#视图的作用" class="headerlink" title="视图的作用"></a>视图的作用</h1><p>与直接从数据表中读取相比，视图有以下优点：</p>
+<h4 id="简单化"><a href="#简单化" class="headerlink" title="简单化"></a>简单化</h4><p><strong>看到的就是需要的</strong>。视图不仅可以简化用户对数据的理解，也可以简化他们的操作。<br>那些被经常使用的查询可以被定义为视图，从而使得用户不必为以后的操作每次指定全部的条件。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p><strong>通过视图用户只能查询和修改他们所能见到的数据</strong>。<br>数据库中的其他数据则既看不见也取不到。数据库授权命令可以使每个用户对数据库的检索限制到特定的数据库对象上，但不能授权到数据库特定行和特定的列上。<br>通过视图，用户可以被限制在数据的不同子集上：</p>
+<ul>
+<li>使用权限可被限制在基表的行的子集上;</li>
+<li>使用权限可被限制在基表的列的子集上;</li>
+<li>使用权限可被限制在基表的行和列的子集上;</li>
+<li>使用权限可被限制在多个基表的连接所限定的行上;</li>
+<li>使用权限可被限制在基表中的数据的统计汇总上;</li>
+<li>使用权限可被限制在另一视图的一个子集上，或是一些视图和基表表合并后的子集上。</li>
+</ul>
+<h4 id="逻辑数据独立性"><a href="#逻辑数据独立性" class="headerlink" title="逻辑数据独立性"></a>逻辑数据独立性</h4><p>视图可帮助用户屏蔽真实表结构变化带来的影响。视图就相当于一个<strong>抽象层</strong>，用户面向的是抽象后的而不是底层表的细节。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T14:27:39.182Z" itemprop="dateUpdated">2019-04-07 22:27:39</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/08/29/MySQL基础之视图理论篇/" target="_blank" rel="external">https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视图/">视图</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/&title=《MySQL基础之视图理论篇》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/&title=《MySQL基础之视图理论篇》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL基础之视图理论篇》 — 风格&url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/09/02/Debian桌面编译安装Tenda-U1-USB无线网卡驱动/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Debian桌面编译安装Tenda U1 USB无线网卡驱动</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/29/Gitlab-CI-Multi-Runner搭建CI持续集成环境/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Gitlab CI Multi Runner搭建CI持续集成环境</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2016 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/&title=《MySQL基础之视图理论篇》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/&title=《MySQL基础之视图理论篇》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL基础之视图理论篇》 — 风格&url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/08/29/MySQL基础之视图理论篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACoUlEQVR42u3a0WoDMQwEwP7/T7fQ15J0V7KTFsZP4XJ38TggGckfH/H4/B7Jt4/u/Hk9uZJ/uxp4eHh4o6k/Gsmkf965mWjyzmTOeHh4eLd5s3Cfx+HkzTfSDx4eHt57eS0yCfptesDDw8P7X7zNVGZBHw8PD+8v85JixPMtcj5mhd3rtRY8PDy8mNdukf/C54v9PTw8PLxFV71NGEnRIU8w+9ni4eHh3eDtS7TJFrnd+OaHBqKEgYeHh3eNl3+bB+42uOfU/Ck8PDy8e7z2eOi+/tEG/WQOv1Sp8fDw8I7yZokhD/Tte2bPHt5S4+Hh4QUxsz04NdsWb36rQOLh4eFd4J1tSrVLlpczVguNh4eHd5nXlm5npPxQwoH54OHh4V3g5ZOYBfe6ZRUnniKN4eHh4R3lzcqpm8rxJtDXJWM8PDy8C7ykwZ9/ztNDXm6Y4fHw8PBewxsebCp/Mm+VbQ5g4eHh4d3jtQ2w51fy+ke99qP2Gx4eHt5tXtvQOnWIapOEojIuHh4e3mVeEu5npFliaDfoeHh4ePd4s0Z+EZTLplrbJPslneDh4eFd4+Xtq6TdlSeM2XHVYonx8PDwXsLbvDTfcM+25vWfgYeHh3eBN2vY58WC5/e3h66S63h4eHiv4SUFhfyezc/nKSGZJx4eHt493j7s3gj0+9ni4eHhvZLXTqhNNrMlGw48PDy8o7zPcrQHAtqW2KzM8XC58fDw8C7w2hjbNsmSMu7zp2YLNKzB4OHh4cW8fEvdrk375tmiFE0vPDw8vKO89shUXj5I3rPJWnh4eHj/hddSc8asNPzwWTw8PLy38jbF1tkxhU3hGA8PD+82Lz86sClh1Eem4vLugVoLHh4eXsxrG2D5Jntfrk020MnS4OHh4R3ifQFLb6ZLI9U00gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux软件篇之systemd | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,Systemd">
+    <meta name="description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。 系统服务管理">
+<meta name="keywords" content="Linux,Systemd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux软件篇之systemd">
+<meta property="og:url" content="https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。 系统服务管理">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T14:27:39.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux软件篇之systemd">
+<meta name="twitter:description" content="简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。 系统服务管理">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux软件篇之systemd</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux软件篇之systemd</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-08T15:32:00.000Z" itemprop="datePublished" class="page-time">
+  2016-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux-Systemd/">Linux | Systemd</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统服务管理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">系统服务管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志管理"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">日志管理</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Linux软件篇之systemd" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux软件篇之systemd</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-08 23:32:00" datetime="2016-03-08T15:32:00.000Z" itemprop="datePublished">2016-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux-Systemd/">Linux | Systemd</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>systemd</strong>是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，systemd可以说是非常强大也非常复杂的一种软件。</p>
+<h3 id="系统服务管理"><a href="#系统服务管理" class="headerlink" title="系统服务管理"></a>系统服务管理</h3><a id="more"></a>
+<ul>
+<li>激活开机启动服务<br>  <code>$ sudo systemctl enable [service-name]</code></li>
+<li>取消开机启动服务<br>  <code>$ sudo systemctl disable [service-name]</code></li>
+<li>查看是否开机启动服务<br>  <code>$ systemctl is-enable [service-name]</code></li>
+<li>查看开机每个服务消耗的时间<br>  <code>$ systemd-analyze blame</code></li>
+<li>查看开机消耗总时间<br>  <code>$ systemd-analyze</code></li>
+<li>查看所有被激活的服务<br>  <code>$ systemctl list-units -t service</code></li>
+<li>查看一个服务的状态<br>  <code>$ systemctl status [service-name]</code></li>
+<li>启动、停止、重启一个服务<br>  <code>$ sudo systemctl start(stop、restart) [service-name]</code></li>
+<li>重新加载一个服务(可以只加载服务的配置文件而不重启服务)<br>  <code>$ sudo systemctl reload [service-name]</code></li>
+</ul>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><ul>
+<li>查看启动日志(默认只保存本次启动的日志)<br>  <code>$ sudo journalctl</code></li>
+<li>查看某个服务的日志<br>  <code>$ sudo journalctl [service-path](如：/usr/sbin/sshd)</code></li>
+<li>查看实时日志<br>  <code>$ sudo journalctl -f</code></li>
+<li>重新载入systemd所有更改的配置，扫描新的或变动的单元<br>  <code>$ sudo systemctl daemon-reload</code></li>
+<li>查看内核日志(不显示应用日志)<br>  <code>$ sudo journalctl -k</code></li>
+<li>查看某个路径的脚本的日志<br>  <code>$ sudo journalctl /bin/bash</code></li>
+<li>显示日志占据的硬盘空间<br>  <code>$ sudo journalctl --disk-usage</code></li>
+</ul>
+<p>以上都为常用的功能，当然还有需要添加自定义的服务，这个以后再说。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-07T14:27:39.181Z" itemprop="dateUpdated">2019-04-07 22:27:39</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/03/08/Linux软件篇之systemd/" target="_blank" rel="external">https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Systemd/">Systemd</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/&title=《Linux软件篇之systemd》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/&title=《Linux软件篇之systemd》 — 风格&source=简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux软件篇之systemd》 — 风格&url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/09/Linux软件篇之Docker/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux软件篇之Docker</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/07/Linux软件篇之tmux/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux软件篇之tmux</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2016 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/&title=《Linux软件篇之systemd》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/&title=《Linux软件篇之systemd》 — 风格&source=简介systemd是Linux下一种init软件，主要是用来管理系统服务的，当然了systemd不仅仅是可以管理系统服务，还有日志管理、系统资源管理等等，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux软件篇之systemd》 — 风格&url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2016/03/08/Linux软件篇之systemd/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3awWrDMBAE0P7/T7vQa7Azs3IKkZ9OIU0UPReGlVY/P/E4/kby/vEyrr/1+vrsWzcMDAyMr2Ucl+P6h9vZknnOYG8eEAYGxgMY+XRtsLaR2lIxMDAwkhC8XnQbnRgYGBh3BW4SoHmJ2ZahGBgYz2QkG87ZcmeP5oN7cQwMjC9ktI2B/3z9wf4GBgbGlzCOcrSH+CtlYrEqDAyMrRnXFyaSEjDJvfVNbxTHGBgYD2DkUySl270NzqhYxMDA2JrRti1X8LODuTyyMTAwdmUkC8oLvqKYK6MZAwPjyYw81PIYbSO7Ddy6YYCBgbERI794kU/dbnpvaHZiYGBsx1i5bnUsjJW2xGkLEwMDY1PGLHDbY/3ZX4dbWQwMjI0Y6wu667As/y4GBsbTGCsT3btNzTfARQ8WAwNjC8bKNaz1ZkDyybo0xMDA2JQxKwdnxeJsi/uGioGB8RhGW2XN2pZ51BbbYwwMjK0ZSfC1B14rB2qzRgUGBsbejLZ92JZxeVi3293oP4CBgbERoz1Qm10Lu47s2SdPK1wMDIyNGOvLzWdoI75+rBgYGJsyjnLkhV2+Ac6LwtM5MTAwtma0YTe7GLGyxW1/FwMDY1fGesjOrl8kbc68FYqBgfEExixk8+JvdmmjKAoxMDAwRkuZvT/EY2BgYCy0AVauheVRjoGB8QRG26TMj+/bpun1nMNGJgYGxpcz2g3kbKEtOD/Iw8DA2JrxC3kBiYfalTZeAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
