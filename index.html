@@ -155,6 +155,52 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-基于Kubernetes的Gitlab自动定时备份" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-06-22 21:18:01" datetime="2019-06-22T13:18:01.000Z" itemprop="datePublished">2019-06-22</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/06/22/基于Kubernetes的Gitlab自动定时备份/">基于Kubernetes的Gitlab自动定时备份</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言Gitlab目前还不支持自定备份配置，当我们使用传统的apt、yum等方式安装Gitlab后，一般都是通过shell脚本+crontab来自动备份了。但是当Gitlab容器化以后这种传统的方式就不太适合了。这里记录一下通过Kubernetes原生的CronJob来自动备份。
+开始之前在开始之前需要有一套Kubernetes集群
+创建ConfigMap创建好集群后，可以将kubeconfi...
+    
+
+        <a href="/2019/06/22/基于Kubernetes的Gitlab自动定时备份/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-调整SyntaxHighlighter-Evolved代码高亮间距" class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -573,53 +619,6 @@ Helm v2.11.0这里Harbor采用helm chart的形式部署在k8s集群上。 nginx-
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitlab/">Gitlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-解决Hibernate使用HQL查询出现is-not-mapped问题" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-10-07 08:26:16" datetime="2016-10-07T00:26:16.000Z" itemprop="datePublished">2016-10-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/10/07/解决Hibernate使用HQL查询出现is-not-mapped问题/">解决Hibernate使用HQL查询出现is not mapped问题</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        环境：Hibernate 5.1.0.Final，IntelliJ IDEA 2016.2.2
-首先检查实体Bean配置一切正常，检查映射配置文件和hibernate.cfg.xml配置文件也是正常的。通过搜索都说是HQL查询根据的是实体名而不是表名查找的，那个我也是对的，实在想不通会出现is not mapped问题。异常信息如下：12345678910111213141516171819...
-    
-
-        <a href="/2016/10/07/解决Hibernate使用HQL查询出现is-not-mapped问题/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
 
     </div>
     

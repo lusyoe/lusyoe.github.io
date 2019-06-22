@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>基于Kubernetes的Gitlab自动定时备份 | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Kubernetes">
+    <meta name="description" content="前言Gitlab目前还不支持自定备份配置，当我们使用传统的apt、yum等方式安装Gitlab后，一般都是通过shell脚本+crontab来自动备份了。但是当Gitlab容器化以后这种传统的方式就不太适合了。这里记录一下通过Kubernetes原生的CronJob来自动备份。 开始之前在开始之前需要有一套Kubernetes集群 创建ConfigMap创建好集群后，可以将kubeconfig文件">
+<meta name="keywords" content="Kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Kubernetes的Gitlab自动定时备份">
+<meta property="og:url" content="https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="前言Gitlab目前还不支持自定备份配置，当我们使用传统的apt、yum等方式安装Gitlab后，一般都是通过shell脚本+crontab来自动备份了。但是当Gitlab容器化以后这种传统的方式就不太适合了。这里记录一下通过Kubernetes原生的CronJob来自动备份。 开始之前在开始之前需要有一套Kubernetes集群 创建ConfigMap创建好集群后，可以将kubeconfig文件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-22T13:21:33.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Kubernetes的Gitlab自动定时备份">
+<meta name="twitter:description" content="前言Gitlab目前还不支持自定备份配置，当我们使用传统的apt、yum等方式安装Gitlab后，一般都是通过shell脚本+crontab来自动备份了。但是当Gitlab容器化以后这种传统的方式就不太适合了。这里记录一下通过Kubernetes原生的CronJob来自动备份。 开始之前在开始之前需要有一套Kubernetes集群 创建ConfigMap创建好集群后，可以将kubeconfig文件">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">基于Kubernetes的Gitlab自动定时备份</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">基于Kubernetes的Gitlab自动定时备份</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-22T13:18:01.000Z" itemprop="datePublished" class="page-time">
+  2019-06-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开始之前"><span class="post-toc-number">2.</span> <span class="post-toc-text">开始之前</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建ConfigMap"><span class="post-toc-number">3.</span> <span class="post-toc-text">创建ConfigMap</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建CronJob"><span class="post-toc-number">4.</span> <span class="post-toc-text">创建CronJob</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#最后"><span class="post-toc-number">5.</span> <span class="post-toc-text">最后</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-基于Kubernetes的Gitlab自动定时备份" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">基于Kubernetes的Gitlab自动定时备份</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-22 21:18:01" datetime="2019-06-22T13:18:01.000Z" itemprop="datePublished">2019-06-22</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Gitlab目前还不支持自定备份配置，当我们使用传统的apt、yum等方式安装Gitlab后，一般都是通过<code>shell脚本+crontab</code>来自动备份了。但是当Gitlab容器化以后这种传统的方式就不太适合了。这里记录一下通过Kubernetes原生的<code>CronJob</code>来自动备份。</p>
+<h1 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h1><p>在开始之前需要有一套Kubernetes集群</p>
+<h1 id="创建ConfigMap"><a href="#创建ConfigMap" class="headerlink" title="创建ConfigMap"></a>创建ConfigMap</h1><p>创建好集群后，可以将kubeconfig文件写入到 <strong>ConfigMap</strong> 中，默认kubeconfig生成在<code>$HOME/.kube/config</code>。 我这里HOME目录默认就是/root/。下面开始创建ConfigMap。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$</span> <span class="string">kubectl</span> <span class="string">create</span> <span class="string">configmap</span> <span class="string">kubeconfig</span> <span class="string">\</span></span><br><span class="line"><span class="bullet">-</span><span class="bullet">-from-file=/root/.kube/config</span></span><br></pre></td></tr></table></figure>
+<h1 id="创建CronJob"><a href="#创建CronJob" class="headerlink" title="创建CronJob"></a>创建CronJob</h1><p>上面之所以要先创建ConfigMap就是因为这里需要引用。否则在POD中无法执行kubectl命令的。下面再来创建CronJob。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">batch/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CronJob</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">gitlab-backup-schedule</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  schedule:</span> <span class="string">"0 1 * * *"</span></span><br><span class="line"><span class="attr">  successfulJobsHistoryLimit:</span> <span class="number">0</span></span><br><span class="line"><span class="attr">  failedJobsHistoryLimit:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  jobTemplate:</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      template:</span></span><br><span class="line"><span class="attr">        spec:</span></span><br><span class="line"><span class="attr">          volumes:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">            configMap:</span></span><br><span class="line"><span class="attr">              name:</span> <span class="string">kubeconfig</span></span><br><span class="line"><span class="attr">          containers:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">gitlab-backup</span></span><br><span class="line"><span class="attr">            image:</span> <span class="string">lachlanevenson/k8s-kubectl:v1.10.11</span></span><br><span class="line"><span class="attr">            volumeMounts:</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">              mountPath:</span> <span class="string">/etc/kubeconfig</span></span><br><span class="line"><span class="attr">            command:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">/bin/sh</span></span><br><span class="line"><span class="bullet">            -</span> <span class="bullet">-c</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">pod_name=$(kubectl</span> <span class="string">get</span> <span class="string">pods</span> <span class="bullet">-l</span> <span class="string">app=git-gitlab-ce</span> <span class="bullet">-o</span> <span class="string">jsonpath='&#123;.items[*].metadata.name&#125;'</span> <span class="bullet">--kubeconfig=/etc/kubeconfig/config);</span></span><br><span class="line">              <span class="string">kubectl</span> <span class="string">get</span> <span class="string">po/$pod_name</span> <span class="bullet">--kubeconfig=/etc/kubeconfig/config;</span></span><br><span class="line">              <span class="string">kubectl</span> <span class="bullet">--kubeconfig=/etc/kubeconfig/config</span> <span class="string">exec</span> <span class="string">$pod_name</span> <span class="bullet">--</span> <span class="string">gitlab-rake</span> <span class="attr">gitlab:backup:create</span></span><br><span class="line"><span class="attr">          restartPolicy:</span> <span class="string">OnFailure</span></span><br></pre></td></tr></table></figure></p>
+<p>这里设置了每天晚上1点开始备份，需要注意的是这里获取pod_name变量，是根据kubectl命令通过标签<code>app=git-gitlab-ce</code>来过滤的，这里需要根据实际的情况来。</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>执行完上面的Job后，当达到定时的时间就会在Gitlab的备份目录中查看到备份的文件，默认Gitlab备份目录是在<code>/var/opt/gitlab/backups</code>。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-22T13:21:33.679Z" itemprop="dateUpdated">2019-06-22 21:21:33</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/&title=《基于Kubernetes的Gitlab自动定时备份》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/&title=《基于Kubernetes的Gitlab自动定时备份》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于Kubernetes的Gitlab自动定时备份》 — 风格&url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/22/调整SyntaxHighlighter-Evolved代码高亮间距/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">调整SyntaxHighlighter Evolved代码高亮间距</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2016 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/&title=《基于Kubernetes的Gitlab自动定时备份》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/&title=《基于Kubernetes的Gitlab自动定时备份》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于Kubernetes的Gitlab自动定时备份》 — 风格&url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2019/06/22/基于Kubernetes的Gitlab自动定时备份/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACp0lEQVR42u3aQW7cMBAEQP//08k5CCR3z5DOBiidfJAolhbg0D38+oqvXw/X051/P/U+ZvKWp3EOXHh4eHiHpp68+AmQTCWfbjsfPDw8vJ/hJUv8+8s2jGS09h48PDy8z+e1BeN9w50UBjw8PLz/i/f0bL5B35Dw8PDwPoF3akJJjtre80NZCx4eHl7My4PUz/n7Sn8PDw8Pb91Vny3om3h334T74yk8PDy8C7xZNPD+4tmKvWmMvW++8fDw8G7wWsz7QG1kkJScfbiMh4eHd5a3OTaaxLj70HZTKvDw8PDO8tp2VLvE5/fkIUVRwPDw8PAu8PLXJJPIn2rDiPztRZHAw8PDG/GSQLYNJvZBQzKfKOzAw8PDu8bbhKf7TXD7EYvkAQ8PD+8Cb5N5bhb0WTlpPyUeHh7eDV5bAG40t/KjVPUIeHh4eNd4sw1u+7J8U54fiv2mtODh4eFd5uUTus3OS8U3M8HDw8O7wGsX4rZHPwt2ZwcLot8QDw8P7xBvH+nOWmItoy1aeHh4eDd4bSjwPuhmw90eIIjmg4eHh3eBly/rs0Z+e83msOry4eHh4ZW8ZOjNVriNG5K9f3EcAQ8PD+8Cr6ges5pTHsmaBbVF1oKHh4d3lNcuuJumVx7I5p816vLh4eHhHeLN2vZt2cgZ+SGG4qAAHh4e3gVevpHdNMZmn2PWosPDw8O7zcsH3Szo9fmvfSyCh4eHd5Q3a+3PGv+zIpH/DHUMgYeHhzfibYbebMSTzfeNzToeHh7eKV57HOpUKJxs4vMO3qoBhoeHhzfi5U39/fZ31u5qO1x4eHh4n8M7NaGkJORHVJvgGg8PD+/f8NqS0B4F2JccPDw8vNu8WdOrPYQ6Kxjt3PDw8PBu89p/+OsgdRTyHigJeHh4eOd5vwGWstjubXzlTAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
