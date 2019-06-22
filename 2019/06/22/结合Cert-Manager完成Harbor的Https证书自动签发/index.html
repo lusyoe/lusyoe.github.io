@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>结合Cert-Manager完成Harbor的Https证书自动签发 | 风格 | 风起于青萍之末</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Kubernetes">
+    <meta name="description" content="前言使用Harbor一般建议都加上Https，但是Https配置也是一个麻烦，这里主要记录一下如何快速通过cert-manager来自动签发证书。 环境 Kubernetes v1.10.11 Harbor v1.7.0 Nginx-ingress-controller v0.21.0 Helm v2.11.0这里Harbor采用helm chart的形式部署在k8s集群上。 nginx-ingr">
+<meta name="keywords" content="Kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="结合Cert-Manager完成Harbor的Https证书自动签发">
+<meta property="og:url" content="https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/index.html">
+<meta property="og:site_name" content="风格">
+<meta property="og:description" content="前言使用Harbor一般建议都加上Https，但是Https配置也是一个麻烦，这里主要记录一下如何快速通过cert-manager来自动签发证书。 环境 Kubernetes v1.10.11 Harbor v1.7.0 Nginx-ingress-controller v0.21.0 Helm v2.11.0这里Harbor采用helm chart的形式部署在k8s集群上。 nginx-ingr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-22T12:55:48.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="结合Cert-Manager完成Harbor的Https证书自动签发">
+<meta name="twitter:description" content="前言使用Harbor一般建议都加上Https，但是Https配置也是一个麻烦，这里主要记录一下如何快速通过cert-manager来自动签发证书。 环境 Kubernetes v1.10.11 Harbor v1.7.0 Nginx-ingress-controller v0.21.0 Helm v2.11.0这里Harbor采用helm chart的形式部署在k8s集群上。 nginx-ingr">
+    
+        <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">卢浩元</h5>
+          <a href="mailto:lusyoe@163.com" title="lusyoe@163.com" class="mail">lusyoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/lusyoe" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">结合Cert-Manager完成Harbor的Https证书自动签发</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">结合Cert-Manager完成Harbor的Https证书自动签发</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-22T12:50:25.000Z" itemprop="datePublished" class="page-time">
+  2019-06-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#环境"><span class="post-toc-number">2.</span> <span class="post-toc-text">环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装Cert-Manager"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">安装Cert-Manager</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建ClusterIssuer"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">创建ClusterIssuer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">应用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装Harbor"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装Harbor</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装-1"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">6.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-结合Cert-Manager完成Harbor的Https证书自动签发" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">结合Cert-Manager完成Harbor的Https证书自动签发</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-22 20:50:25" datetime="2019-06-22T12:50:25.000Z" itemprop="datePublished">2019-06-22</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用Harbor一般建议都加上Https，但是Https配置也是一个麻烦，这里主要记录一下如何快速通过cert-manager来自动签发证书。</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Kubernetes v1.10.11</li>
+<li>Harbor v1.7.0</li>
+<li>Nginx-ingress-controller v0.21.0</li>
+<li>Helm v2.11.0<br>这里Harbor采用helm chart的形式部署在k8s集群上。 nginx-ingress-controller采用<code>Deployment+NodePort</code>暴露80和443。 如果集群内NodePort端口限制了不能使用80和443，那么也可以采用<code>DaemonSet+hostNetwork</code>来进行负载均衡。</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>k8s集群、nginx-ingress-controller还有helm的安装这里就不细说了，基本上是基础集群必有的。<br>推荐一个快速搭建部署的项目：kubeasz</p>
+<h2 id="安装Cert-Manager"><a href="#安装Cert-Manager" class="headerlink" title="安装Cert-Manager"></a>安装Cert-Manager</h2><p>直接从官方的chart仓库进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm install --name cert-manager --namespace kube-system \</span><br><span class="line">  --<span class="built_in">set</span> ingressShim.defaultIssuerName=letsencrypt-prod \</span><br><span class="line">  --<span class="built_in">set</span> ingressShim.defaultIssuerKind=ClusterIssuer stable/cert-manager</span><br></pre></td></tr></table></figure>
+<p>这里指定自动签发 <strong>letsencrypt-prod</strong> 的<code>Issuer</code>，并且默认使用<code>ClusterIsser</code>。</p>
+<h2 id="创建ClusterIssuer"><a href="#创建ClusterIssuer" class="headerlink" title="创建ClusterIssuer"></a>创建ClusterIssuer</h2><p>创建文件：<code>cluster-issuer.yaml</code>，内容如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">certmanager.k8s.io/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterIssuer</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">letsencrypt-prod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  acme:</span></span><br><span class="line"><span class="attr">    server:</span> <span class="attr">https://acme-v02.api.letsencrypt.org/directory</span></span><br><span class="line"><span class="attr">    email:</span> <span class="string">lusyoe@163.com</span></span><br><span class="line"><span class="attr">    privateKeySecretRef:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">letsencrypt-prod</span></span><br><span class="line"><span class="attr">    http01:</span> <span class="string">&#123;&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><code>kubectl apply -f cluster-issuer.yaml</code></p>
+<p>这样Cert-Manager就已经安装配置好了。</p>
+<h1 id="安装Harbor"><a href="#安装Harbor" class="headerlink" title="安装Harbor"></a>安装Harbor</h1><p>下载官方项目源码：<code>https://github.com/goharbor/harbor-helm/releases</code><br>master分支是开发分支，建议下载1.0.0的Release源码。</p>
+<p>修改<code>values.yaml</code><br>源码下载好后，修改项目目录中的values.yaml文件。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">expose:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">ingress</span></span><br><span class="line"><span class="attr">  tls:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br><span class="line">   <span class="comment"># 这里可以随意填写一个，cert-manager会自动创建并挂载</span></span><br><span class="line"><span class="attr">    secretName:</span> <span class="string">"harbor-secret-tls"</span></span><br><span class="line"><span class="attr">    notarySecretName:</span> <span class="string">"notary-secret-tls"</span></span><br><span class="line"><span class="attr">    commonName:</span> <span class="string">""</span></span><br><span class="line"><span class="attr">  ingress:</span></span><br><span class="line"><span class="attr">    hosts:</span></span><br><span class="line"><span class="attr">      core:</span> <span class="string">harbor.lusyoe.com</span></span><br><span class="line"><span class="attr">      notary:</span> <span class="string">notary.lusyoe.com</span></span><br><span class="line"><span class="attr">    annotations:</span></span><br><span class="line">      <span class="string">ingress.kubernetes.io/ssl-redirect:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="string">nginx.ingress.kubernetes.io/ssl-redirect:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="string">ingress.kubernetes.io/proxy-body-size:</span> <span class="string">"0"</span></span><br><span class="line">      <span class="string">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="string">"0"</span></span><br><span class="line">      <span class="comment"># 这里添加自动创建tls，并使用的issuer</span></span><br><span class="line">      <span class="string">kubernetes.io/tls-acme:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="string">certmanager.k8s.io/issuer:</span> <span class="string">letsencrypt-prod</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h1><p>这里没有修改其他的配置，正式的生产环境最好还是要做数据持久化配置的哦。<br>其中包含了很多的组件，也可以适当的启用和禁用。<br>进入到harbor源码目录，执行以下命令进行安装：<br><code>helm install --name harbor .</code></p>
+<p>通过cert-manager自动签发的证书，将会挂载到pod的<code>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt</code></p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>最后我们就可以通过浏览器访问：<a href="https://harbor.lusyoe.com就可以了。" target="_blank" rel="noopener">https://harbor.lusyoe.com就可以了。</a><br>后面有空再介绍使用手动自签的证书完成Harbor的Https。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-22T12:55:48.875Z" itemprop="dateUpdated">2019-06-22 20:55:48</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://lusyoe.github.io">
+            <img src="/img/avatar.jpg" alt="卢浩元">
+            卢浩元
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/&title=《结合Cert-Manager完成Harbor的Https证书自动签发》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/&title=《结合Cert-Manager完成Harbor的Https证书自动签发》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《结合Cert-Manager完成Harbor的Https证书自动签发》 — 风格&url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/22/Google-Cloud-Platform创建VM实例允许root登录/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Google Cloud Platform创建VM实例允许root登录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>卢浩元 &copy; 2016 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/&title=《结合Cert-Manager完成Harbor的Https证书自动签发》 — 风格&pic=https://lusyoe.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/&title=《结合Cert-Manager完成Harbor的Https证书自动签发》 — 风格&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《结合Cert-Manager完成Harbor的Https证书自动签发》 — 风格&url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/&via=https://lusyoe.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADHUlEQVR42u3aS27DMAwFwN7/0u22QOHkPdIFEmW0ClrH1sgLhp+vr3h9/1p//351fXK331f+/fz4iVfX3LawsbGx34T9/XC1G318fbKT2QHlFmxsbOxT2Y83MQsnyfG1mPw4nhixsbGxP56dY5I778MbNjY2NnbO3ge8fHN54MTGxsbGzpOEWSNh1ipoSf9SS8PGxsZ+eXabBrzy53/pb2NjY2O/MPt7sdoQOAtjm7bu5X6wsbGxD2LnP/pn7duWkZT+8yYxNjY29iewZ63TtpV7V2MgfzFPdoWNjY19KDvHtE3ce0dt8lB6eR9sbGzsQ9ltyzYvIbVPmSUqxQvAxsbGPpTdlmw2IWRWZkqKR9E12NjY2Aex2+LO7JiKxwdhr30Z0YFiY2Njvy17s4m2WD8r99+V6mBjY2N/AruOdaNkoE1m8gMtEhtsbGzsg9izkZrZyE6yZk9vh0GxsbGxT2W3SUg74jM7mhmmDcPY2NjY78uefW3WEmgDUp72tCEQGxsb+zx2At6Xfv6vlVsnS9jY2NgHsWdpwL6QNBsDuuv4sLGxsU9iJ7B21Katae1HeeqSFjY2NvZB7CQt2Rfr22Zt/gLyItTlldjY2NjHsZM1awBs0ok8EObNDGxsbOyT2Pmt9xWsPLVoU6PkVWFjY2Ofym4fs0kn2gNK0ptZYMPGxsY+g90Grc1gTR5gNt+KDgUbGxv7IPa+oNOmMbOQtmkYXz4RGxsb+yB2vtpm7V3ZUt7c3ZTJsLGxsd+RfW96kCNnh5UHyCdhDBsbG/sgdlvW3xxQEhrbO6ziMzY2NvYR7Fl6kASJTZs2+dbqbtjY2NgHsdsRyeRhbUmoPb42KBb/xsbGxn5D9r0jMu3928CzKTwVtTRsbGzst2K3Ld5ZsNnw2uCaHwo2Njb2Sew8zOxHIe+aLdocEzY2Nvap7Nmo5ewQ92M3bVEpag9gY2NjfwA7L9bMxm7yolXblsDGxsbGzgPSbBBnP45TBzlsbGzs49iz4v69Qz9JcaptCVzuARsbG/sgdt7obX/ut2EvSUXara8Gd7CxsbFfnf0D/Ge/g3cov3oAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

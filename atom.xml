@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2019-06-22T12:45:41.133Z</updated>
+  <updated>2019-06-22T12:55:48.875Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>结合Cert-Manager完成Harbor的Https证书自动签发</title>
+    <link href="https://lusyoe.github.io/2019/06/22/%E7%BB%93%E5%90%88Cert-Manager%E5%AE%8C%E6%88%90Harbor%E7%9A%84Https%E8%AF%81%E4%B9%A6%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%8F%91/"/>
+    <id>https://lusyoe.github.io/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/</id>
+    <published>2019-06-22T12:50:25.000Z</published>
+    <updated>2019-06-22T12:55:48.875Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用Harbor一般建议都加上Https，但是Https配置也是一个麻烦，这里主要记录一下如何快速通过cert-manager来自动签发证书。</p><h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul><li>Kubernetes v1.10.11</li><li>Harbor v1.7.0</li><li>Nginx-ingress-controller v0.21.0</li><li>Helm v2.11.0<br>这里Harbor采用helm chart的形式部署在k8s集群上。 nginx-ingress-controller采用<code>Deployment+NodePort</code>暴露80和443。 如果集群内NodePort端口限制了不能使用80和443，那么也可以采用<code>DaemonSet+hostNetwork</code>来进行负载均衡。</li></ul><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>k8s集群、nginx-ingress-controller还有helm的安装这里就不细说了，基本上是基础集群必有的。<br>推荐一个快速搭建部署的项目：kubeasz</p><h2 id="安装Cert-Manager"><a href="#安装Cert-Manager" class="headerlink" title="安装Cert-Manager"></a>安装Cert-Manager</h2><p>直接从官方的chart仓库进行安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm install --name cert-manager --namespace kube-system \</span><br><span class="line">  --<span class="built_in">set</span> ingressShim.defaultIssuerName=letsencrypt-prod \</span><br><span class="line">  --<span class="built_in">set</span> ingressShim.defaultIssuerKind=ClusterIssuer stable/cert-manager</span><br></pre></td></tr></table></figure><p>这里指定自动签发 <strong>letsencrypt-prod</strong> 的<code>Issuer</code>，并且默认使用<code>ClusterIsser</code>。</p><h2 id="创建ClusterIssuer"><a href="#创建ClusterIssuer" class="headerlink" title="创建ClusterIssuer"></a>创建ClusterIssuer</h2><p>创建文件：<code>cluster-issuer.yaml</code>，内容如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">certmanager.k8s.io/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterIssuer</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">letsencrypt-prod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  acme:</span></span><br><span class="line"><span class="attr">    server:</span> <span class="attr">https://acme-v02.api.letsencrypt.org/directory</span></span><br><span class="line"><span class="attr">    email:</span> <span class="string">lusyoe@163.com</span></span><br><span class="line"><span class="attr">    privateKeySecretRef:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">letsencrypt-prod</span></span><br><span class="line"><span class="attr">    http01:</span> <span class="string">&#123;&#125;</span></span><br></pre></td></tr></table></figure></p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><code>kubectl apply -f cluster-issuer.yaml</code></p><p>这样Cert-Manager就已经安装配置好了。</p><h1 id="安装Harbor"><a href="#安装Harbor" class="headerlink" title="安装Harbor"></a>安装Harbor</h1><p>下载官方项目源码：<code>https://github.com/goharbor/harbor-helm/releases</code><br>master分支是开发分支，建议下载1.0.0的Release源码。</p><p>修改<code>values.yaml</code><br>源码下载好后，修改项目目录中的values.yaml文件。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">expose:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">ingress</span></span><br><span class="line"><span class="attr">  tls:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br><span class="line">   <span class="comment"># 这里可以随意填写一个，cert-manager会自动创建并挂载</span></span><br><span class="line"><span class="attr">    secretName:</span> <span class="string">"harbor-secret-tls"</span></span><br><span class="line"><span class="attr">    notarySecretName:</span> <span class="string">"notary-secret-tls"</span></span><br><span class="line"><span class="attr">    commonName:</span> <span class="string">""</span></span><br><span class="line"><span class="attr">  ingress:</span></span><br><span class="line"><span class="attr">    hosts:</span></span><br><span class="line"><span class="attr">      core:</span> <span class="string">harbor.lusyoe.com</span></span><br><span class="line"><span class="attr">      notary:</span> <span class="string">notary.lusyoe.com</span></span><br><span class="line"><span class="attr">    annotations:</span></span><br><span class="line">      <span class="string">ingress.kubernetes.io/ssl-redirect:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="string">nginx.ingress.kubernetes.io/ssl-redirect:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="string">ingress.kubernetes.io/proxy-body-size:</span> <span class="string">"0"</span></span><br><span class="line">      <span class="string">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="string">"0"</span></span><br><span class="line">      <span class="comment"># 这里添加自动创建tls，并使用的issuer</span></span><br><span class="line">      <span class="string">kubernetes.io/tls-acme:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="string">certmanager.k8s.io/issuer:</span> <span class="string">letsencrypt-prod</span></span><br></pre></td></tr></table></figure></p><h1 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h1><p>这里没有修改其他的配置，正式的生产环境最好还是要做数据持久化配置的哦。<br>其中包含了很多的组件，也可以适当的启用和禁用。<br>进入到harbor源码目录，执行以下命令进行安装：<br><code>helm install --name harbor .</code></p><p>通过cert-manager自动签发的证书，将会挂载到pod的<code>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt</code></p><h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>最后我们就可以通过浏览器访问：<a href="https://harbor.lusyoe.com就可以了。" target="_blank" rel="noopener">https://harbor.lusyoe.com就可以了。</a><br>后面有空再介绍使用手动自签的证书完成Harbor的Https。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;使用Harbor一般建议都加上Https，但是Https配置也是一个麻烦，这里主要记录一下如何快速通过cert-manager来自动签发证书
+      
+    
+    </summary>
+    
+    
+      <category term="Kubernetes" scheme="https://lusyoe.github.io/tags/Kubernetes/"/>
+    
+  </entry>
   
   <entry>
     <title>Google Cloud Platform创建VM实例允许root登录</title>
@@ -326,9 +349,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
+    
+      <category term="显卡驱动" scheme="https://lusyoe.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -366,7 +389,7 @@
     <published>2016-09-02T15:14:01.000Z</published>
     <updated>2019-04-07T14:27:39.175Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p><h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul><li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li></ul><a id="more"></a><ul><li><p>编译</p><ul><li>解压zip包<br><code># unzip U1_linux.zip</code></li><li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li><li>执行自动编译脚本<br><code># sh install.sh</code></li></ul></li><li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sudo apt-get install linux-headers-`uname -r`</span></span><br></pre></td></tr></table></figure><p>然后继续编译即可<br><code># sh install.sh</code></p><p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p><h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul><li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li></ul><a id="more"></a><ul><li><p>编译</p><ul><li>解压zip包<br><code># unzip U1_linux.zip</code></li><li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li><li>执行自动编译脚本<br><code># sh install.sh</code></li></ul></li><li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> sudo apt-get install linux-headers-`uname -r`</span><br></pre></td></tr></table></figure><p>然后继续编译即可<br><code># sh install.sh</code></p><p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>]]></content>
     
     <summary type="html">
     
@@ -380,9 +403,9 @@
       <category term="Linux" scheme="https://lusyoe.github.io/categories/Linux/"/>
     
     
-      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
-    
       <category term="USB" scheme="https://lusyoe.github.io/tags/USB/"/>
+    
+      <category term="Linux驱动" scheme="https://lusyoe.github.io/tags/Linux%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
@@ -506,29 +529,6 @@
       <category term="MySQL" scheme="https://lusyoe.github.io/tags/MySQL/"/>
     
       <category term="索引" scheme="https://lusyoe.github.io/tags/%E7%B4%A2%E5%BC%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Idea Maven项目无法下载依赖问题汇总</title>
-    <link href="https://lusyoe.github.io/2016/08/21/Idea-Maven%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
-    <id>https://lusyoe.github.io/2016/08/21/Idea-Maven项目无法下载依赖问题汇总/</id>
-    <published>2016-08-21T11:31:50.000Z</published>
-    <updated>2019-04-07T14:27:39.179Z</updated>
-    
-    <content type="html"><![CDATA[<p>在使用IntelliJ IDEA开发Web的时候，刚开始总是遇到Maven的各种问题。<br>现在总结一下关于无法下载依赖jar的问题。</p><h3 id="依赖语法错误"><a href="#依赖语法错误" class="headerlink" title="依赖语法错误"></a>依赖语法错误</h3><a id="more"></a><p>有时候没注意，直接就这样写了：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p><p>然而，像这种单个的依赖必须要添加到<code>&lt;dependencies&gt;&lt;/dependencies&gt;</code>中间才行。<br>正确的做法应该是这样:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></p><p>可恨的是IDE也不提示个什么。。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在使用IntelliJ IDEA开发Web的时候，刚开始总是遇到Maven的各种问题。&lt;br&gt;现在总结一下关于无法下载依赖jar的问题。&lt;/p&gt;
-&lt;h3 id=&quot;依赖语法错误&quot;&gt;&lt;a href=&quot;#依赖语法错误&quot; class=&quot;headerlink&quot; title=&quot;依赖语法错误&quot;&gt;&lt;/a&gt;依赖语法错误&lt;/h3&gt;
-    
-    </summary>
-    
-      <category term="Maven" scheme="https://lusyoe.github.io/categories/Maven/"/>
-    
-    
-      <category term="Maven" scheme="https://lusyoe.github.io/tags/Maven/"/>
     
   </entry>
   
