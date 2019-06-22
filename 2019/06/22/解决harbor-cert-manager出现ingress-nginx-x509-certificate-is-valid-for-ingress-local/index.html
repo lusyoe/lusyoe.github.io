@@ -21,18 +21,18 @@
     
     
     <meta name="keywords" content="Kubernetes">
-    <meta name="description" content="问题在通过上一篇《结合Cert-Manager完成Harbor的Https证书自动签发》文章，部署好 Harbor 后，执行docker login出现了，如下错误： ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com 解决后来中间也是找了各种方法尝试，一开始还以为是cert-manag">
+    <meta name="description" content="问题在通过上一篇结合Cert-Manager完成Harbor的Https证书自动签发 文章，部署好 Harbor 后，执行docker login出现了，如下错误： ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com 解决后来中间也是找了各种方法尝试，一开始还以为是cert-manage">
 <meta name="keywords" content="Kubernetes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决harbor+cert-manager出现ingress-nginx x509: certificate is valid for ingress.local">
 <meta property="og:url" content="https://lusyoe.github.io/2019/06/22/解决harbor-cert-manager出现ingress-nginx-x509-certificate-is-valid-for-ingress-local/index.html">
 <meta property="og:site_name" content="风格">
-<meta property="og:description" content="问题在通过上一篇《结合Cert-Manager完成Harbor的Https证书自动签发》文章，部署好 Harbor 后，执行docker login出现了，如下错误： ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com 解决后来中间也是找了各种方法尝试，一开始还以为是cert-manag">
+<meta property="og:description" content="问题在通过上一篇结合Cert-Manager完成Harbor的Https证书自动签发 文章，部署好 Harbor 后，执行docker login出现了，如下错误： ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com 解决后来中间也是找了各种方法尝试，一开始还以为是cert-manage">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-22T13:01:02.475Z">
+<meta property="og:updated_time" content="2019-06-22T13:08:37.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决harbor+cert-manager出现ingress-nginx x509: certificate is valid for ingress.local">
-<meta name="twitter:description" content="问题在通过上一篇《结合Cert-Manager完成Harbor的Https证书自动签发》文章，部署好 Harbor 后，执行docker login出现了，如下错误： ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com 解决后来中间也是找了各种方法尝试，一开始还以为是cert-manag">
+<meta name="twitter:description" content="问题在通过上一篇结合Cert-Manager完成Harbor的Https证书自动签发 文章，部署好 Harbor 后，执行docker login出现了，如下错误： ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com 解决后来中间也是找了各种方法尝试，一开始还以为是cert-manage">
     
         <link rel="alternate" type="application/atom+xml" title="风格" href="/atom.xml">
     
@@ -188,7 +188,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在通过上一篇<a href="./结合Cert-Manager完成Harbor的Https证书自动签发">《结合Cert-Manager完成Harbor的Https证书自动签发》</a>文章，<br>部署好 <strong>Harbor</strong> 后，执行<code>docker login</code>出现了，如下错误：</p>
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在通过上一篇<a href="/2019/06/22/结合Cert-Manager完成Harbor的Https证书自动签发/" title="结合Cert-Manager完成Harbor的Https证书自动签发">结合Cert-Manager完成Harbor的Https证书自动签发</a> 文章，<br>部署好 <strong>Harbor</strong> 后，执行<code>docker login</code>出现了，如下错误：</p>
 <p><code>ingress-nginx x509: certificate is valid for ingress.local, not harbor.lusyoe.com</code></p>
 <h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>后来中间也是找了各种方法尝试，一开始还以为是<code>cert-manager</code>的问题，最后才无意中发现其实是<code>nginx-ingress-controller</code>的问题。<br>当默认没有指定<code>nginx-ingress-controller</code>使用的证书时，它使用的就是<code>ingress.local</code>。 修改nginx-ingress-controller的<code>values.yaml</code>配置文件，添加额外的参数即可，如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">extraArgs:</span></span><br><span class="line"><span class="attr">  default-ssl-certificate:</span> <span class="string">default/harbor-secret-tls</span></span><br></pre></td></tr></table></figure></p>
 <p>最后再通过docker登录就不会出现证书问题了。</p>
@@ -201,7 +201,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-06-22T13:01:02.475Z" itemprop="dateUpdated">2019-06-22 21:01:02</time>
+    最后更新时间：<time datetime="2019-06-22T13:08:37.865Z" itemprop="dateUpdated">2019-06-22 21:08:37</time>
 </span><br>
 
 
@@ -276,7 +276,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/06/22/调整SyntaxHighlighter-Evolved代码高亮间距/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">调整SyntaxHighlighter Evolved代码高亮间距</h4>
+      </a>
+    </div>
   
 
   
