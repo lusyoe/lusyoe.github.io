@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lusyoe.github.io/"/>
-  <updated>2019-04-07T14:27:39.171Z</updated>
+  <updated>2019-06-22T12:45:41.133Z</updated>
   <id>https://lusyoe.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Google Cloud Platform创建VM实例允许root登录</title>
+    <link href="https://lusyoe.github.io/2019/06/22/Google-Cloud-Platform%E5%88%9B%E5%BB%BAVM%E5%AE%9E%E4%BE%8B%E5%85%81%E8%AE%B8root%E7%99%BB%E5%BD%95/"/>
+    <id>https://lusyoe.github.io/2019/06/22/Google-Cloud-Platform创建VM实例允许root登录/</id>
+    <published>2019-06-22T12:41:19.000Z</published>
+    <updated>2019-06-22T12:45:41.133Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>最近才刚开始使用GCP，发现一个很不方便的地方，每次创建好VM默认都不允许root账号登录。</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>创建CentOS VM时，下拉展开Management，找到<code>Automation—&gt;Startup script</code>。<br>在输入框中填入以下内容即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;最近才刚开始使用GCP，发现一个很不方便的地方，每次创建好VM默认都不允许root账号登录。&lt;/p&gt;
+&lt;h1 id=&quot;解决&quot;&gt;&lt;a href
+      
+    
+    </summary>
+    
+    
+      <category term="Cloud" scheme="https://lusyoe.github.io/tags/Cloud/"/>
+    
+  </entry>
   
   <entry>
     <title>2017年回顾总结</title>
@@ -64,9 +88,9 @@
       <category term="生活" scheme="https://lusyoe.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-      <category term="总结" scheme="https://lusyoe.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="生活" scheme="https://lusyoe.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="总结" scheme="https://lusyoe.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -342,7 +366,7 @@
     <published>2016-09-02T15:14:01.000Z</published>
     <updated>2019-04-07T14:27:39.175Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p><h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul><li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li></ul><a id="more"></a><ul><li><p>编译</p><ul><li>解压zip包<br><code># unzip U1_linux.zip</code></li><li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li><li>执行自动编译脚本<br><code># sh install.sh</code></li></ul></li><li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> sudo apt-get install linux-headers-`uname -r`</span><br></pre></td></tr></table></figure><p>然后继续编译即可<br><code># sh install.sh</code></p><p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>朋友新组装了一台PC,应他的要求帮他装了一个Debian Linux系统。<br>由于没办法直接用网线连着PC,他就买了一个USB的无线网卡连上无线路由就好。<br>结果Linux系统由于驱动问题，不识别那个网卡。<br>没办法了，系统是我帮装的，只好叫我来给他弄这个了。一番折腾过后顺利安装成功了，在这里记录一下。</p><h1 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h1><ul><li>从官方网站下载适用于Linux的驱动<br><code># wget http://down.tenda.com.cn/uploadfile/2016/U1_linux.zip</code></li></ul><a id="more"></a><ul><li><p>编译</p><ul><li>解压zip包<br><code># unzip U1_linux.zip</code></li><li>进入解压后的目录<br><code># cd RTL8192EU_linux_v4.3.15_14701_BTCOEX20150615-41.20150715</code></li><li>执行自动编译脚本<br><code># sh install.sh</code></li></ul></li><li><p>解决依赖问题<br>如果编译过程中出现类似<code>/lib/modules/3.16.0-4-amd64/build No such file or directory</code> 错误。<br>那么需要安装额外的编译依赖库。</p></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sudo apt-get install linux-headers-`uname -r`</span></span><br></pre></td></tr></table></figure><p>然后继续编译即可<br><code># sh install.sh</code></p><p>如果不是使用root用户编译的话,中间需要输入几次root密码。<br>最后出现<br><code>The Setup Script is completed !</code><br>就表示编译安装成功了，这时候点开桌面的网络连接工具应该就可以扫描到热点了。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来挺简单的，但是对于新手来说还是很不容易的。<br>腾达的官方文档倒是挺全的，但是全英文不说，信息太大而全了。一般新手很难找到有用的信息。<br>就比如说这次编译依赖的问题，我就没有从文档中找到。</p>]]></content>
     
     <summary type="html">
     
@@ -505,28 +529,6 @@
     
     
       <category term="Maven" scheme="https://lusyoe.github.io/tags/Maven/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>回首感悟</title>
-    <link href="https://lusyoe.github.io/2016/08/20/%E5%9B%9E%E9%A6%96%E6%84%9F%E6%82%9F/"/>
-    <id>https://lusyoe.github.io/2016/08/20/回首感悟/</id>
-    <published>2016-08-20T13:42:22.000Z</published>
-    <updated>2019-04-07T14:27:39.179Z</updated>
-    
-    <content type="html"><![CDATA[<p>人生总是充满着选择，每一个选择又会造成截然不同的结果。<br>从13年毕业至今，感觉人生真的是变化很快啊。<br>毕业后，毅然决然的选择了转行，到现在也算是差不多完全融入IT这一行了。<br>很庆幸，当初并没有选择错误。虽然不是科班出身，但凭着一股浓厚的兴趣，能真正入行也是不容易了。</p><p>回首一下这3年</p><h2 id="2013年6月正式毕业了"><a href="#2013年6月正式毕业了" class="headerlink" title="2013年6月正式毕业了"></a>2013年6月正式毕业了</h2><p>和绝大多数人一样，我毕业后一段时间都是很茫然的状态，不知道到底要做什么，毕竟刚踏入社会，什么都不了解。<br>我选择了回家，由于在毕业之前报考了学校的计算机二级考试，开始在家里自学计算机课程了，编程语言当然只有C了。<br>经过了暑期的几个月学习，最终顺利的考过了，也算是给自己增加了不少信心吧。<br>不过就这样想找工作还是早得很啊。。</p><a id="more"></a><h2 id="2013年9月-12月-Java起航"><a href="#2013年9月-12月-Java起航" class="headerlink" title="2013年9月-12月 Java起航"></a>2013年9月-12月 Java起航</h2><p>之后又开始自学Java了，当初学Java完全就是奔着Android去的，那时候Android太火了。<br>学Java的过程中又报了计算机网络自考本科，开始全面系统的学习计算机课程了。</p><h2 id="2014年3月-6月-自考之路"><a href="#2014年3月-6月-自考之路" class="headerlink" title="2014年3月-6月 自考之路"></a>2014年3月-6月 自考之路</h2><p>2014年可以说是最重要的一年了，由于基础底子太差了，仅仅凭着几个月的学习完全赶不上来。<br>当然了，自考可以说是一败涂地了，几次过后就已经完全放弃了。。<br>在这期间最大的收获就是在武大表哥那里的生活了，完全可以说是表哥带着我从毕业后的迷茫期走出来的。<br>让我真正的建立了一个成年人的思想，有了自己的思想和主见。那段时间思考的最多的就是人生了。<br>我的人生到底要怎么走，自考的失败可以说差点让我放弃了走IT的路了，那段时间整个人也是懵的。<br>也是表哥把我拉出来的，真的是要非常的感谢他了。</p><h2 id="2014年7月-8月-初次踏入社会"><a href="#2014年7月-8月-初次踏入社会" class="headerlink" title="2014年7月-8月 初次踏入社会"></a>2014年7月-8月 初次踏入社会</h2><p>2014年的暑期，第一次走入社会寻找工作了，虽然之前在校的时候有过实习经验，但那是建筑行业的了。<br>既然已经打算换行了，当然不想再找那方面的工作了。然而，现实就是这么的残酷，就我这水平什么都找不到。。</p><p>无奈只能找一些工厂先去锻炼下了<br>在武汉，去过富士康，由于大专的毕业，居然不要。。好像那些小学毕业的才更吃香啊<br>接连的找了好几个厂子，最后还是在人才市场，找到了一个愿意收我的小厂了。<br>走入工厂才知道那有多么的辛苦啊，每天都是机械性的劳动，还有白班夜班的倒。。</p><p>结果自然不言而喻，在那里只做了一周，还是放弃不下计算机编程啊</p><h2 id="2014年9月-12月-培训之旅"><a href="#2014年9月-12月-培训之旅" class="headerlink" title="2014年9月-12月 培训之旅"></a>2014年9月-12月 培训之旅</h2><p>在武汉，在网上搜一些计算机实习工作时，发现了培训机构。<br>当然了咱好歹也是成年人了，肯定不会被他们所忽悠，什么包就业，推荐工作啥的，一个字都不会信。<br>但是知识这东西，恰好是我目前最缺乏的，通过网上用人单位的招聘需求，很多东西也不懂。<br>这方面培训机构还是很有经验的，通过到多个培训机构试听，最终还是选择了一个看起来靠谱点的。</p><p>培训内容主要为：Java基础、Web入门和Android就业<br>Java基础由于之前有过自学，所以还是挺轻松的，几次测验基本在班里也是第一的<br>Web入门：当时对Web没有太过关注，也就真的只是入个门啦，当然那个讲师还是挺有水平的<br>最关键是Android了，当时真的是挺用心的了，基本上白天学完了，晚上继续敲代码到凌晨1,2点</p><p>时间就这样在充实的学习过程中过去了.</p><h2 id="2015年2月-3月-工作工作"><a href="#2015年2月-3月-工作工作" class="headerlink" title="2015年2月-3月 工作工作"></a>2015年2月-3月 工作工作</h2><p>培训终于结束了，也算是给我开启了一扇IT的大门吧，经过培训过后，我才感觉已经踏入IT门槛了。<br>2015年2月过完年后，为了发展到深圳来了。<br>刚开始找工作，真的觉得自己还是太嫩了，以至于快1个月才终于找到了一个像样的工作了。<br>当然了，这里还有个小插曲，需要感谢一下当初的培训机构。<br>为了找工作，像我这种出身的，简历当然得要伪造了(惭愧)，不然不用想了。。。<br>新单位居然要打电话给之前的单位调查背景，幸好我当初保存了培训机构的前台号码。</p><h2 id="2015年3月-2016年1月-Android实战"><a href="#2015年3月-2016年1月-Android实战" class="headerlink" title="2015年3月-2016年1月 Android实战"></a>2015年3月-2016年1月 Android实战</h2><p>终于终于我找到一份Android开发的工作了，虽然是面向Android TV端的…<br>突然发现自己不会的还是有好多啊，压力有点大。但是日子总得过啊</p><p>每天下了班后回来继续看项目学习了，可怜原还以为能有个人带带呢，结果就我1个Android开发。</p><p>碰碰磕磕，差不多一年的时间就这样过去了，也差不多熟悉Android app的基本开发了。</p><p>在这期间由于意外情况，接触到了Android系统底层的东西了，比如：自己编译ROM刷到盒子里面，静默安装等等</p><p>也跟一些厂商有打过交道了，比如：深圳的兆驰、TCL、小霸王等<br>第一次听说了，除了MTK，高通之外的芯片了，如：Amlogic、Rockchip<br>第一次听说并使用了Docker<br>第一次自己去制作.9 图<br>第一次把自己学习到的东西都运用上了<br>等等…</p><h2 id="2016年2月-3月-Android系统"><a href="#2016年2月-3月-Android系统" class="headerlink" title="2016年2月-3月 Android系统"></a>2016年2月-3月 Android系统</h2><p>由于种种原因，不得不从这家辞职了。是该考虑下一家的时候了。<br>打算好了去南山发展，毕竟在深圳南山区才是IT科技氛围最浓厚的区域了。<br>刚开始也找了好几家app的开发，不过貌似大部分都对我有系统开发经验有兴趣点，<br>那我是该考虑一下方向了，毕竟相对于app来说，我对系统底层也是更有兴趣一点(讨厌UI)。。</p><p>最终在科技园附近找到了一家偏系统开发的工作了，我也没想到人生第一次薪水过万会来的如此之快。</p><p>刚入职肯定是要好好表现了，发现他们居然连版本控制工具都没用，文件都是copy来copy去的。<br>咱现在也不是那种刚入行的嫩鸟了，而且对于系统源码来说，没有版本控制实在是太容易出错了。</p><p>由于之前在上一家的学习，知道了怎么搭建一整套源码管理。<br>耗费一周的时间，成功的搭建起了gitlab + repo + git的源码管理系统。<br>gitlab作为最上层的操作界面，项目组每个人接触最多的东西<br>repo 来着google官方的Android系统源码管理工具，可以管理许多的git小仓库<br>git 最底层当然是使用git了，最流行最适合最好的系统源码管理工具了</p><p>然而git毕竟学习成本较高啊，在我走之后他们就没法使用了。。。</p><h2 id="2016年3月-至今-正式Android-Framework-Engineer"><a href="#2016年3月-至今-正式Android-Framework-Engineer" class="headerlink" title="2016年3月-至今 正式Android Framework Engineer"></a>2016年3月-至今 正式Android Framework Engineer</h2><p>是的，我只在上一家待一个月就跳槽走了，原因说起来很可笑，有时候星期六要加班，而且还是免费的…<br>我不喜欢这样，虽然都说在IT这行加班是很普遍的，但是那也是要有相应的补贴才行啊。免费的工，抱歉我不会打。</p><p>经过了一周的找工作面试，最终我却选择了外包公司。整个行业都在说外包怎么怎么的坑，当然了不排除确实有那么一些。</p><p>但是这家能给出比我上一家还要多出50%的薪水，我没理由不去啊。<br>入职之后就是直接到某手机厂商那上班了，是说长期驻场来着。跟他们的员工一样的工作上班等<br>在这里加班还是挺少的，待遇也不错，真的很满意了</p><p>发现了外包也有不错啊，很多东西光只听别人说真的很容易造成误导。小时候都听说过小马过河故事呢</p><p>还有就是在大公司就是不一样，流程非常的严谨，整个的开发流程就跟我之前所经历的完全不一样。<br>第一次见识到了code review、自动化Test等各种流程了，感觉学到了很多。</p><p>在这里我也被分配到了framework组，做一些中间层功能接口开发、移植和Bug的修复等工作</p><p>然而，时间过去我发现自己没有了对Android的热爱，少了当初的那一份激情了。<br>在这个暑期，我又对Java大数据，分布式感兴趣了起来。<br>不，应该说我始终对编程有着热爱，但是现在每天却很少coding了，而Android即使是app项目的代码量也不大。<br>并没有充分的展现出现编程的艺术来。是的，编程不仅仅是一种技术，更应该是一种艺术。</p><p>话说，今年看书还是看的挺多的，光这个暑期就看完3本了《Head First 设计模式》、《MySQL 5.5》、《分布式Java应用》<br>可以看到，基本都是为下一步做的技术储备了，相比上半年看的《深入理解Android》系列等Android系统开发方面书籍确实变化蛮大的。</p><p>我想我已经做好了选择，不管以后的结果如何，选择了就不会后悔~</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;人生总是充满着选择，每一个选择又会造成截然不同的结果。&lt;br&gt;从13年毕业至今，感觉人生真的是变化很快啊。&lt;br&gt;毕业后，毅然决然的选择了转行，到现在也算是差不多完全融入IT这一行了。&lt;br&gt;很庆幸，当初并没有选择错误。虽然不是科班出身，但凭着一股浓厚的兴趣，能真正入行也是不容易了。&lt;/p&gt;
-&lt;p&gt;回首一下这3年&lt;/p&gt;
-&lt;h2 id=&quot;2013年6月正式毕业了&quot;&gt;&lt;a href=&quot;#2013年6月正式毕业了&quot; class=&quot;headerlink&quot; title=&quot;2013年6月正式毕业了&quot;&gt;&lt;/a&gt;2013年6月正式毕业了&lt;/h2&gt;&lt;p&gt;和绝大多数人一样，我毕业后一段时间都是很茫然的状态，不知道到底要做什么，毕竟刚踏入社会，什么都不了解。&lt;br&gt;我选择了回家，由于在毕业之前报考了学校的计算机二级考试，开始在家里自学计算机课程了，编程语言当然只有C了。&lt;br&gt;经过了暑期的几个月学习，最终顺利的考过了，也算是给自己增加了不少信心吧。&lt;br&gt;不过就这样想找工作还是早得很啊。。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="感悟总结" scheme="https://lusyoe.github.io/tags/%E6%84%9F%E6%82%9F%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
